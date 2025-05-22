@@ -196,28 +196,56 @@ export default async function decorate(block) {
   /* ---------------------------------------------------------------------
      4 — ✨  mega-menu overlay & hover listeners (new!)
   --------------------------------------------------------------------- */
-  const overlay = document.createElement('div');
-  overlay.className = 'nav-overlay';
-  document.body.append(overlay);
+/* ---------------------------------------------------------------------
+     4 — ✨  mega-menu overlay, hover **and click** listeners
+--------------------------------------------------------------------- */
+const overlay = document.createElement('div');
+overlay.className = 'nav-overlay';
+document.body.append(overlay);
 
-  const megaWrapper = document.createElement('div');
-  megaWrapper.className = 'mega-wrapper';
-  nav.after(megaWrapper);
+const megaWrapper = document.createElement('div');
+megaWrapper.className = 'mega-wrapper';
+nav.after(megaWrapper);
 
-  const navDrops = nav.querySelectorAll('.nav-sections .nav-drop');
-  navDrops.forEach((drop, idx) => {
-    drop.dataset.key = idx;                        // stable cache key
-    drop.addEventListener('mouseenter', () => {
-      if (!isDesktop.matches) return;
+const navDrops = nav.querySelectorAll('.nav-sections .nav-drop');
+
+navDrops.forEach((drop, idx) => {
+  drop.dataset.key = idx;  // stable cache key for buildMega()
+
+  /* ---------- open on hover (desktop only) -------------------------- */
+  drop.addEventListener('mouseenter', () => {
+    if (!isDesktop.matches) return;
+    buildMega(drop, megaWrapper);
+    setMegaState(true, overlay, megaWrapper);
+  });
+  drop.addEventListener('mouseleave', () => {
+    if (!isDesktop.matches) return;
+    setMegaState(false, overlay, megaWrapper);
+  });
+
+  /* ---------- open / close on click (desktop only) ------------------ */
+  drop.addEventListener('click', (e) => {
+    if (!isDesktop.matches) return;   // keep default tap behaviour on mobile
+    e.preventDefault();               // stop text selection / link jump
+
+    const expanded = drop.getAttribute('aria-expanded') === 'true';
+    toggleAllNavSections(navSections);            // collapse other items
+    drop.setAttribute('aria-expanded', !expanded);
+
+    if (!expanded) {                              // first click → open
       buildMega(drop, megaWrapper);
       setMegaState(true, overlay, megaWrapper);
-    });
-    drop.addEventListener('mouseleave', () => {
-      if (!isDesktop.matches) return;
+    } else {                                      // second click → close
       setMegaState(false, overlay, megaWrapper);
-    });
+    }
   });
-  overlay.addEventListener('click', () => setMegaState(false, overlay, megaWrapper));
+});
+
+/* ---------- global close actions ------------------------------------ */
+overlay.addEventListener('click', () => setMegaState(false, overlay, megaWrapper));
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') setMegaState(false, overlay, megaWrapper);
+});
 
   /* 5 — final wrapper (OOTB) */
   const navWrapper = document.createElement('div');
