@@ -107,25 +107,30 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
    ✨ ADDED: mega-menu helpers (build in-page from nested <ul>)
 --------------------------------------------------------------------------- */
 function buildMega(drop, wrapper) {
-  if (wrapper.dataset.loaded === drop.dataset.key) return;
+  // cache check
+  const key = drop.dataset.key;
+  if (wrapper.dataset.loaded === key) return;
 
-  wrapper.innerHTML = '';
-  const sub = drop.querySelector(':scope > ul');
-  if (sub) {
+  wrapper.innerHTML = '';                // wipe previous content
+  const subList = drop.querySelector(':scope > ul');
+
+  if (subList) {
     const column = document.createElement('div');
     column.className = 'column';
-    // clone every <li>—link or not
-    sub.querySelectorAll(':scope > li').forEach((li) => {
-      const item = document.createElement('div');
-      item.innerHTML = li.innerHTML;     // copies text, <a>, <p>, etc.
-      column.append(item);
+
+    // move—not clone—each <li> so we don’t duplicate IDs
+    subList.querySelectorAll(':scope > li').forEach((li) => {
+      const slot = document.createElement('div');
+      slot.innerHTML = li.innerHTML;     // keeps plain text, <a>, <p>, <img>, etc.
+      column.append(slot);
     });
+
     wrapper.append(column);
   } else {
     wrapper.innerHTML =
-      '<div class=\"column\"><p style=\"padding:0 32px;\">No submenu content</p></div>';
+      '<div class=\"column\"><p style=\"padding:0 32px;\">(No submenu content)</p></div>';
   }
-  wrapper.dataset.loaded = drop.dataset.key;
+  wrapper.dataset.loaded = key;
 }
 
 function setMegaState(open, overlay, wrapper) {
