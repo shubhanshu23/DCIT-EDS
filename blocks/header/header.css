@@ -266,3 +266,70 @@ header nav .nav-sections ul > li > ul > li {
 header nav .nav-tools {
   grid-area: tools;
 }
+
+/* ---------------------------------------------------------------------
+   2.  *** ADDITIONS & OVERRIDES FOR MODAL MEGA MENU ***
+   ------------------------------------------------------------------ */
+
+/* 2.1 Overlay */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  display: none;
+  z-index: 4;
+}
+.nav-overlay.active { display: block; }
+
+/* 2.2 Mega-wrapper */
+.mega-wrapper {
+  position: absolute;
+  left: 0;
+  top: var(--nav-height);
+  width: 100%;
+  background: var(--nb-light);
+  box-shadow: 0 4px 24px rgba(0,0,0,.15);
+  display: none;
+  z-index: 5;
+  padding: 32px 0;
+}
+.mega-wrapper.open { display: block; }
+
+.mega-wrapper .column {
+  max-width: 1240px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+  gap: 24px;
+}
+
+.mega-wrapper a { color: var(--nb-blue); font-weight: 500; }
+.mega-wrapper a:hover { color: var(--nb-red); }
+
+/* 2.3 Desktop – hide small inline dropdown and highlight current item */
+@media (width >= 900px) {
+  /* suppress inline submenu */
+  header nav .nav-sections .default-content-wrapper > ul > li > ul {
+    display: none !important;
+  }
+
+  /* visual cue when aria-expanded="true" */
+  header nav .nav-sections .nav-drop[aria-expanded='true'] > a {
+    color: var(--nb-red);
+  }
+}
+
+/* 2.4 Visual tweaks (optional – brand look) */
+header .nav-wrapper {
+  background: var(--nb-light);
+  border-bottom: 1px solid var(--nb-gray);
+}
+header nav .nav-sections > ul > li > a {
+  padding: 24px 0;
+  color: var(--nb-blue);
+  font-weight: 600;
+}
+header nav .nav-brand img {
+  height: 48px;
+  width: auto;
+}
