@@ -103,30 +103,52 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
-/**
- * loads and decorates the header, mainly the nav
- * @param {Element} block The header block element
- */
+/* ---------------------------------------------------------------------------
+   ✨ ADDED: mega-menu helpers (build in-page from nested <ul>)
+--------------------------------------------------------------------------- */
+function buildMega(drop, wrapper) {
+  if (wrapper.dataset.loaded === drop.dataset.key) return;      // cache
+  wrapper.innerHTML = '';
+
+  const sub = drop.querySelector(':scope > ul');
+  if (sub) {
+    const col = document.createElement('div');
+    col.className = 'column';
+    sub.querySelectorAll('li > a').forEach((a) => col.append(a.cloneNode(true)));
+    wrapper.append(col);
+  } else {
+    wrapper.innerHTML = '<div class="column"><p style="padding:0 32px;">No submenu configured</p></div>';
+  }
+  wrapper.dataset.loaded = drop.dataset.key;
+}
+function setMegaState(open, overlay, wrapper) {
+  overlay.classList.toggle('active', open);
+  wrapper.classList.toggle('open', open);
+}
+
+/* ---------------------------------------------------------------------------
+   decorate()  – unchanged core flow + mega-menu injection
+--------------------------------------------------------------------------- */
 export default async function decorate(block) {
-  // load nav as fragment
-  const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+  /* 1 — load nav fragment (OOTB) */
+  const navPath = getMetadata('nav')
+    ? new URL(getMetadata('nav'), window.location).pathname
+    : '/nav';
   const fragment = await loadFragment(navPath);
 
-  // decorate nav DOM
+  /* 2 — assemble nav DOM (OOTB) */
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools'];
-  classes.forEach((c, i) => {
+  ['brand', 'sections', 'tools'].forEach((c, i) => {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
   });
 
   const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
+  const brandLink = navBrand?.querySelector('.button');
   if (brandLink) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
@@ -134,19 +156,20 @@ export default async function decorate(block) {
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
-        if (isDesktop.matches) {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        }
+    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li')
+      .forEach((navSection) => {
+        if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+        navSection.addEventListener('click', () => {
+          if (isDesktop.matches) {
+            const expanded = navSection.getAttribute('aria-expanded') === 'true';
+            toggleAllNavSections(navSections);
+            navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+          }
+        });
       });
-    });
   }
 
-  // hamburger for mobile
+  /* 3 — hamburger (OOTB) */
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
@@ -155,10 +178,36 @@ export default async function decorate(block) {
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
-  // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
+  /* ---------------------------------------------------------------------
+     4 — ✨  mega-menu overlay & hover listeners (new!)
+  --------------------------------------------------------------------- */
+  const overlay = document.createElement('div');
+  overlay.className = 'nav-overlay';
+  document.body.append(overlay);
+
+  const megaWrapper = document.createElement('div');
+  megaWrapper.className = 'mega-wrapper';
+  nav.after(megaWrapper);
+
+  const navDrops = nav.querySelectorAll('.nav-sections .nav-drop');
+  navDrops.forEach((drop, idx) => {
+    drop.dataset.key = idx;                        // stable cache key
+    drop.addEventListener('mouseenter', () => {
+      if (!isDesktop.matches) return;
+      buildMega(drop, megaWrapper);
+      setMegaState(true, overlay, megaWrapper);
+    });
+    drop.addEventListener('mouseleave', () => {
+      if (!isDesktop.matches) return;
+      setMegaState(false, overlay, megaWrapper);
+    });
+  });
+  overlay.addEventListener('click', () => setMegaState(false, overlay, megaWrapper));
+
+  /* 5 — final wrapper (OOTB) */
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
