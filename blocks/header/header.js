@@ -194,58 +194,62 @@ export default async function decorate(block) {
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
   /* ---------------------------------------------------------------------
-     4 — ✨  mega-menu overlay & hover listeners (new!)
+       4 — ✨  mega-menu overlay, hover + click listeners  (REVISED)
   --------------------------------------------------------------------- */
-/* ---------------------------------------------------------------------
-     4 — ✨  mega-menu overlay, hover **and click** listeners
---------------------------------------------------------------------- */
-const overlay = document.createElement('div');
-overlay.className = 'nav-overlay';
-document.body.append(overlay);
+  const overlay = document.createElement('div');
+  overlay.className = 'nav-overlay';
+  document.body.append(overlay);
 
-const megaWrapper = document.createElement('div');
-megaWrapper.className = 'mega-wrapper';
-nav.after(megaWrapper);
+  const megaWrapper = document.createElement('div');
+  megaWrapper.className = 'mega-wrapper';
+  nav.after(megaWrapper);
 
-const navDrops = nav.querySelectorAll('.nav-sections .nav-drop');
-
-navDrops.forEach((drop, idx) => {
-  drop.dataset.key = idx;  // stable cache key for buildMega()
-
-  /* ---------- open on hover (desktop only) -------------------------- */
-  drop.addEventListener('mouseenter', () => {
-    if (!isDesktop.matches) return;
+  /* ---------- helpers ------------------------------------------------- */
+  function openMega(drop) {
     buildMega(drop, megaWrapper);
     setMegaState(true, overlay, megaWrapper);
-  });
-  drop.addEventListener('mouseleave', () => {
-    if (!isDesktop.matches) return;
+    drop.setAttribute('aria-expanded', 'true');
+    megaWrapper.dataset.activeKey = drop.dataset.key;
+  }
+
+  function closeMega() {
     setMegaState(false, overlay, megaWrapper);
-  });
+    toggleAllNavSections(navSections, false);
+    delete megaWrapper.dataset.activeKey;
+  }
 
-  /* ---------- open / close on click (desktop only) ------------------ */
-  drop.addEventListener('click', (e) => {
-    if (!isDesktop.matches) return;   // keep default tap behaviour on mobile
-    e.preventDefault();               // stop text selection / link jump
+  /* ---------- event wiring -------------------------------------------- */
+  const navDrops = nav.querySelectorAll('.nav-sections .nav-drop');
 
-    const expanded = drop.getAttribute('aria-expanded') === 'true';
-    toggleAllNavSections(navSections);            // collapse other items
-    drop.setAttribute('aria-expanded', !expanded);
+  navDrops.forEach((drop, idx) => {
+    drop.dataset.key = idx;
 
-    if (!expanded) {                              // first click → open
-      buildMega(drop, megaWrapper);
-      setMegaState(true, overlay, megaWrapper);
-    } else {                                      // second click → close
-      setMegaState(false, overlay, megaWrapper);
+    /* —— hover or first click — open panel (desktop only) -------------- */
+    function handleOpen(e) {
+      if (!isDesktop.matches) return;      // keep default mobile behaviour
+      if (e.type === 'click') e.preventDefault();
+
+      const alreadyOpen = megaWrapper.dataset.activeKey === drop.dataset.key;
+      toggleAllNavSections(navSections, false);     // reset all items
+
+      if (!alreadyOpen) openMega(drop);             // open new panel
+      else              closeMega();                // close if same item
     }
-  });
-});
 
-/* ---------- global close actions ------------------------------------ */
-overlay.addEventListener('click', () => setMegaState(false, overlay, megaWrapper));
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') setMegaState(false, overlay, megaWrapper);
-});
+    drop.addEventListener('mouseenter', handleOpen);
+    drop.addEventListener('click',       handleOpen);
+  });
+
+  /* —— keep panel open while pointer is over it ----------------------- */
+  megaWrapper.addEventListener('mouseenter', () => {
+    /* nothing – just prevents navDrop mouseleave from closing it */
+  });
+
+  /* —— close when pointer leaves panel or user clicks veil / presses Esc */
+  megaWrapper.addEventListener('mouseleave', closeMega);
+  overlay     .addEventListener('click',     closeMega);
+  window      .addEventListener('keydown',   (e) => { if (e.key === 'Escape') closeMega(); });
+
 
   /* 5 — final wrapper (OOTB) */
   const navWrapper = document.createElement('div');
