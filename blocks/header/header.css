@@ -266,3 +266,57 @@ header nav .nav-sections ul > li > ul > li {
 header nav .nav-tools {
   grid-area: tools;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Mega-menu overlay & panel  (adds on top of stock styles)
+───────────────────────────────────────────────────────────── */
+header .nav-wrapper {       /* keep bar above panel & veil   */
+  z-index: 6;
+}
+
+/* 2.1 dark veil */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .40);
+  display: none;
+  z-index: 4;
+}
+.nav-overlay.active { display: block; }
+
+/* 2.2 panel */
+.mega-wrapper {
+  position: absolute;
+  left: 0;
+  top: var(--nav-height);
+  width: 100%;
+  background: var(--light-color);
+  box-shadow: 0 4px 24px rgba(0,0,0,.15);
+  display: none;
+  z-index: 5;                 /* between veil and header     */
+  padding: 32px 0;
+}
+.mega-wrapper.open { display: block; }
+
+.mega-wrapper .column {
+  max-width: 1240px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.mega-wrapper a       { color: var(--link-color, #004c97); font-weight: 500; }
+.mega-wrapper a:hover { color: var(--highlight-color, #d4232c); }
+
+/* 2.3 hide the tiny inline dropdown we don’t want on desktop */
+@media (width >= 900px) {
+  header nav .nav-sections .default-content-wrapper > ul > li > ul {
+    display: none !important;
+  }
+  /* give selected top-item a colour hint */
+  header nav .nav-sections .nav-drop[aria-expanded="true"] > a {
+    color: var(--highlight-color, #d4232c);
+  }
+}
+

@@ -136,13 +136,13 @@ export default async function decorate(block) {
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
-        if (isDesktop.matches) {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        }
-      });
+//      navSection.addEventListener('click', () => {
+//        if (isDesktop.matches) {
+//          const expanded = navSection.getAttribute('aria-expanded') === 'true';
+//          toggleAllNavSections(navSections);
+//          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+//        }
+//      });
     });
   }
 
@@ -158,6 +158,83 @@ export default async function decorate(block) {
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+  /* ─────────────────────────────────────────────────────────────
+     4 — mega-menu overlay, hover + click listeners
+  ───────────────────────────────────────────────────────────── */
+  const overlay = document.createElement('div');
+  overlay.className = 'nav-overlay';
+  document.body.append(overlay);
+
+  const megaWrapper = document.createElement('div');
+  megaWrapper.className = 'mega-wrapper';
+  nav.after(megaWrapper);
+
+  /* helper functions */
+  function buildMega(drop) {
+    if (megaWrapper.dataset.loaded === drop.dataset.key) return; // cached
+    megaWrapper.innerHTML = '';
+
+    const col = document.createElement('div');
+    col.className = 'column';
+
+    drop.querySelectorAll(':scope > ul > li').forEach((li) => {
+      const slot = document.createElement('div');
+      slot.innerHTML = li.innerHTML;         // move—not clone—contents
+      col.append(slot);
+    });
+
+    megaWrapper.append(col);
+    megaWrapper.dataset.loaded = drop.dataset.key;
+  }
+
+  function openMega(drop) {
+    buildMega(drop);
+    overlay.classList.add('active');
+    megaWrapper.classList.add('open');
+    toggleAllNavSections(navSections, false);      // collapse others
+    drop.setAttribute('aria-expanded', 'true');
+    megaWrapper.dataset.activeKey = drop.dataset.key;
+  }
+
+  function closeMega() {
+    overlay.classList.remove('active');
+    megaWrapper.classList.remove('open');
+    toggleAllNavSections(navSections, false);
+    delete megaWrapper.dataset.activeKey;
+  }
+
+  /* wire every top-level item */
+  const navDrops = nav.querySelectorAll('.nav-sections .nav-drop');
+  navDrops.forEach((drop, idx) => {
+    drop.dataset.key = idx;
+
+    /* — open on hover (desktop only) — */
+    drop.addEventListener('mouseenter', () => {
+      if (isDesktop.matches) openMega(drop);
+    });
+
+    /* — open/close on click (desktop only) — */
+    drop.addEventListener('click', (e) => {
+      if (!isDesktop.matches) return;        // keep mobile tap behaviour
+      e.preventDefault();                    // stop link jump
+
+      const same = megaWrapper.dataset.activeKey === drop.dataset.key;
+      if (same && megaWrapper.classList.contains('open')) {
+        closeMega();                         // second click → close
+      } else {
+        openMega(drop);                      // first click → open
+      }
+    });
+  });
+
+  /* keep panel open while pointer is inside it */
+  megaWrapper.addEventListener('mouseleave', closeMega);
+
+  /* global dismiss actions */
+  overlay.addEventListener('click', closeMega);
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMega();
+  });
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
