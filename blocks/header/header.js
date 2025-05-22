@@ -107,20 +107,27 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
    ✨ ADDED: mega-menu helpers (build in-page from nested <ul>)
 --------------------------------------------------------------------------- */
 function buildMega(drop, wrapper) {
-  if (wrapper.dataset.loaded === drop.dataset.key) return;      // cache
-  wrapper.innerHTML = '';
+  if (wrapper.dataset.loaded === drop.dataset.key) return;
 
+  wrapper.innerHTML = '';
   const sub = drop.querySelector(':scope > ul');
   if (sub) {
-    const col = document.createElement('div');
-    col.className = 'column';
-    sub.querySelectorAll('li > a').forEach((a) => col.append(a.cloneNode(true)));
-    wrapper.append(col);
+    const column = document.createElement('div');
+    column.className = 'column';
+    // clone every <li>—link or not
+    sub.querySelectorAll(':scope > li').forEach((li) => {
+      const item = document.createElement('div');
+      item.innerHTML = li.innerHTML;     // copies text, <a>, <p>, etc.
+      column.append(item);
+    });
+    wrapper.append(column);
   } else {
-    wrapper.innerHTML = '<div class="column"><p style="padding:0 32px;">No submenu configured</p></div>';
+    wrapper.innerHTML =
+      '<div class=\"column\"><p style=\"padding:0 32px;\">No submenu content</p></div>';
   }
   wrapper.dataset.loaded = drop.dataset.key;
 }
+
 function setMegaState(open, overlay, wrapper) {
   overlay.classList.toggle('active', open);
   wrapper.classList.toggle('open', open);
