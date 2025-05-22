@@ -103,64 +103,30 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
-/* ---------------------------------------------------------------------------
-   ✨ ADDED: mega-menu helpers (build in-page from nested <ul>)
---------------------------------------------------------------------------- */
-function buildMega(drop, wrapper) {
-  // cache check
-  const key = drop.dataset.key;
-  if (wrapper.dataset.loaded === key) return;
-
-  wrapper.innerHTML = '';                // wipe previous content
-  const subList = drop.querySelector(':scope > ul');
-
-  if (subList) {
-    const column = document.createElement('div');
-    column.className = 'column';
-
-    // move—not clone—each <li> so we don’t duplicate IDs
-    subList.querySelectorAll(':scope > li').forEach((li) => {
-      const slot = document.createElement('div');
-      slot.innerHTML = li.innerHTML;     // keeps plain text, <a>, <p>, <img>, etc.
-      column.append(slot);
-    });
-
-    wrapper.append(column);
-  } else {
-    wrapper.innerHTML =
-      '<div class=\"column\"><p style=\"padding:0 32px;\">(No submenu content)</p></div>';
-  }
-  wrapper.dataset.loaded = key;
-}
-
-function setMegaState(open, overlay, wrapper) {
-  overlay.classList.toggle('active', open);
-  wrapper.classList.toggle('open', open);
-}
-
-/* ---------------------------------------------------------------------------
-   decorate()  – unchanged core flow + mega-menu injection
---------------------------------------------------------------------------- */
+/**
+ * loads and decorates the header, mainly the nav
+ * @param {Element} block The header block element
+ */
 export default async function decorate(block) {
-  /* 1 — load nav fragment (OOTB) */
-  const navPath = getMetadata('nav')
-    ? new URL(getMetadata('nav'), window.location).pathname
-    : '/nav';
+  // load nav as fragment
+  const navMeta = getMetadata('nav');
+  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
 
-  /* 2 — assemble nav DOM (OOTB) */
+  // decorate nav DOM
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  ['brand', 'sections', 'tools'].forEach((c, i) => {
+  const classes = ['brand', 'sections', 'tools'];
+  classes.forEach((c, i) => {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
   });
 
   const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand?.querySelector('.button');
+  const brandLink = navBrand.querySelector('.button');
   if (brandLink) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
@@ -168,20 +134,19 @@ export default async function decorate(block) {
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li')
-      .forEach((navSection) => {
-        if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-        navSection.addEventListener('click', () => {
-          if (isDesktop.matches) {
-            const expanded = navSection.getAttribute('aria-expanded') === 'true';
-            toggleAllNavSections(navSections);
-            navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-          }
-        });
+    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+      navSection.addEventListener('click', () => {
+        if (isDesktop.matches) {
+          const expanded = navSection.getAttribute('aria-expanded') === 'true';
+          toggleAllNavSections(navSections);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        }
       });
+    });
   }
 
-  /* 3 — hamburger (OOTB) */
+  // hamburger for mobile
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
@@ -190,68 +155,10 @@ export default async function decorate(block) {
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
+  // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
-  /* ---------------------------------------------------------------------
-       4 — ✨  mega-menu overlay, hover + click listeners  (REVISED)
-  --------------------------------------------------------------------- */
-  const overlay = document.createElement('div');
-  overlay.className = 'nav-overlay';
-  document.body.append(overlay);
-
-  const megaWrapper = document.createElement('div');
-  megaWrapper.className = 'mega-wrapper';
-  nav.after(megaWrapper);
-
-  /* ---------- helpers ------------------------------------------------- */
-  function openMega(drop) {
-    buildMega(drop, megaWrapper);
-    setMegaState(true, overlay, megaWrapper);
-    drop.setAttribute('aria-expanded', 'true');
-    megaWrapper.dataset.activeKey = drop.dataset.key;
-  }
-
-  function closeMega() {
-    setMegaState(false, overlay, megaWrapper);
-    toggleAllNavSections(navSections, false);
-    delete megaWrapper.dataset.activeKey;
-  }
-
-  /* ---------- event wiring -------------------------------------------- */
-  const navDrops = nav.querySelectorAll('.nav-sections .nav-drop');
-
-  navDrops.forEach((drop, idx) => {
-    drop.dataset.key = idx;
-
-    /* —— hover or first click — open panel (desktop only) -------------- */
-    function handleOpen(e) {
-      if (!isDesktop.matches) return;      // keep default mobile behaviour
-      if (e.type === 'click') e.preventDefault();
-
-      const alreadyOpen = megaWrapper.dataset.activeKey === drop.dataset.key;
-      toggleAllNavSections(navSections, false);     // reset all items
-
-      if (!alreadyOpen) openMega(drop);             // open new panel
-      else              closeMega();                // close if same item
-    }
-
-    drop.addEventListener('mouseenter', handleOpen);
-    drop.addEventListener('click',       handleOpen);
-  });
-
-  /* —— keep panel open while pointer is over it ----------------------- */
-  megaWrapper.addEventListener('mouseenter', () => {
-    /* nothing – just prevents navDrop mouseleave from closing it */
-  });
-
-  /* —— close when pointer leaves panel or user clicks veil / presses Esc */
-  megaWrapper.addEventListener('mouseleave', closeMega);
-  overlay     .addEventListener('click',     closeMega);
-  window      .addEventListener('keydown',   (e) => { if (e.key === 'Escape') closeMega(); });
-
-
-  /* 5 — final wrapper (OOTB) */
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
