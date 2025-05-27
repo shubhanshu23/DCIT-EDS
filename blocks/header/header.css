@@ -1,6 +1,6 @@
 /* header and nav layout */
 header .nav-wrapper {
-  background-color: var(--background-color);
+  background-color: var(--brand-color-black);
   width: 100%;
   z-index: 2;
   position: fixed;
@@ -28,6 +28,16 @@ header nav[aria-expanded='true'] {
     'tools tools' var(--nav-height) / auto 1fr;
   overflow-y: auto;
   min-height: 100dvh;
+}
+
+header nav .nav-sections .default-content-wrapper > ul li {
+  color: var(--color-nav-link);
+  cursor: pointer;
+}
+
+header nav .nav-sections .default-content-wrapper > ul li:hover {
+  color: var(--brand-color-secondary);
+  cursor: pointer;
 }
 
 @media (width >= 900px) {
@@ -142,6 +152,8 @@ header .nav-brand {
   font-size: var(--heading-font-size-s);
   font-weight: 700;
   line-height: 1;
+  color: var(--color-nav-link);
+
 }
 
 header nav .nav-brand img {
@@ -270,8 +282,7 @@ header nav .nav-tools {
 /*********************************/
 
 /* === Mega-menu override: full-width sheet, 4-col grid, vertical sub-links, bold headings === */
-@media (min-width:1024px){
-
+@media (min-width:1024px) {
   /* Full-width dropdown sheet */
   header nav .nav-sections
     .default-content-wrapper > ul > li[aria-expanded='true'] > ul{
@@ -281,13 +292,17 @@ header nav .nav-tools {
       width: 100%;
       max-width: none;
       padding: 40px 5vw;
-      background: #fff;
+      background: var(--brand-secondary-nav-wrapper);
       box-shadow: 0 8px 24px rgba(0,0,0,.08);
       z-index: 1000;
-
       display: grid !important;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 32px 24px;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul > li > ul a{
+      font-weight: 400 !important;
+      text-decoration: none;
   }
 
   /* Each immediate <li> inside the sheet becomes a column */
@@ -315,11 +330,7 @@ header nav .nav-tools {
       flex-direction: column;
       row-gap: 6px;
   }
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul > li > ul a{
-      font-weight: 400 !important;
-      text-decoration: none;
-  }
+
 }
 
 /* Remove any dark overlay injected by demos */
@@ -329,7 +340,7 @@ header .nav-wrapper::after{ content:none !important; }
 
 /* 1. Mobile logo inside the dropdown sheet
    ───────────────────────────────────────── */
-@media (max-width:899px){
+@media ( max-width:899px ){
   /* position the sheet relative so we can anchor the logo inside it */
   header nav .nav-sections
     .default-content-wrapper > ul > li[aria-expanded='true'] > ul{
@@ -350,18 +361,21 @@ header .nav-wrapper::after{ content:none !important; }
 }
 
 /* 2. Bold column heading even if it isn’t wrapped in <a href=""> */
+
 /*   (covers plain <strong>, <span>, or bare text nodes)          */
 @media (min-width:1024px){
   header nav .nav-sections
     .default-content-wrapper > ul > li[aria-expanded='true'] > ul > li{
       font-weight: 600;                /* column heading */
   }
+
   /* but immediately drop to 400 for nested links */
   header nav .nav-sections
     .default-content-wrapper > ul > li[aria-expanded='true'] > ul > li > ul a{
       font-weight: 400 !important;
   }
 }
+
 /* === Column-logo + brand/CTA helpers (no JS) ======================== */
 
 /* 1 ─ Column logo (desktop ≥ 1024 px) */
@@ -395,13 +409,13 @@ header .nav-tools .button.cta{
 /* (brand logo already handled by OOTB `nav-brand` rules) */
 
 /* === Mobile behaviour for the CTA in .nav-tools ===================== */
+
 /*                                                              *
  *  • On phones/tablets (< 900 px) while the menu is CLOSED → hide CTA *
  *  • When the hamburger is OPEN (aria-expanded="true") → show CTA at  *
  *    the bottom of the drawer, full-width, nice padding               */
 
 @media (max-width:899px){
-
   /* 1 ▸ Hide the CTA when the header bar is collapsed */
   header nav[aria-expanded='false'] .nav-tools{
     display:none !important;          /* disappears from top bar        */
@@ -444,6 +458,7 @@ header .nav-tools .button.cta{
   header nav .nav-sections li[aria-expanded='true'] > ul{
     grid-template-columns: 260px repeat(auto-fit,minmax(220px,1fr));
   }
+
   /* hero cell */
   .mega-intro{
     display:flex;
@@ -452,9 +467,16 @@ header .nav-tools .button.cta{
     row-gap:16px;
     padding-right:24px;
   }
-  .mega-intro .intro-title{ font-size:26px;font-weight:700;line-height:1.2; }
-  .mega-intro img,.mega-intro svg{ width:56px;height:auto; }
+
+  .mega-intro .intro-title{ 
+    font-size:26px;font-weight:700;line-height:1.2; 
+  }
+
+  .mega-intro img,.mega-intro svg{ 
+    width:56px;height:auto; 
+  }
 }
+
 @media (max-width:1023px){ .mega-intro{display:none!important;} }
 
 /* === Hero intro column + mobile-CTA alignment (add-on) =============== */
@@ -465,6 +487,7 @@ header .nav-tools .button.cta{
   header nav .nav-sections li[aria-expanded='true'] > ul{
     grid-template-columns: 260px repeat(auto-fit,minmax(220px,1fr));
   }
+
   .mega-intro{
     display:flex;
     flex-direction:column;
@@ -472,17 +495,20 @@ header .nav-tools .button.cta{
     row-gap:16px;
     padding-right:24px;
   }
+
   .mega-intro .intro-title{
     font-size: 26px;
     font-weight: 700;
     line-height: 1.2;
     margin:0;
   }
+
   .mega-intro img,.mega-intro svg{
     width:56px;
     height:auto;
   }
 }
+
 /* hide hero on mobile */
 @media (max-width:1023px){
   .mega-intro{display:none!important;}
@@ -493,6 +519,7 @@ header .nav-tools .button.cta{
   header nav[aria-expanded='true'] .nav-tools{
     text-align:left!important;
   }
+
   header nav[aria-expanded='true'] .nav-tools .button.cta{
     margin:0!important;
     width:100%;
@@ -502,7 +529,6 @@ header .nav-tools .button.cta{
 
 /* === Hero first-column (logo + level-one title) ===================== */
 @media (min-width:1024px){
-
   /* 1 ▸ Reserve 260 px for the first column, keep rest auto-fit grid */
   header nav .nav-sections
     .default-content-wrapper > ul > li[aria-expanded='true'] > ul{
