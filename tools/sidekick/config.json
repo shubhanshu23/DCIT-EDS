@@ -1,3 +1,12 @@
 {
-  "host": "main--dcit-eds--shubhanshu23.aem.page"
+  "project": "Example",
+  "plugins": [
+    {
+      "id": "library",
+      "title": "Library",
+      "environments": ["edit"],
+      "url": "/tools/sidekick/library.html",
+      "includePaths": ["**.docx**"]
+    }
+  ]
 }
