@@ -1,2 +1,5 @@
 mountpoints:
-  /: https://drive.google.com/drive/folders/1HlN4VElASkcKD2xSSEHN5ldHPEZG2pLo
+  /:
+    url: "https://author-p156702-e1664409.adobeaemcloud.com/bin/franklin.delivery/shubhanshu23/dcit-eds/main"
+    type: "markup"
+    suffix: ".html"
