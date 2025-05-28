@@ -155,7 +155,7 @@ export default async function decorate(block) {
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
-  toggleMenu(nav, navSections, /*forceExpanded*/ false);
+  toggleMenu(nav, navSections, false);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, false));
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
