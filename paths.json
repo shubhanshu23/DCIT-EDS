@@ -1,0 +1,10 @@
+{
+  "mappings": [
+    "/content/dcit-insurance/:/",
+    "/content/dcit-insurance/configuration:/.helix/config.json",
+    "/content/dcit-insurance/metadata:/metadata.json"
+  ],
+  "includes": [
+    "/content/dcit-insurance/"
+  ]
+}
