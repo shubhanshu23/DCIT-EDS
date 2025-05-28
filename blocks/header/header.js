@@ -155,14 +155,8 @@ export default async function decorate(block) {
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
-  // prevent mobile nav behavior on window resize
-
-  // always START COLLAPSED, whatever the current viewport is
   toggleMenu(nav, navSections, /*forceExpanded*/ false);
-  // keep the same (collapsed) state when the 900-px breakpoint flips
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, false));
-
-
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
