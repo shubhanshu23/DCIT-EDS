@@ -49,8 +49,8 @@
       },
       {
         "component": "select",
-        "name": "titleType",
-        "label": "Title Type",
+        "name": "textType",
+        "label": "text Type",
         "options": [
           {
             "name": "h1",
