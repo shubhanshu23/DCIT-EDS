@@ -18,7 +18,7 @@ footer .footer.block .section:first-child {
   flex-direction: column-reverse;
 }
 
-footer .columns {
+footer .columns div:first-child{
   align-items: flex-start;
 }
 
