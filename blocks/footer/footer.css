@@ -13,8 +13,47 @@ footer .footer p {
   margin: 0;
 }
 
+footer .footer.block .section:first-child {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+footer .columns {
+  align-items: flex-start;
+}
+
+footer .columns h1, h2{
+   margin-top: 0;
+}
+
+footer ul {
+   padding-inline-start: 0;
+   color: var(--text-color);
+}
+
+footer ul li {
+   list-style: none;
+   font-size: 1rem;
+   padding-inline-start: 0;
+   color: var(--text-color);
+}
+
+footer .columns ul li a{
+   color: var(--text-color);
+   text-decoration: none;
+}
+
+footer .columns ul li a:hover{
+   color: var(--brand-color-secondary);
+}
+
 @media (width >= 900px) {
   footer .footer > div {
     padding: 40px 32px 24px;
+  }
+
+  footer .footer.block .columns-wrapper .columns  div div:first-child {
+    min-width: 35%;
+    font-size: 1rem;
   }
 }
