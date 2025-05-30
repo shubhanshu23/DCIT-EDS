@@ -187,6 +187,10 @@
           {
             "name": "Highlight",
             "value": "highlight"
+          },
+          {
+            "name": "Plans Section",
+            "value": "plans-section"
           }
         ]
       }
