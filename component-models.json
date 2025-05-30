@@ -92,9 +92,11 @@
     "id": "title",
     "fields": [
       {
-        "component": "text",
-        "name": "title",
-        "label": "Title"
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
       },
       {
         "component": "select",
