@@ -45,7 +45,8 @@
       {
         "component": "text",
         "name": "text",
-        "label": "text"
+        "label": "text",
+        "valueType": "string"
       },
       {
         "component": "select",

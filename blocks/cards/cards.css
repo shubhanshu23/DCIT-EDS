@@ -25,3 +25,24 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+/* Plans Section cards css */
+.plans-section .cards-card-body h4, .plans-section .cards-card-body h5 {
+  text-align: center;
+}
+
+.plans-section .cards > ul {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.plans-section .cards > ul > li {
+  border-radius: 15px;
+}
+
+.plans-section .cards-card-body .button-container {
+  text-align: center;
+}
+
+.plans-section .cards-card-body > ul {
+  list-style-type: disc;
+}
