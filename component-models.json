@@ -309,6 +309,7 @@
       {
         "component": "richtext",
         "name": "rte",
+        "value": "",
         "label": "Rich Text",
         "valueType": "string"
       }
