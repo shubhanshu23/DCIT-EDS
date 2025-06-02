@@ -1,0 +1,29 @@
+{
+    "definitions": [
+        {
+            "title": "RTE",
+            "id": "richtext",
+            "plugins": {
+                "xwalk": {
+                    "page": {
+                        "resourceType": "core/franklin/components/rte/v1/rte",
+                        "template": {}
+                    }
+                }
+            }
+        }
+    ],
+    "models": [
+        {
+            "id": "richtext",
+            "fields": [
+                {
+                    "component": "richtext",
+                    "name": "rte",
+                    "label": "Rich Text",
+                    "valueType": "string"
+                }
+            ]
+        }
+    ]
+}
