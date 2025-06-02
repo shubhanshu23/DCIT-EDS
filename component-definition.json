@@ -55,6 +55,18 @@
               }
             }
           }
+        },
+        {
+          "title": "RTE",
+          "id": "rte",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/rte/v1/rte",
+                "template": {}
+              }
+            }
+          }
         }
       ]
     },
@@ -71,6 +83,20 @@
                 "resourceType": "core/franklin/components/section/v1/section",
                 "template": {
                   "model": "section"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Container",
+          "id": "container",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/container/v1/container",
+                "template": {
+                  "model": "container"
                 }
               }
             }

@@ -93,11 +93,9 @@
     "id": "title",
     "fields": [
       {
-        "component": "richtext",
-        "name": "text",
-        "value": "",
-        "label": "Text",
-        "valueType": "string"
+        "component": "text",
+        "name": "title",
+        "label": "Title"
       },
       {
         "component": "select",
@@ -213,7 +211,7 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
-      },   
+      },
       {
         "component": "aem-content",
         "name": "link",
@@ -302,6 +300,42 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "richtext",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "rte",
+        "label": "Rich Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "container",
+    "fields": [
+      {
+        "component": "text",
+        "name": "name",
+        "label": "Container Name"
+      },
+      {
+        "component": "multiselect",
+        "name": "style",
+        "label": "Style",
+        "options": [
+          {
+            "name": "Default",
+            "value": "default"
+          },
+          {
+            "name": "Plans Section",
+            "value": "plans-section"
+          }
+        ]
       }
     ]
   }
