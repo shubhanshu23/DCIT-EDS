@@ -338,5 +338,31 @@
         ]
       }
     ]
+  },
+  {
+    "id": "pdf-viewer",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "pdf-viewer",
+        "label": "PDF Viewer",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "pdf-viewer",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "PDF Link"
+      },
+      {
+        "component": "text",
+        "name": "linkTitle",
+        "label": "Title"
+      }
+    ]
   }
 ]

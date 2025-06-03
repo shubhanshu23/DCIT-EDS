@@ -17,7 +17,8 @@
       "columns",
       "fragment",
       "richtext",
-      "container"
+      "container",
+	  "pdf-viewer"
     ]
   },
   {
