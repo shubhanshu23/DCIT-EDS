@@ -51,7 +51,9 @@
         "cards",
         "columns",
         "fragment",
-        "richtext"
+        "richtext",
+		"form",
+        "embed-adaptive-form"
       ]
     }
   ]
