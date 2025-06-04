@@ -50,8 +50,8 @@
       },
       {
         "component": "select",
-        "name": "titleType",
-        "label": "Title Type",
+        "name": "textType",
+        "label": "text Type",
         "options": [
           {
             "name": "h1",
@@ -343,6 +343,32 @@
             "value": "plans-section"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "pdf-viewer",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "pdf-viewer",
+        "label": "PDF Viewer",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "pdf-viewer",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "PDF Link"
+      },
+      {
+        "component": "text",
+        "name": "linkTitle",
+        "label": "Title"
       }
     ]
   }
