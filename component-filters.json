@@ -18,9 +18,9 @@
       "fragment",
       "richtext",
       "container",
-      "pdf-viewer",
-      "form",
-      "embed-adaptive-form"
+	  "pdf-viewer",
+        "form",
+        "embed-adaptive-form"
     ]
   },
   {
@@ -51,7 +51,7 @@
       "button"
     ]
   },
-   {
+  {
     "id": "form",
     "components": [
       "captcha",
@@ -76,6 +76,7 @@
       "rating",
       "telephone-input",
       "text-input",
+      "tnc",
       "wizard"
     ]
   }
