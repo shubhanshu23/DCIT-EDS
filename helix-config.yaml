@@ -1,9 +1,12 @@
 strains:
+  - name: default
+    content:
+      repo: dcit-eds/shubhanshu23
+      ref: main
+
   - name: secure-dashboard
     condition:
-      url: https://accounts.google.com/o/oauth2/v2/auth?client_id=353895241946-bj7aj7r5p64e508a9f5sf213p3sah96t.apps.googleusercontent.com&redirect_uri=https://main--dcit-eds--shubhanshu23.aem.page/auth/callback&response_type=code&scope=openid%20email%20profile&state=original-request-url&access_type=offline
-    url:
-      pathname: /
+      url: https://main--dcit-eds--shubhanshu23.aem.page/dashboard
     redirects:
-      - from: /
-        to: https://main--dcit-eds--shubhanshu23.aem.page/
+      - from: /dashboard
+        to: https://your-middleware-host/login-check?next=/dashboard
