@@ -20,7 +20,7 @@ module.exports = {
     'no-param-reassign': [2, { props: false }], // allow modifying properties of param
     'xwalk/max-cells': ['error', {
       '*': 4, // default limit for all models
-      form: 15,
+      form: 16,
       wizard: 12,
       'form-button': 7,
       'checkbox-group': 20,

@@ -517,7 +517,7 @@ main .form .button-wrapper button {
 }
 
 main .form .button-wrapper button:hover {
-    border: 3px solid var(#fff);
+    border: 3px solid var(--background-color-primary);
     color: #fff;
     background-color: var(--button-secondary-color);
 }
