@@ -46,3 +46,7 @@
 .plans-section .cards-card-body > ul {
   list-style-type: disc;
 }
+
+.plans-section .default-content-wrapper > h3{
+  margin-top: 0.2rem;
+}

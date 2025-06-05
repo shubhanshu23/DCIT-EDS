@@ -63,7 +63,9 @@
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/rte/v1/rte",
-                "template": {}
+                "template": {
+                  "model": "richtext"
+                }
               }
             }
           }
@@ -198,7 +200,7 @@
             }
           }
         },
-	    {
+	      {
           "title": "Adaptive Form",
           "id": "form",
           "plugins": {
@@ -602,7 +604,7 @@
               }
             }
           }
-        },        
+        },  
         {
           "title": "Wizard",
           "id": "wizard",

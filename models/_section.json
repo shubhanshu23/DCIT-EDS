@@ -52,7 +52,7 @@
         "columns",
         "fragment",
         "richtext",
-		"form",
+		    "form",
         "embed-adaptive-form"
       ]
     }
