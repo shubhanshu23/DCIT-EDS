@@ -5,5 +5,5 @@ strains:
     url:
       pathname: /
     redirects:
-      - from: /dashboard
+      - from: /
         to: https://main--dcit-eds--shubhanshu23.aem.page/
