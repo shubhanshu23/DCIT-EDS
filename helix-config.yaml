@@ -1,8 +1,4 @@
 strains:
-  - name: default
-    content:
-      repo: dcit-eds/shubhanshu23
-      ref: main
 
   - name: secure-dashboard
     condition:
