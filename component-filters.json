@@ -18,7 +18,8 @@
       "fragment",
       "richtext",
       "container",
-	  "pdf-viewer"
+	  "pdf-viewer",
+    "login-form"
     ]
   },
   {

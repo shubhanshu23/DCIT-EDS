@@ -371,5 +371,15 @@
         "label": "Title"
       }
     ]
+  },
+  {
+    "id": "login-form",
+    "fields": [
+      {
+        "component": "text",
+        "name": "redirectUrl",
+        "label": "Redirection URL"
+      }
+    ]
   }
 ]
