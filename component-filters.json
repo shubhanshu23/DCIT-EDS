@@ -18,11 +18,9 @@
       "fragment",
       "richtext",
       "container",
-	  "pdf-viewer",
-        "form",
-        "embed-adaptive-form"
-	  "pdf-viewer",
-    "login-form"
+      "pdf-viewer",
+      "form",
+      "embed-adaptive-form"
     ]
   },
   {

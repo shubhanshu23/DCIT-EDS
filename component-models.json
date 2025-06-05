@@ -2821,11 +2821,11 @@
               },
               {
                 "name": "$1,234.21",
-                "value": "¤#,##0.00"
+                "value": "ï¿½#,##0.00"
               },
               {
                 "name": "$1234.21",
-                "value": "¤####0.00"
+                "value": "ï¿½####0.00"
               },
               {
                 "name": "1,234.210",
@@ -5181,16 +5181,6 @@
             "value": "plans-section"
           }
         ]
-      }
-    ]
-  },
-  {
-    "id": "login-form",
-    "fields": [
-      {
-        "component": "text",
-        "name": "redirectUrl",
-        "label": "Redirection URL"
       }
     ]
   }
