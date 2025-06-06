@@ -1,9 +1,9 @@
 /* Open Sans */
 @font-face {
-    font-family: 'Open Sans Semi Condensed';
-    src: url('../fonts/OpenSans/woff2/OpenSansSemiCondensed-Bold.woff2') format('woff2'),
-        url('../fonts/OpenSans/woff/OpenSansSemiCondensed-Bold.woff') format('woff');
-    font-weight: 700;
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans/woff2/OpenSans-Light.woff2') format('woff2'),
+        url('../fonts/OpenSans/woff/OpenSans-Light.woff') format('woff');
+    font-weight: 300;
     font-style: normal;
     font-display: swap;
 }

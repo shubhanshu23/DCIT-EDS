@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+ @import './reset.css';
+
 :root {
   /* colors */
   --background-color: white;
@@ -25,7 +27,7 @@
 
   /* fonts */
   --body-font-family: 'Open Sans', Verdana, Helvetica, sans-serif;;
-  --heading-font-family: 'Open Sans Semi Condensed', Verdana, Helvetica, sans-serif;
+  --heading-font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -42,19 +44,6 @@
 
   /* nav height */
   --nav-height: 64px;
-}
-
-/* fallback fonts */
-@font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
-  src: local('Arial');
-}
-
-@font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
-  src: local('Arial');
 }
 
 @media (width >= 900px) {
