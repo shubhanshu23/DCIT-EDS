@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
- @import './reset.css';
+ @import "url('./reset.css')";
 
 :root {
   /* colors */
@@ -26,8 +26,8 @@
   --brand-color-secondary: #8cc527;
 
   /* fonts */
-  --body-font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
-  --heading-font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
+  --body-font-family: 'Open Sans', verdana, helvetica, sans-serif;
+  --heading-font-family: 'Open Sans', verdana, helvetica, sans-serif;
 
   /* body sizes */
   --body-font-size-m: 22px;
