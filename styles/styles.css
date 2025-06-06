@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
- @import "url('./reset.css')";
+ @import url('./reset.css');
 
 :root {
   /* colors */
