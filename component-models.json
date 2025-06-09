@@ -197,6 +197,10 @@
           {
             "name": "Plans Section",
             "value": "plans-section"
+          },
+          {
+            "name": "Cards Section",
+            "value": "cards-section"
           }
         ]
       }
