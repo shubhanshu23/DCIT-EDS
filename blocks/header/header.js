@@ -134,8 +134,16 @@ export default async function decorate(block) {
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
+    navSections.querySelector(':scope .default-content-wrapper > ul')?.classList?.add('header-level-one');
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+      const levelTwoUl = navSection.querySelector(':scope > ul');
+      if (levelTwoUl) {
+        navSection.classList.add('nav-drop');
+        levelTwoUl.classList.add('header-level-two');
+        levelTwoUl.querySelectorAll(':scope > li > ul').forEach((levelThreeUl) => {
+          levelThreeUl.classList.add('header-level-three');
+        });
+      }
       navSection.addEventListener('click', () => {
         if (isDesktop.matches) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
