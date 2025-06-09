@@ -1,8 +1,7 @@
 strains:
-
   - name: secure-dashboard
     condition:
       url: https://main--dcit-eds--shubhanshu23.aem.page/dashboard
     redirects:
       - from: /dashboard
-        to: https://your-middleware-host/login-check?next=/dashboard
+        to: https://27203-oauthnp20project-stage.adobeioruntime.net/api/v1/web/eds-middleware/login-check?next=/dashboard
