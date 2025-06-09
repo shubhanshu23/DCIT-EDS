@@ -201,6 +201,10 @@
           {
             "name": "Cards Section",
             "value": "cards-section"
+          },
+          {
+            "name": "Quiz Section",
+            "value": "quiz-section"
           }
         ]
       }
@@ -5197,6 +5201,25 @@
         "name": "title",
         "label": "Title",
         "value": "Login"
+      },
+      {
+        "component": "text-area",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "quizForm",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": "Quiz Form"
       },
       {
         "component": "text-area",
