@@ -25,12 +25,6 @@ export default async function decorate(block) {
   errorDiv.className = 'login-error';
   block.append(errorDiv);
 
-  function showError(msg) {
-    errorDiv.textContent = msg;
-    errorDiv.style.display = 'block';
-    userInput.focus();
-  }
-
   const form = document.createElement('form');
   form.setAttribute('method', 'POST');
   form.setAttribute('action', '#');
@@ -60,6 +54,12 @@ export default async function decorate(block) {
   form.append(userLabel, userInput, passLabel, passInput, submitBtn);
   block.append(form);
 
+  const showError = (msg) => {
+    errorDiv.textContent = msg;
+    errorDiv.style.display = 'block';
+    userInput.focus();
+  };
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorDiv.style.display = 'none';
@@ -77,7 +77,10 @@ export default async function decorate(block) {
 
       if (response.ok) {
         const finalUrl = response.url || '';
-        if (response.redirected || (finalUrl && !finalUrl.includes('j_security_check'))) {
+        if (
+          response.redirected ||
+          (finalUrl && !finalUrl.includes('j_security_check'))
+        ) {
           window.location.href = finalUrl || '/';
         } else {
           window.location.reload();
@@ -104,5 +107,6 @@ export default async function decorate(block) {
       }
     }
   } catch (e) {
+    // ignore
   }
 }
