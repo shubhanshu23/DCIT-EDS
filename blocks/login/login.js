@@ -78,8 +78,8 @@ export default async function decorate(block) {
       if (response.ok) {
         const finalUrl = response.url || '';
         if (
-          response.redirected ||
-          (finalUrl && !finalUrl.includes('j_security_check'))
+          response.redirected
+          || (finalUrl && !finalUrl.includes('j_security_check'))
         ) {
           window.location.href = finalUrl || '/';
         } else {
@@ -108,5 +108,6 @@ export default async function decorate(block) {
     }
   } catch (e) {
     // ignore
+    void 0;
   }
 }
