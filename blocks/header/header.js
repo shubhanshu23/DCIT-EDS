@@ -108,7 +108,6 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  console.log(block,"blocks");
   // load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
@@ -135,7 +134,7 @@ export default async function decorate(block) {
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
-    navSections.querySelector(":scope .default-content-wrapper > ul")?.classList?.add('header-level-one');
+    navSections.querySelector(':scope .default-content-wrapper > ul')?.classList?.add('header-level-one');
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       const levelTwoUl = navSection.querySelector(':scope > ul');
       if (levelTwoUl) {
