@@ -5183,5 +5183,24 @@
         ]
       }
     ]
+  },
+  {
+    "id": "login",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": "Login"
+      },
+      {
+        "component": "text-area",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      }
+    ]
   }
 ]
