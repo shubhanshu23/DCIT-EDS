@@ -108,6 +108,5 @@ export default async function decorate(block) {
     }
   } catch (e) {
     // ignore
-    void 0;
   }
 }
