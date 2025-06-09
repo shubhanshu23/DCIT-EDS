@@ -89,7 +89,7 @@ export default async function decorate(block) {
     emailInput,
     subscribeDiv,
     agreeDiv,
-    submitBtn
+    submitBtn,
   );
   block.append(form);
 
@@ -108,6 +108,7 @@ export default async function decorate(block) {
       return;
     }
     form.reset();
-    alert('Quiz started!');
+    console.log('Quiz started!');
   });
 }
+
