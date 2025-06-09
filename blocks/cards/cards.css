@@ -1,52 +1,44 @@
-.cards > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  grid-gap: 24px;
+/* Columns container */
+.cards-section .columns-wrapper .columns div {
+    align-items: stretch;
 }
 
-.cards > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
+/* Column */
+.cards-section .columns-wrapper .columns div div {
+    background-color: #fff;
+    padding: 0 20px 20px;
 }
 
-.cards .cards-card-body {
-  margin: 16px;
+/* Image */
+.cards-section .columns-wrapper .columns div div picture {
+    margin: 0 -20px 20px;
 }
 
-.cards .cards-card-image {
-  line-height: 0;
+.cards-section .columns-wrapper .columns div div img {
+    aspect-ratio: 3;
+    object-fit: cover;
 }
 
-.cards > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+/* Label */
+.cards-section .columns-wrapper .columns div div > p:not(.button-container) {
+    color: #707377;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
 }
 
-/* Plans Section cards css */
-.plans-section .cards-card-body h4, .plans-section .cards-card-body h5 {
-  text-align: center;
+/* Heading */
+.cards-section .columns-wrapper .columns div div h2 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 12px;
 }
 
-.plans-section .cards > ul {
-  grid-template-columns: repeat(3, 1fr);
+/* Sub Heading */
+.cards-section .columns-wrapper .columns div div h3 {
+    color: #707377;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 12px;
 }
 
-.plans-section .cards > ul > li {
-  border-radius: 15px;
-}
-
-.plans-section .cards-card-body .button-container {
-  text-align: center;
-}
-
-.plans-section .cards-card-body > ul {
-  list-style-type: disc;
-}
-
-.plans-section .default-content-wrapper > h3{
-  margin-top: 0.2rem;
-}

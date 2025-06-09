@@ -1,0 +1,46 @@
+/* Reset box model and remove margins and paddings */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove list styles */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Remove default anchor styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Remove default button styles */
+button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Remove default picture styles */
+picture {
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+
+/* Set base font styles */
+body {
+  line-height: 1;
+}
+
+/* Add global box-sizing */
+html {
+  box-sizing: border-box;
+}

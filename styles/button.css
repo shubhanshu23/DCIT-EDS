@@ -1,0 +1,21 @@
+a.button {
+    position: relative;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+a.button:hover {
+    text-decoration: underline;
+}
+
+a.button::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    margin-left: 6px;
+    top: 6px;
+    border-top: 2px solid #707377;
+    border-right: 2px solid #707377;
+    transform: rotate(45deg);
+}
