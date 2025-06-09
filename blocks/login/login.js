@@ -25,6 +25,12 @@ export default async function decorate(block) {
   errorDiv.className = 'login-error';
   block.append(errorDiv);
 
+  function showError(msg) {
+    errorDiv.textContent = msg;
+    errorDiv.style.display = 'block';
+    userInput.focus();
+  }
+
   const form = document.createElement('form');
   form.setAttribute('method', 'POST');
   form.setAttribute('action', '#');
@@ -66,7 +72,7 @@ export default async function decorate(block) {
       const response = await fetch(loginUrl, {
         method: 'POST',
         body: formData,
-        credentials: 'include'
+        credentials: 'include',
       });
 
       if (response.ok) {
@@ -80,21 +86,16 @@ export default async function decorate(block) {
         showError('Invalid username or password.');
       }
     } catch (err) {
-      console.error('Login request failed:', err);
       showError('An error occurred. Please try again.');
     }
   });
 
-  function showError(msg) {
-    errorDiv.textContent = msg;
-    errorDiv.style.display = 'block';
-    userInput.focus();
-  }
-
   try {
     const sessionInfo = await fetch(
       `${window.location.origin}/system/sling/info.sessionInfo.json`,
-      { credentials: 'include' }
+      {
+        credentials: 'include',
+      },
     );
     if (sessionInfo.ok) {
       const infoData = await sessionInfo.json();
