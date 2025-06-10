@@ -36,14 +36,14 @@ export default async function decorate(block) {
   const firstNameInput = document.createElement('input');
   firstNameInput.type = 'text';
   firstNameInput.name = 'firstName';
-  firstNameInput.placeholder = 'First Name';
+  firstNameInput.placeholder = 'First Name*';
   firstNameInput.required = true;
 
   // Last Name
   const lastNameInput = document.createElement('input');
   lastNameInput.type = 'text';
   lastNameInput.name = 'lastName';
-  lastNameInput.placeholder = 'Last Name';
+  lastNameInput.placeholder = 'Last Name*';
   lastNameInput.required = true;
 
   // Email
