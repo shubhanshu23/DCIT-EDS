@@ -21,7 +21,8 @@
       "pdf-viewer",
       "form",
       "embed-adaptive-form",
-      "login"
+      "login",
+      "quiz-form"
     ]
   },
   {
