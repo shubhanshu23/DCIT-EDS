@@ -87,7 +87,7 @@
   margin-bottom: 24px;
 }
 
-@media (max-width: 500px) {
+/* @media (max-width: 500px) {
   .quiz-section form input[type="text"],
   .quiz-section form input[type="email"],
   .form-checkbox {
@@ -97,4 +97,4 @@
   .quiz-section form button[type="submit"] {
     width: 100%;
   }
-}
+} */
