@@ -1,0 +1,51 @@
+/* Style for the quiz question block */
+.quiz-question-block {
+  text-align: center;
+  padding: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+/* Style for the question text */
+.quiz-question-text {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Style for the options */
+.quiz-option {
+  display: inline-block;
+  width: 45%;
+  padding: 15px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f1f1f1;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for options */
+.quiz-option:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+}
+
+/* Style for the "Go back" link */
+.quiz-question-block a {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.quiz-question-block a:hover {
+  text-decoration: underline;
+}

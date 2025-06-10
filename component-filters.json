@@ -22,7 +22,8 @@
       "form",
       "embed-adaptive-form",
       "login",
-      "quiz-form"
+      "quiz-form",
+      "quiz-question"
     ]
   },
   {

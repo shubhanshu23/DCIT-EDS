@@ -5229,5 +5229,25 @@
         "value": ""
       }
     ]
+  },
+  {
+    "id": "quiz-question",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "question",
+        "label": "Question",
+        "value": ""
+      },
+      {
+        "component": "multiselect",
+        "valueType": "string",
+        "name": "options",
+        "label": "Options",
+        "multi": true,
+        "value": []
+      }
+    ]
   }
 ]
