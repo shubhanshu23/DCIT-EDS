@@ -66,16 +66,22 @@
   margin-top: 6px;
 }
 
-.header .nav-wrapper nav .header-level-one > li:hover > .header-level-two {
+.header .nav-wrapper nav .header-level-one > li:hover > .header-submenu-container {
   display: block;
+}
+
+.header .nav-wrapper nav .header-submenu-container {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: #121212;
 }
 
 /* Header Level 2 */
 .header .nav-wrapper nav .header-level-two {
-  display: none;
-  position: absolute;
+  width: 24%;
   background-color: #292B2C;
-  left: 0;
   padding: 40px 0 40px 40px;
 }
 
@@ -130,8 +136,8 @@
   display: none;
   position: absolute;
   top: 0;
-  left: 100%;
-  width: calc(1200px - 100%);
+  left: 24%;
+  width: calc(100% - 24%);
   height: 100%;
   background-color: #121212;
   padding: 38px;
