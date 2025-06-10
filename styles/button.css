@@ -1,14 +1,14 @@
-a.button {
+a.button.primary {
     position: relative;
     font-size: 16px;
     font-weight: 700;
 }
 
-a.button:hover {
+a.button.primary:hover {
     text-decoration: underline;
 }
 
-a.button::after {
+a.button.primary::after {
     content: '';
     position: absolute;
     width: 12px;
