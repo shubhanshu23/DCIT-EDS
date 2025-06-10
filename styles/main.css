@@ -12,10 +12,6 @@ body.appear {
   display: block;
 }
 
-header {
-  height: var(--nav-height);
-}
-
 header .header,
 footer .footer {
   visibility: hidden;
@@ -55,6 +51,10 @@ pre {
   background-color: var(--light-color);
   overflow-x: auto;
   white-space: pre;
+}
+
+main {
+  margin-top: 70px;
 }
 
 main > div {
