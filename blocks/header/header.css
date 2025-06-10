@@ -35,10 +35,6 @@
   display: flex;
 }
 
-.header .nav-wrapper nav .header-level-one li {
-  /* display: block; */
-}
-
 .header .nav-wrapper nav .header-level-one .button {
   display: flex;
   align-items: center;
