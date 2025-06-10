@@ -1,5 +1,4 @@
 export default async function decorate(block) {
-  // Create a container for the quiz question
   const questionBlock = document.createElement('div');
   questionBlock.className = 'quiz-question-block';
 
@@ -20,6 +19,6 @@ export default async function decorate(block) {
   });
 
   // Append the question block to the main block
-  block.innerHTML = ''; // Clear existing content
+  block.innerHTML = ''; //
   block.appendChild(questionBlock);
 }

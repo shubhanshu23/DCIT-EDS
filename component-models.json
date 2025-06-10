@@ -5242,7 +5242,7 @@
       },
       {
         "component": "multiselect",
-        "valueType": "string",
+        "valueType": "array",
         "name": "options",
         "label": "Options",
         "multi": true,
