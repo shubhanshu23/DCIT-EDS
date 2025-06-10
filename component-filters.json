@@ -81,5 +81,11 @@
       "tnc",
       "wizard"
     ]
+  },
+  {
+    "id": "quiz-form",
+    "components": [
+      "quiz-question"
+    ]
   }
 ]
