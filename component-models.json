@@ -5212,7 +5212,7 @@
     ]
   },
   {
-    "id": "quizForm",
+    "id": "quiz-form",
     "fields": [
       {
         "component": "text-input",
