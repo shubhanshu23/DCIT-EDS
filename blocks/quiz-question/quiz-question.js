@@ -4,7 +4,7 @@ export default async function decorate(block) {
 
   // Extract question and options from cells
   const questionCell = cells[0];
-  const optionsCells = cells.slice(1);
+  const optionsCells = cells.slice(1, -1);
 
   // Create question element
   const questionElement = document.createElement('p');
