@@ -44,8 +44,8 @@ export default async function decorate(block) {
   goBackLink.textContent = 'Go back';
   goBackLink.className = 'go-back';
   goBackLink.addEventListener('click', () => {
-    goBackLink.parentElement.parentElement.style.display = "none";
-    goBackLink.parentElement.parentElement.previousElementSibling.style.display = "none";
+    goBackLink.parentElement.parentElement.style.display = 'none';
+    goBackLink.parentElement.parentElement.previousElementSibling.style.display = 'none';
   });
 
   // Append elements to block
