@@ -24,7 +24,7 @@ export default async function decorate(block) {
     optionButton.className = 'quiz-option';
     optionButton.textContent = optionText;
 
-    optionButton.addEventListener("click", () => {
+    optionButton.addEventListener('click', () => {
       Array.from(optionButton.parentElement.children).forEach((btn) => {
         btn.classList.remove('selected');
       });
