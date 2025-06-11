@@ -33,7 +33,7 @@
 
 .quiz-option.selected {
   background-color: #0056b3;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgb(0 0 0 / 30%);
 }
 
 /* Style for the Go back */
