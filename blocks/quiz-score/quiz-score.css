@@ -1,17 +1,17 @@
-.quiz-score-container {
+.quiz-score {
   text-align: center;
   margin: 60px auto;
   max-width: 600px;
   font-family: inherit;
 }
 
-.quiz-score-container h2 {
+.quiz-score h2 {
   color: #2056ae;
   font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 
-.quiz-score-container p {
+.quiz-score p {
   color: #2056ae;
   font-size: 1.2rem;
   margin-bottom: 2rem;
