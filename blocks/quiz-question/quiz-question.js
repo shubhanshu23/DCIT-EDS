@@ -54,7 +54,7 @@ export default async function decorate(block) {
         });
         lastScore = `${correctCount}/${quizTotalMarks}`;
         console.log(`Score: ${correctCount}/${quizTotalMarks}`);
-      };
+      }
     });
 
     optionsContainer.appendChild(optionButton);
@@ -85,4 +85,7 @@ export default async function decorate(block) {
   block.appendChild(hiddenInput);
 }
 
-export { lastScore };
+export function getLastScore() {
+  return lastScore;
+}
+
