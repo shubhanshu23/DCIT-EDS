@@ -23,7 +23,8 @@
       "embed-adaptive-form",
       "login",
       "quiz-form",
-      "quiz-question"
+      "quiz-question",
+      "quiz-score"
     ]
   },
   {

@@ -5220,17 +5220,6 @@
         "name": "description",
         "label": "Description",
         "value": ""
-      },
-      {
-        "component": "multiselect",
-        "name": "style",
-        "label": "Style",
-        "options": [
-          {
-            "name": "active",
-            "value": "active"
-          }
-        ]
       }
     ]
   },
@@ -5277,6 +5266,32 @@
         "valueType": "string",
         "name": "correct-answer",
         "label": "Correct Answer",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "quiz-score",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "title",
+        "label": "TItle",
+        "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "button-text",
+        "label": "Button Text",
         "value": ""
       }
     ]
