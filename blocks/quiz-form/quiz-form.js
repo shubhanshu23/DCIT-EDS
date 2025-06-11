@@ -1,6 +1,6 @@
 export default async function decorate(block) {
   const cells = [...block.children];
-  document.querySelector('.quiz-form').classList.add('active')
+  document.querySelector('.quiz-form').classList.add('active');
 
   if (cells[0]) {
     const descText = cells[0].innerHTML.trim();
