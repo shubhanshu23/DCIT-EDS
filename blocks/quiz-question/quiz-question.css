@@ -1,18 +1,24 @@
 /* Style for the question */
 .quiz-question p {
-  font-size: 1.5rem;
-  font-weight: bold;
   text-align: center;
-  margin-bottom: 1rem;
-  color: #333;
+  color: #2d3e6c;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 24px;
 }
 
 /* Container for options */
 .quiz-options {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+  justify-content: center;
+}
+
+@media (width >= 768px) {
+  .quiz-options {
+    grid-template-columns: 1fr; /* Single column for smaller screens */
+  }
 }
 
 /* Style for individual option buttons */
@@ -21,7 +27,7 @@
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 0.75rem 1.5rem;
+  padding: 2rem;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
