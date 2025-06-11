@@ -1,4 +1,5 @@
-import { getLastScore } from './blocks/quiz-question/quiz-question.js';
+import { getLastScore } from '../quiz-question/quiz-question.js';
+
 const score = getLastScore();
 
 export default async function decorate(block) {
