@@ -32,11 +32,11 @@ export default async function decorate(block) {
 
       // Mark current option as selected
       optionButton.classList.add('selected');
-      optionButton.parentElement.parentElement.classList.remove('active');
-      optionButton.parentElement.parentElement.parentElement.nextSibling.children[0].classList.add('active');
-
       const allQuizOptions = document.querySelectorAll('.quiz-options');
       const isLast = optionButton.parentElement === allQuizOptions[allQuizOptions.length - 1];
+      optionButton.parentElement.parentElement.classList.remove('active');
+      if (!isLast) optionButton.parentElement.parentElement.parentElement.nextSibling.children[0].classList.add('active');
+
       if (isLast) {
         let correctCount = 0;
         const quizTotalMarks = document.querySelectorAll('.quiz-options').length;
