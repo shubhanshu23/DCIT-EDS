@@ -1,3 +1,4 @@
+let lastScore = null;
 export default async function decorate(block) {
   const cells = [...block.children];
 
@@ -32,7 +33,30 @@ export default async function decorate(block) {
       // Mark current option as selected
       optionButton.classList.add('selected');
       optionButton.parentElement.parentElement.classList.remove('active');
-      optionButton.parentElement.parentElement.parentElement.nextSibling.children[0].classList.add('active');
+      optionButton.parentElement.parentElement.parentElement.nextSibling.children[0].classList.add('active');  
+
+      const allQuizOptions = document.querySelectorAll('.quiz-options');
+      const isLast = optionButton.parentElement === allQuizOptions[allQuizOptions.length - 1];
+      if (isLast) {
+        let correctCount = 0;
+        const quizTotalMarks = document.querySelectorAll(".quiz-options").length;
+
+        document.querySelectorAll(".quiz-options").forEach((container) => {
+          const selected = Array.from(container.children).find((el) =>
+            el.classList.contains("selected")
+          );
+          if (selected) {
+            const correctInput = container.parentElement.querySelector(".correct-answer");
+            if (correctInput) {
+              const isCorrect = selected.textContent.trim() === correctInput.value.trim();
+              if (isCorrect) correctCount++;
+            }
+            console.log(selected.textContent);
+          }
+        });
+        lastScore = `${correctCount}/${quizTotalMarks}`
+        console.log(`Score: ${correctCount}/${quizTotalMarks}`);
+      }
     });
 
     optionsContainer.appendChild(optionButton);
@@ -49,9 +73,18 @@ export default async function decorate(block) {
     goBackLink.parentElement.parentElement.previousElementSibling.children[0].classList.add('active');
   });
 
+  // hidden input with textContent of last cell
+  const hiddenInput = document.createElement('input');
+  hiddenInput.type = 'hidden';
+  hiddenInput.className = 'correct-answer';
+  hiddenInput.value = cells[cells.length - 1]?.textContent?.trim() || '';
+
   // Append elements to block
   block.innerHTML = '';
   block.appendChild(questionElement);
   block.appendChild(optionsContainer);
   block.appendChild(goBackLink);
+  block.appendChild(hiddenInput);
 }
+
+// export { lastScore };
