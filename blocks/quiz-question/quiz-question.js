@@ -88,4 +88,3 @@ export default async function decorate(block) {
 export function getLastScore() {
   return lastScore;
 }
-
