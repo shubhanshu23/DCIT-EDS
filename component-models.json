@@ -5219,7 +5219,12 @@
         "valueType": "string",
         "name": "description",
         "label": "Description",
-        "value": "active",
+        "value": ""
+      },
+      {
+        "component": "multiselect",
+        "name": "style",
+        "label": "Style",
         "options": [
           {
             "name": "active",
