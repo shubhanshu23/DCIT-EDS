@@ -1,32 +1,16 @@
 export default async function decorate(block) {
   const cells = [...block.children];
 
-  // Title
   if (cells[0]) {
-    const titleText = cells[0].textContent.trim();
-    if (titleText) {
-      cells[0].innerHTML = `<h2>${titleText}</h2>`;
+    const descText = cells[0].innerHTML.trim();
+    if (descText) {
+      if (!descText.startsWith('<')) {
+        cells[0].innerHTML = `<p>${descText}</p>`;
+      }
     } else {
       block.removeChild(cells[0]);
     }
   }
-
-  // Description
-  if (cells[1]) {
-    const descText = cells[1].innerHTML.trim();
-    if (descText) {
-      if (!descText.startsWith('<')) {
-        cells[1].innerHTML = `<p>${descText}</p>`;
-      }
-    } else {
-      block.removeChild(cells[1]);
-    }
-  }
-
-  const errorDiv = document.createElement('div');
-  errorDiv.className = 'quiz-form-error';
-  errorDiv.style.display = 'none';
-  block.append(errorDiv);
 
   const form = document.createElement('form');
   form.setAttribute('method', 'POST');
