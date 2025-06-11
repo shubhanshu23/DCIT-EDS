@@ -80,7 +80,7 @@ export default async function decorate(block) {
   const questions = Array.from(document.querySelectorAll('.quiz-question'));
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    form.parentElement.style.display = 'none';
+    form.parentElement.classList.remove('active');
     if (questions[0]) questions[0].classList.add('active');
     console.log('Quiz started!');
   });
