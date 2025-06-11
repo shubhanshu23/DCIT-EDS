@@ -5271,6 +5271,13 @@
         "name": "option-4",
         "label": "option 4",
         "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "correct-answer",
+        "label": "Correct Answer",
+        "value": ""
       }
     ]
   }
