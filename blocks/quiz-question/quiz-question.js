@@ -35,7 +35,7 @@ export default async function decorate(block) {
       const allQuizOptions = document.querySelectorAll('.quiz-options');
       const isLast = optionButton.parentElement === allQuizOptions[allQuizOptions.length - 1];
       optionButton.parentElement.parentElement.classList.remove('active');
-      if(!isLast) optionButton.parentElement.parentElement.parentElement.nextSibling.children[0].classList.add('active');
+      if (!isLast) optionButton.parentElement.parentElement.parentElement.nextSibling.children[0].classList.add('active');
 
       if (isLast) {
         let correctCount = 0;
