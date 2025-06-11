@@ -1,24 +1,50 @@
 export default async function decorate(block) {
-  const questionBlock = document.createElement('div');
-  questionBlock.className = 'quiz-question-block';
+  const cells = [...block.children];
 
-  // Render the question
-  const questionText = block.dataset.question || 'Default Question';
-  const questionElement = document.createElement('div');
-  questionElement.className = 'quiz-question-text';
-  questionElement.textContent = questionText;
-  questionBlock.appendChild(questionElement);
+  // Extract question and options from cells
+  const questionCell = cells[0];
+  const optionsCells = cells.slice(1);
 
-  // Render the options
-  const options = block.dataset.options ? JSON.parse(block.dataset.options) : [];
-  options.forEach((option) => {
-    const optionElement = document.createElement('div');
-    optionElement.className = 'quiz-option';
-    optionElement.textContent = option;
-    questionBlock.appendChild(optionElement);
+  // Create question element
+  const questionElement = document.createElement("p");
+  if (questionCell) {
+    const questionText = questionCell.textContent.trim();
+    questionElement.textContent = questionText;
+  } else {
+    block.removeChild(cells[0]);
+  }
+
+  // options container
+  const optionsContainer = document.createElement("div");
+  optionsContainer.className = "quiz-options";
+
+  optionsCells.forEach((cell) => {
+    const optionText = cell.textContent.trim();
+    const optionButton = document.createElement("button");
+    optionButton.className = "quiz-option";
+    optionButton.textContent = optionText;
+
+    optionButton.addEventListener("click", () => {
+      Array.from(optionButton.parentElement.children).forEach((btn) => {
+        btn.classList.remove("selected");
+      });
+
+      // Mark current option as selected
+      optionButton.classList.add("selected");
+    });
+
+    optionsContainer.appendChild(optionButton);
   });
 
-  // Append the question block to the main block
-  block.innerHTML = ''; //
-  block.appendChild(questionBlock);
+  // Create "Go back" link
+  const goBackLink = document.createElement("a");
+  goBackLink.href = "#";
+  goBackLink.textContent = "Go back";
+  goBackLink.className = "go-back";
+
+  // Append elements to block
+  block.innerHTML = ""; // Clear existing content
+  block.appendChild(questionElement);
+  block.appendChild(optionsContainer);
+  block.appendChild(goBackLink);
 }
