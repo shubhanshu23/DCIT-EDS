@@ -46,7 +46,7 @@ export default async function decorate(block) {
   goBackLink.addEventListener('click', (e) => {
     e.preventDefault();
     goBackLink.parentElement.classList.remove('active');
-    goBackLink.parentElement.previousElementSibling.classList.add('active');
+    goBackLink.parentElement.parentElement.previousElementSibling.children[0].classList.add('active');
   });
 
   // Append elements to block
