@@ -15,7 +15,7 @@
   justify-content: center;
 }
 
-@media (width >= 768px) {
+@media (width <= 768px) {
   .quiz-options {
     grid-template-columns: 1fr; /* Single column for smaller screens */
   }
