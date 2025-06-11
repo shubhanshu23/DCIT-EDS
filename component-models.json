@@ -5241,12 +5241,32 @@
         "value": ""
       },
       {
-        "component": "multiselect",
-        "valueType": "array",
-        "name": "options",
-        "label": "Options",
-        "multi": true,
-        "value": []
+        "component": "text-input",
+        "valueType": "string",
+        "name": "option-1",
+        "label": "option 1",
+        "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "option-2",
+        "label": "option 2",
+        "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "option-3",
+        "label": "option 3",
+        "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "option-4",
+        "label": "option 4",
+        "value": ""
       }
     ]
   }
