@@ -5217,16 +5217,15 @@
       {
         "component": "text-input",
         "valueType": "string",
-        "name": "title",
-        "label": "Title",
-        "value": "Quiz Form"
-      },
-      {
-        "component": "text-area",
-        "valueType": "string",
         "name": "description",
         "label": "Description",
-        "value": ""
+        "value": "active",
+        "options": [
+          {
+            "name": "active",
+            "value": "active"
+          }
+        ]
       }
     ]
   },

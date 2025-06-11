@@ -88,3 +88,11 @@
     width: 100%;
   }
 }
+
+.quiz-form {
+  display: none;
+}
+
+.quiz-form.active {
+  display: block;
+}
