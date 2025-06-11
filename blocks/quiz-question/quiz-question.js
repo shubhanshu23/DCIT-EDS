@@ -31,6 +31,8 @@ export default async function decorate(block) {
 
       // Mark current option as selected
       optionButton.classList.add('selected');
+      optionButton.parentElement.parentElement.parentElement.style.display = 'none';
+      optionButton.parentElement.parentElement.parentElement.nextSibling.style.display = 'block';
     });
 
     optionsContainer.appendChild(optionButton);
@@ -41,9 +43,13 @@ export default async function decorate(block) {
   goBackLink.href = '#';
   goBackLink.textContent = 'Go back';
   goBackLink.className = 'go-back';
+  goBackLink.addEventListener('click', () => {
+    goBackLink.parentElement.parentElement.style.display = 'none';
+    goBackLink.parentElement.parentElement.previousElementSibling.style.display = 'none';
+  });
 
   // Append elements to block
-  block.innerHTML = ''; // Clear existing content
+  block.innerHTML = '';
   block.appendChild(questionElement);
   block.appendChild(optionsContainer);
   block.appendChild(goBackLink);

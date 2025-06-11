@@ -93,21 +93,11 @@ export default async function decorate(block) {
   );
   block.append(form);
 
-  const showError = (msg) => {
-    errorDiv.textContent = msg;
-    errorDiv.style.display = 'block';
-  };
-
+  const questions = Array.from(document.querySelectorAll('.quiz-question'));
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    errorDiv.style.display = 'none';
-    errorDiv.textContent = '';
-
-    if (!agreeInput.checked) {
-      showError('You must agree to the processing of personal data.');
-      return;
-    }
-    form.reset();
+    form.parentElement.style.display = 'none';
+    if (questions[0]) questions[0].classList.add('active');
     console.log('Quiz started!');
   });
 }
