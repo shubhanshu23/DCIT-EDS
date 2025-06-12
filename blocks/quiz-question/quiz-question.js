@@ -1,4 +1,4 @@
-let lastScore = null;
+let lastScore = 0;
 export default async function decorate(block) {
   const cells = [...block.children];
 
@@ -54,6 +54,7 @@ export default async function decorate(block) {
         });
         lastScore = `${correctCount}/${quizTotalMarks}`;
         console.log(`Score: ${correctCount}/${quizTotalMarks}`);
+        document.querySelector('.quiz-last-score--event').textContent = lastScore;
       }
     });
 
