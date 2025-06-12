@@ -3,6 +3,7 @@
   margin: 60px auto;
   max-width: 600px;
   font-family: inherit;
+  display: none;
 }
 
 .quiz-score h2 {
@@ -39,10 +40,6 @@
 
 .quiz-score-btn:hover {
   background: #145ea8;
-}
-
-.quiz-score {
-  display: none;
 }
 
 .quiz-score.active {
