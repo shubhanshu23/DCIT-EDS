@@ -20,7 +20,11 @@
       "container",
       "pdf-viewer",
       "form",
-      "embed-adaptive-form"
+      "embed-adaptive-form",
+      "login",
+      "quiz-form",
+      "quiz-question",
+      "quiz-score"
     ]
   },
   {

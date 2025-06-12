@@ -1,0 +1,2 @@
+https://27203-oauthnp20project-stage.adobeioruntime.net/api/v1/web/eds-middleware/login-check
+https://27203-oauthnp20project-stage.adobeioruntime.net/api/v1/web/eds-middleware/auth-callback

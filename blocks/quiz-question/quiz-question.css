@@ -1,0 +1,66 @@
+/* Style for the question */
+.quiz-question p {
+  text-align: center;
+  color: #2d3e6c;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+/* Container for options */
+.quiz-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  justify-content: center;
+}
+
+@media (width <= 768px) {
+  .quiz-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Style for individual option buttons */
+.quiz-option {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.quiz-option:hover {
+  background-color: #0056b3;
+}
+
+.quiz-option.selected {
+  background-color: #0056b3;
+  box-shadow: 0 0 5px rgb(0 0 0 / 30%);
+}
+
+/* Style for the Go back */
+.go-back {
+  display: block;
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.go-back:hover {
+  text-decoration: underline;
+}
+
+.quiz-question {
+  display: none;
+}
+
+.quiz-question.active {
+  display: block;
+}

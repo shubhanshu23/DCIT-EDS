@@ -1,0 +1,98 @@
+.quiz-section form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.quiz-section form input[type="text"],
+.quiz-section form input[type="email"] {
+  width: 100%;
+  max-width: 400px;
+  padding: 18px 16px;
+  border: 2px solid #b5c6e3;
+  border-radius: 7px;
+  font-size: 1.1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.quiz-section form input[type="text"]:focus,
+.quiz-section form input[type="email"]:focus {
+  border-color: #1976d2;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.form-checkbox label {
+  cursor: pointer;
+  color: #2d3e6c;
+}
+
+.form-checkbox input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: #1976d2;
+}
+
+.quiz-section form button[type="submit"] {
+  margin-top: 18px;
+  width: 200px;
+  padding: 14px 0;
+  background: #1976d2;
+  color: #fff;
+  font-size: 1.15rem;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.quiz-section form button[type="submit"]:hover {
+  background: #145ea8;
+}
+
+.quiz-section h2 {
+  text-align: center;
+  color: #17408b;
+  font-size: 2rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.quiz-section p {
+  text-align: center;
+  color: #2d3e6c;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+@media (width <= 500px) {
+  .quiz-section form input[type="text"],
+  .quiz-section form input[type="email"],
+  .form-checkbox {
+    max-width: 100%;
+  }
+
+  .quiz-section form button[type="submit"] {
+    width: 100%;
+  }
+}
+
+.quiz-form {
+  display: none;
+}
+
+.quiz-form.active {
+  display: block;
+}
