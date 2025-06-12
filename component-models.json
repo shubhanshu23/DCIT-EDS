@@ -205,6 +205,14 @@
           {
             "name": "Quiz Section",
             "value": "quiz-section"
+          },
+          {
+            "name": "Footer Navigation",
+            "value": "footer-nav"
+          },
+          {
+            "name": "Footer TnC",
+            "value": "footer-tnc"
           }
         ]
       }
