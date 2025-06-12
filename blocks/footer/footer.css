@@ -1,59 +1,78 @@
-footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+/* Footer navigation */
+.footer .footer-nav {
+  font-weight: 300;
+  background-color: #000;
+  color: #d0d0ce;
+  padding: 80px 24px 64px;
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+.footer .footer-nav h3 {
+  font-size: 40px;
+  font-weight: 300;
+  color: #f5f6f6;
+  margin-bottom: 24px;
 }
 
-footer .footer p {
-  margin: 0;
+.footer .footer-nav .columns > div {
+  row-gap: 40px;
 }
 
-footer .footer.block .section:first-child {
+.footer .footer-nav .columns > div h4 {
+  font-size: 22px;
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+
+.footer .footer-nav .columns > div div:first-child ul {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  row-gap: 16px;
+  font-size: 24px;
 }
 
-footer .columns div:first-child{
-  align-items: flex-start;
-}
-
-footer .columns h1, h2{
-   margin-top: 0;
-}
-
-footer ul {
-   padding-inline-start: 0;
-   color: var(--text-color);
-}
-
-footer ul li {
-   list-style: none;
-   font-size: 1rem;
-   padding-inline-start: 0;
-   color: var(--text-color);
-}
-
-footer .columns ul li a{
-   color: var(--text-color);
-   text-decoration: none;
-}
-
-footer .columns ul li a:hover{
-   color: var(--brand-color-secondary);
+.footer .footer-nav .columns > div div:not(:first-child) ul {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  font-size: 16px;
 }
 
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+  .footer .footer-nav {
+    padding: 80px 56px 64px;
   }
+}
 
-  footer .footer.block .columns-wrapper .columns  div div:first-child {
-    min-width: 35%;
-    font-size: 1rem;
+/* Footer TnC */
+.footer .footer-tnc {
+  background-color: #fff;
+  padding: 16px 24px;
+}
+
+@media (width >= 900px) {
+  .footer .footer-tnc {
+    padding: 24px 56px;
   }
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.footer .footer-tnc ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  margin-bottom: 16px;
+}
+
+.footer .footer-tnc ul li {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.footer .footer-tnc p {
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.footer .footer-tnc p a {
+  color: #007cb0;
 }
