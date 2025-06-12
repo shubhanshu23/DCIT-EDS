@@ -1,7 +1,3 @@
-import { getLastScore } from '../quiz-question/quiz-question.js';
-
-const score = getLastScore();
-
 export default async function decorate(block) {
   const cells = [...block.children];
 
@@ -20,7 +16,7 @@ export default async function decorate(block) {
   // Score
   const scoreElem = document.createElement('div');
   scoreElem.className = 'quiz-score-value';
-  scoreElem.innerHTML = `<span>Score: <b class="quiz-last-score--event">${score}</b></span>`;
+  scoreElem.innerHTML = '<span>Score: <b class="quiz-last-score--event"></b></span>';
 
   // Button
   const button = document.createElement('button');

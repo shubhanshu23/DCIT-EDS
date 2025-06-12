@@ -85,7 +85,3 @@ export default async function decorate(block) {
   block.appendChild(goBackLink);
   block.appendChild(hiddenInput);
 }
-
-export function getLastScore() {
-  return lastScore;
-}
