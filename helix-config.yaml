@@ -1,8 +1,17 @@
 strains:
-
   - name: secure-dashboard
-    condition:
-      url: https://main--dcit-eds--shubhanshu23.aem.page/dashboard
+    urls:
+      hostname: main--dcit-eds--shubhanshu23.aem.page
+      pathname: /dashboard
     redirects:
       - from: /dashboard
-        to: https://your-middleware-host/login-check?next=/dashboard
+        to: https://main--dcit-eds--middleware.aio.app/api/v1/web/eds-middleware/login-check?next=/dashboard
+
+  - name: auth-callback
+    urls:
+      hostname: main--dcit-eds--shubhanshu23.aem.page
+      pathname: /auth/callback
+
+  - name: default
+    urls:
+      hostname: main--dcit-eds--shubhanshu23.aem.page

@@ -201,6 +201,18 @@
           {
             "name": "Cards Section",
             "value": "cards-section"
+          },
+          {
+            "name": "Quiz Section",
+            "value": "quiz-section"
+          },
+          {
+            "name": "Footer Navigation",
+            "value": "footer-nav"
+          },
+          {
+            "name": "Footer TnC",
+            "value": "footer-tnc"
           }
         ]
       }
@@ -5185,6 +5197,110 @@
             "value": "plans-section"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "login",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": "Login"
+      },
+      {
+        "component": "text-area",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "quiz-form",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "quiz-question",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "question",
+        "label": "Question",
+        "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "option-1",
+        "label": "option 1",
+        "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "option-2",
+        "label": "option 2",
+        "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "option-3",
+        "label": "option 3",
+        "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "option-4",
+        "label": "option 4",
+        "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "correct-answer",
+        "label": "Correct Answer",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "quiz-score",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "title",
+        "label": "TItle",
+        "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "button-text",
+        "label": "Button Text",
+        "value": ""
       }
     ]
   }
