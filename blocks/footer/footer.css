@@ -70,6 +70,28 @@
   background-size: 100% 1px;
 }
 
+.footer .footer-nav .social-icon-widgets {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  row-gap: 8px;
+  margin-top: 56px;
+}
+
+@media (width >= 900px) {
+  .footer .footer-nav .social-icon-widgets {
+    margin-top: 40px;
+  }
+}
+
+.footer .footer-nav .social-icon-widgets h4 {
+  font-size: 16px
+}
+
+.footer .footer-nav .social-icon-widgets ul {
+  column-gap: 16px;
+}
+
 /* Footer TnC */
 .footer .footer-tnc {
   background-color: #fff;
