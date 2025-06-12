@@ -25,8 +25,8 @@
 
 .quiz-score-btn {
   margin-top: 18px;
-  width: 200px;
-  padding: 14px 0;
+  width: max-content;
+  padding: 14px 10px;
   background: #1976d2;
   color: #fff;
   font-size: 1.15rem;
@@ -39,4 +39,12 @@
 
 .quiz-score-btn:hover {
   background: #145ea8;
+}
+
+.quiz-score {
+  display: none;
+}
+
+.quiz-score.active {
+  display: block;
 }

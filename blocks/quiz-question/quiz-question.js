@@ -54,6 +54,7 @@ export default async function decorate(block) {
         });
         lastScore = `${correctCount}/${quizTotalMarks}`;
         console.log(`Score: ${correctCount}/${quizTotalMarks}`);
+        document.querySelector('.quiz-last-score--event').textContent = lastScore;      
       }
     });
 
