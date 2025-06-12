@@ -85,7 +85,8 @@
 }
 
 .footer .footer-nav .social-icon-widgets h4 {
-  font-size: 16px
+  font-size: 16px;
+  font-weight: 300;
 }
 
 .footer .footer-nav .social-icon-widgets ul {
