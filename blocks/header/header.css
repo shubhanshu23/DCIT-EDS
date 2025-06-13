@@ -1,546 +1,166 @@
-/* header and nav layout */
-header .nav-wrapper {
-  background-color: var(--brand-color-black);
-  width: 100%;
-  z-index: 2;
+/* stylelint-disable no-descending-specificity */
+.header {
   position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  color: #fff;
 }
 
-header nav {
-  box-sizing: border-box;
-  display: grid;
-  grid-template:
-    'hamburger brand tools' var(--nav-height)
-    'sections sections sections' 1fr / auto 1fr auto;
-  align-items: center;
-  gap: 0 24px;
-  margin: auto;
-  max-width: 1248px;
-  height: var(--nav-height);
-  padding: 0 24px;
-  font-family: var(--body-font-family);
-}
-
-header nav[aria-expanded='true'] {
-  grid-template:
-    'hamburger brand' var(--nav-height)
-    'sections sections' 1fr
-    'tools tools' var(--nav-height) / auto 1fr;
-  overflow-y: auto;
-  min-height: 100dvh;
-}
-
-header nav .nav-sections ul > li {
-  font-weight: 500;
-}
-
-header nav .nav-sections ul > li > ul > li {
-  font-weight: 400;
-}
-
-/* More specific selectors below general ones */
-header nav .nav-sections .default-content-wrapper > ul li {
-  color: var(--color-nav-link);
-  cursor: pointer;
-}
-
-header nav .nav-sections .default-content-wrapper > ul li:hover {
-  color: var(--brand-color-secondary);
-  cursor: pointer;
-}
-
-@media (width >= 900px) {
-  header nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 0 32px;
-    max-width: 1264px;
-    padding: 0 32px;
-  }
-
-  header nav[aria-expanded='true'] {
-    min-height: 0;
-    overflow: visible;
-  }
-}
-
-header nav p {
-  margin: 0;
-  line-height: 1;
-}
-
-header nav a:any-link {
-  color: currentcolor;
-}
-
-/* hamburger */
-header nav .nav-hamburger {
-  grid-area: hamburger;
-  height: 22px;
+/* Header container */
+.header .nav-wrapper nav {
+  position: relative;
+  max-width: 1200px;
   display: flex;
   align-items: center;
+  column-gap: 45px;
+  margin: 0 auto;
 }
 
-header nav .nav-hamburger button {
-  height: 22px;
-  margin: 0;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  background-color: var(--background-color);
-  color: inherit;
-  overflow: initial;
-  text-overflow: initial;
-  white-space: initial;
-}
-
-header nav .nav-hamburger-icon,
-header nav .nav-hamburger-icon::before,
-header nav .nav-hamburger-icon::after {
-  box-sizing: border-box;
-  display: block;
-  position: relative;
-  width: 20px;
-}
-
-header nav .nav-hamburger-icon::before,
-header nav .nav-hamburger-icon::after {
-  content: '';
-  position: absolute;
-  background: currentcolor;
-}
-
-header nav[aria-expanded='false'] .nav-hamburger-icon,
-header nav[aria-expanded='false'] .nav-hamburger-icon::before,
-header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  height: 2px;
-  border-radius: 2px;
-  background: currentcolor;
-}
-
-header nav[aria-expanded='false'] .nav-hamburger-icon::before {
-  top: -6px;
-}
-
-header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  top: 6px;
-}
-
-header nav[aria-expanded='true'] .nav-hamburger-icon {
-  height: 22px;
-}
-
-header nav[aria-expanded='true'] .nav-hamburger-icon::before,
-header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: 3px;
-  left: 1px;
-  transform: rotate(45deg);
-  transform-origin: 2px 1px;
-  width: 24px;
-  height: 2px;
-  border-radius: 2px;
-}
-
-header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: unset;
-  bottom: 3px;
-  transform: rotate(-45deg);
-}
-
-@media (width >= 900px) {
-  header nav .nav-hamburger {
-    display: none;
-    visibility: hidden;
-  }
-}
-
-/* brand */
-header .nav-brand {
-  grid-area: brand;
-  flex-basis: 128px;
-  font-size: var(--heading-font-size-s);
-  font-weight: 700;
-  line-height: 1;
-  color: var(--color-nav-link);
-
-}
-
-header nav .nav-brand img {
-  width: 128px;
-  height: auto;
-}
-
-/* sections */
-header nav .nav-sections {
-  grid-area: sections;
-  flex: 1 1 auto;
+/* Hamburger menu icon */
+.header .nav-wrapper nav .nav-hamburger {
   display: none;
-  visibility: hidden;
 }
 
-header nav[aria-expanded='true'] .nav-sections {
-  display: block;
-  visibility: visible;
-  align-self: start;
+/* Logo */
+.header .nav-wrapper nav .nav-brand img {
+  width: auto;
+  height: 24px;
 }
 
-header nav .nav-sections ul {
-  list-style: none;
-  padding-left: 0;
-  font-size: var(--body-font-size-s);
+/* Header Level 1 */
+.header .nav-wrapper nav .header-level-one {
+  display: flex;
 }
 
-header nav .nav-sections ul > li > ul {
-  margin-top: 0;
-}
-
-@media (width >= 900px) {
-  header nav .nav-sections {
-    display: block;
-    visibility: visible;
-    white-space: nowrap;
-  }
-
-  header nav[aria-expanded='true'] .nav-sections {
-    align-self: unset;
-  }
-
-  header nav .nav-sections .nav-drop {
-    position: relative;
-    padding-right: 16px;
-    cursor: pointer;
-  }
-
-  header nav .nav-sections .nav-drop::after {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    top: 0.5em;
-    right: 2px;
-    transform: rotate(135deg);
-    width: 6px;
-    height: 6px;
-    border: 2px solid currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
-  }
-
-  header nav .nav-sections .nav-drop[aria-expanded='true']::after {
-    top: unset;
-    bottom: 0.5em;
-    transform: rotate(315deg);
-  }
-
-  header nav .nav-sections ul {
-    display: flex;
-    gap: 24px;
-    margin: 0;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li {
-    flex: 0 1 auto;
-    position: relative;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul {
-    display: none;
-    position: relative;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
-    display: block;
-    position: absolute;
-    left: -24px;
-    width: 200px;
-    top: 150%;
-    padding: 16px;
-    background-color: var(--light-color);
-    white-space: initial;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: 16px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--light-color);
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
-    padding: 8px 0;
-  }
-}
-
-/* tools */
-header nav .nav-tools {
-  grid-area: tools;
-}
-
-/* === Mega-menu override: full-width sheet, 4-col grid, vertical sub-links, bold headings === */
-@media (width >= 1024px) {
-  /* Full-width dropdown sheet */
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
-      position: fixed !important;
-      top: var(--nav-height);
-      left: 0;
-      right: 0;
-      width: 100%;
-      max-width: none;
-      padding: 40px 5vw;
-      background: var(--brand-secondary-nav-wrapper);
-      box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
-      z-index: 1000;
-      display: grid !important;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 32px 24px;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul > li > ul a {
-      font-weight: 400 !important;
-      text-decoration: none;
-  }
-
-  /* Each immediate <li> inside the sheet becomes a column */
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul > li {
-      display: flex;
-      flex-direction: column;
-      row-gap: 8px;
-  }
-
-  /* Bold column heading (first child link or strong) */
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul > li > a:first-child,
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul > li > strong:first-child {
-      font-weight: 600 !important;
-      margin-bottom: 4px;
-      text-decoration: none;
-  }
-
-  /* Sub-links: vertical stack, normal weight */
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul > li > ul {
-      display: flex !important;
-      flex-direction: column;
-      row-gap: 6px;
-  }
-}
-
-/* Remove any dark overlay injected by demos */
-header .nav-wrapper::after { content: none !important; }
-
-/* === EXTRA mobile tweaks: logo + plain-text heading === */
-
-/* 1. Mobile logo inside the dropdown sheet
-   ───────────────────────────────────────── */
-@media (width <= 899px) {
-  /* position the sheet relative so we can anchor the logo inside it */
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
-      position: relative !important;
-  }
-
-  /* the author drops <img class="mega-logo"> or inline <svg class="mega-logo"> */
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul .mega-logo {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      width: 40px;
-      height: auto;
-      display: block;
-      pointer-events: none;
-  }
-}
-
-/* 2. Bold column heading even if it isn’t wrapped in <a href=""> */
-@media (width >= 1024px) {
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul > li {
-      font-weight: 600;
-  }
-
-  /* but immediately drop to 400 for nested links */
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul > li > ul a {
-      font-weight: 400 !important;
-  }
-}
-
-/* === Column-logo + brand/CTA helpers (no JS) ======================== */
-
-/* 1 ─ Column logo (desktop ≥ 1024 px) */
-@media (width >= 1024px) {
-  /* Make the first `.column-logo` inside the open sheet occupy its own grid column */
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul > li .column-logo {
-      display: block;
-      grid-column: 1 / 2;
-      grid-row: 1 / -1;
-      width: 72px;
-      height: auto;
-      margin: 0;
-  }
-}
-
-/* 2 ─ Hide that logo on small screens (mobile has the hamburger) */
-@media (width <= 1023px) {
-  .column-logo { display: none !important; }
-}
-
-/* 3 ─ CTA button styles (inherits helix/Milo button tokens) */
-header .nav-tools .button.cta {
-  padding: 8px 20px;
-  background: var(--highlight-background-color, #0065ff);
-  color: #fff !important;
-  border-radius: 4px;
+.header .nav-wrapper nav .header-level-one .button {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+  font-size: 18px;
   font-weight: 600;
+  border-bottom: 4px solid transparent;
+  padding: 20px 15px 18px;
 }
 
-/* (brand logo already handled by OOTB `nav-brand` rules) */
-
-/* === Mobile behaviour for the CTA in .nav-tools ===================== */
-@media (width <= 899px) {
-  /* 1 ▸ Hide the CTA when the header bar is collapsed */
-  header nav[aria-expanded='false'] .nav-tools {
-    display: none !important;
-  }
-
-  /* 2 ▸ Show (and style) it inside the slide-down drawer */
-  header nav[aria-expanded='true'] .nav-tools {
-    display: block !important;
-    width: 100%;
-    padding: 24px 32px;
-    text-align: left !important;
-  }
-
-  /* 3 ▸ Make the button span the full width for easy tapping */
-  header nav[aria-expanded='true'] .nav-tools .button.cta {
-    display: block;
-    width: 100%;
-    margin: 0 !important;
-    max-width: none;
-  }
+.header .nav-wrapper nav .header-level-one > li:hover .button {
+  color: #86bc25;
+  border-color: #86bc25;
 }
 
-@media (width >= 1024px) {
-  /* reserve 260 px for hero */
-  header nav .nav-sections li[aria-expanded='true'] > ul {
-    grid-template-columns: 260px repeat(auto-fit, minmax(220px, 1fr));
-  }
-
-  /* hero cell */
-  .mega-intro {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    row-gap: 16px;
-    padding-right: 24px;
-  }
-
-  .mega-intro .intro-title {
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 1.2;
-  }
-
-  .mega-intro img, .mega-intro svg {
-    width: 56px;
-    height: auto;
-  }
+.header .nav-wrapper nav .header-level-one .nav-drop .button::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid transparent;
+  border-top: 2px solid transparent;
+  border-color: #fff;
+  transform: rotate(135deg);
 }
 
-@media (width <= 1023px) {
-  .mega-intro { display: none !important; }
+.header .nav-wrapper nav .header-level-one >li:hover .button::after {
+  border-color: #86bc25;
+  transform: rotate(-45deg);
+  margin-top: 6px;
 }
 
-/* === Hero intro column + mobile-CTA alignment (add-on) =============== */
-@media (width >= 1024px) {
-  /* grid: hero gets 260 px, rest auto */
-  header nav .nav-sections li[aria-expanded='true'] > ul {
-    grid-template-columns: 260px repeat(auto-fit, minmax(220px, 1fr));
-  }
-
-  .mega-intro {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    row-gap: 16px;
-    padding-right: 24px;
-  }
-
-  .mega-intro .intro-title {
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 1.2;
-    margin: 0;
-  }
-
-  .mega-intro img, .mega-intro svg {
-    width: 56px;
-    height: auto;
-  }
+.header .nav-wrapper nav .header-level-one > li:hover > .header-submenu-container {
+  display: block;
 }
 
-@media (width <= 1023px) {
-  .mega-intro { display: none !important; }
+.header .nav-wrapper nav .header-submenu-container {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: #121212;
 }
 
-/* === Hero first-column (logo + level-one title) ===================== */
-@media (width >= 1024px) {
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
-      grid-template-columns: 260px repeat(auto-fit, minmax(220px, 1fr));
-  }
-
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul
-      > li:first-child:not(:has(> ul)) {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        row-gap: 16px;
-        padding-right: 24px;
-  }
-
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul
-      > li:first-child:not(:has(> ul)) img {
-            width: 56px;
-            height: auto;
-      }
-
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul
-      > li:first-child:not(:has(> ul)) > *:not(img) {
-            font-size: var(--heading-font-size-m, 26px);
-            font-weight: 700;
-            line-height: 1.2;
-            margin: 0;
-      }
+/* Header Level 2 */
+.header .nav-wrapper nav .header-level-two {
+  width: 24%;
+  background-color: #292B2C;
+  padding: 40px 0 40px 40px;
 }
 
-@media (width <= 1023px) {
-  header nav .nav-sections
-    .default-content-wrapper > ul > li[aria-expanded='true'] > ul
-      > li:first-child:not(:has(> ul)) {
-        display: none !important;
-  }
+.header .nav-wrapper nav .header-level-two .button-container {
+  margin-bottom: 16px;
 }
 
-/* Hide hero strip, logo column, and ANY images/SVG inside the drawer  */
-@media (width <= 899px) {
-  .mega-intro,
-  .column-logo { display: none !important; }
+.header .nav-wrapper nav .header-level-two .button {
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 300;
+  min-width: 180px;
+  border: 0;
+  color: #fff !important;
+  padding: 8px 24px 8px 16px;
+}
 
-  header nav .nav-sections img,
-  header nav .nav-sections svg { display: none !important; }
+.header .nav-wrapper nav .header-level-two > li:hover .button {
+  color: #86bc25 !important;
+  background-color: #000;
+}
 
-  header nav[aria-expanded='false'] .nav-sections { display: none !important; }
+/* If level 2 has level 3 */
+.header .nav-wrapper nav .header-level-two > li:has(ul) .button::after {
+  border-top: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-color: #fff !important;
+  transform: rotate(45deg) !important;
+  margin-top: 6px;
+}
+
+.header .nav-wrapper nav .header-level-two > li:has(ul):hover .button::after {
+  border-color: #86bc25 !important;
+  transform: rotate(45deg);
+}
+
+/* If level 2 doesn't have level 3 */
+.header .nav-wrapper nav .header-level-two > li:not(:has(> ul)) .button::after {
+  border-color: #292B2C !important;
+}
+
+.header .nav-wrapper nav .header-level-two > li:not(:has(> ul)):hover .button::after {
+  border-color: #000 !important;
+}
+
+.header .nav-wrapper nav .header-level-two > li:hover > .header-level-three {
+  display: block;
+}
+
+/* Header Level 3 */
+.header .nav-wrapper nav .header-level-three {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 24%;
+  width: calc(100% - 24%);
+  height: 100%;
+  background-color: #121212;
+  padding: 38px;
+}
+
+.header .nav-wrapper nav .header-level-three li:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.header .nav-wrapper nav .header-level-three a {
+  background-image: linear-gradient(#43b02a, #43b02a);
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size .5s ease;
+}
+
+.header .nav-wrapper nav .header-level-three > li:hover a {
+  background-size: 100% 1px;
+}
+
+/* Right side section(login, search) */
+.header .nav-wrapper nav .nav-tools {
+  display: none;
+  margin-left: auto;
 }

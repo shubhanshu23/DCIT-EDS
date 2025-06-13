@@ -137,12 +137,16 @@ export default async function decorate(block) {
     navSections.querySelector(':scope .default-content-wrapper > ul')?.classList?.add('header-level-one');
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       const levelTwoUl = navSection.querySelector(':scope > ul');
+      const divContainer = document.createElement('div');
+      divContainer.classList.add('header-submenu-container');
       if (levelTwoUl) {
         navSection.classList.add('nav-drop');
         levelTwoUl.classList.add('header-level-two');
         levelTwoUl.querySelectorAll(':scope > li > ul').forEach((levelThreeUl) => {
           levelThreeUl.classList.add('header-level-three');
         });
+        levelTwoUl.parentNode.replaceChild(divContainer, levelTwoUl);
+        divContainer.appendChild(levelTwoUl);
       }
       navSection.addEventListener('click', () => {
         if (isDesktop.matches) {
