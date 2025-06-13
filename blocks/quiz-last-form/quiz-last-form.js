@@ -1,6 +1,5 @@
 export default async function decorate(block) {
   const form = document.createElement('form');
-  const cells = [...block.children];
   form.setAttribute('method', 'POST');
   form.setAttribute('action', '#');
 
@@ -10,7 +9,7 @@ export default async function decorate(block) {
   jobInput.name = 'jobTitle';
   jobInput.placeholder = 'Job title*';
   jobInput.required = true;
-  
+
   // Phone
   const phoneInput = document.createElement('input');
   phoneInput.type = 'text';
