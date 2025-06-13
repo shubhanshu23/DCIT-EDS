@@ -55,7 +55,7 @@
   border-color: #1976d2;
 }
 
-@media (min-width: 400px) {
+@media (width >= 400px) {
   .birthday-fields {
     flex-direction: row;
     align-items: flex-start;
