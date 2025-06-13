@@ -28,7 +28,7 @@ export default async function decorate(block) {
   yearOption.textContent = 'Year';
   yearOption.value = '';
   yearSelect.appendChild(yearOption);
-  for (let y = 1920; y <= new Date().getFullYear(); y += 1) {
+  for (let y = new Date().getFullYear(); y >= 1920; y -= 1) {
     const opt = document.createElement('option');
     opt.value = y;
     opt.textContent = y;
