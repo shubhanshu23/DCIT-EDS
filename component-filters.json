@@ -24,7 +24,8 @@
       "login",
       "quiz-form",
       "quiz-question",
-      "quiz-score"
+      "quiz-score",
+      "quiz-last-form"
     ]
   },
   {
