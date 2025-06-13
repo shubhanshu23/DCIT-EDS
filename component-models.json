@@ -5295,5 +5295,17 @@
         "value": ""
       }
     ]
+  },
+  {
+    "id": "quiz-last-form",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "button-text",
+        "label": "Button Text",
+        "value": ""
+      }
+    ]
   }
 ]
