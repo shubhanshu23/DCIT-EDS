@@ -89,6 +89,7 @@ export default async function decorate(block) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     form.parentElement.classList.remove('active');
+    form.parentElement.parentElement.nextSibling.children[0].classList.add('active');
     console.log('Form last submitted!');
   });
 }
