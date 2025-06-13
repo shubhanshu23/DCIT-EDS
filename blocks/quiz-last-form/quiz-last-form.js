@@ -8,13 +8,15 @@ export default async function decorate(block) {
   const jobInput = document.createElement('input');
   jobInput.type = 'text';
   jobInput.name = 'jobTitle';
-  jobInput.placeholder = 'Job title';
-
+  jobInput.placeholder = 'Job title*';
+  jobInput.required = true;
+  
   // Phone
   const phoneInput = document.createElement('input');
   phoneInput.type = 'text';
   phoneInput.name = 'phone';
-  phoneInput.placeholder = 'Phone';
+  phoneInput.placeholder = 'Phone*';
+  phoneInput.required = true;
 
   // Birthday
   const birthdayDiv = document.createElement('div');
@@ -22,6 +24,7 @@ export default async function decorate(block) {
 
   const yearSelect = document.createElement('select');
   yearSelect.name = 'birthYear';
+  yearSelect.required = true;
   const yearOption = document.createElement('option');
   yearOption.textContent = 'Year';
   yearOption.value = '';
@@ -35,6 +38,7 @@ export default async function decorate(block) {
 
   const monthSelect = document.createElement('select');
   monthSelect.name = 'birthMonth';
+  monthSelect.required = true;
   const monthOption = document.createElement('option');
   monthOption.textContent = 'Month';
   monthOption.value = '';
@@ -48,6 +52,7 @@ export default async function decorate(block) {
 
   const daySelect = document.createElement('select');
   daySelect.name = 'birthDay';
+  daySelect.required = true;
   const dayOption = document.createElement('option');
   dayOption.textContent = 'Day';
   dayOption.value = '';
@@ -60,8 +65,7 @@ export default async function decorate(block) {
   }
 
   const birthdayLabel = document.createElement('label');
-  birthdayLabel.textContent = 'Birthday';
-  birthdayLabel.style.display = 'block';
+  birthdayLabel.textContent = 'Birthday*';
 
   birthdayDiv.append(birthdayLabel, yearSelect, monthSelect, daySelect);
 
@@ -75,7 +79,7 @@ export default async function decorate(block) {
   // See Result button
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
-  submitBtn.textContent = `${cells[0].innerHTML.trim()}`;
+  submitBtn.textContent = 'See Result';
 
   form.append(
     jobInput,

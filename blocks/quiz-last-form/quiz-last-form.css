@@ -98,8 +98,16 @@
   .birthday-fields {
     max-width: 100%;
   }
-  
+
   .quiz-last-form form button[type="submit"] {
     width: 100%;
   }
+}
+
+.quiz-last-form{
+    display: none;
+}
+
+.quiz-last-form.active{
+    display: block;
 }
