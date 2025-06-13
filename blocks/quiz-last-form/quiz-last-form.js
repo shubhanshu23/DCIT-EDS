@@ -26,7 +26,7 @@ export default async function decorate(block) {
   yearOption.textContent = 'Year';
   yearOption.value = '';
   yearSelect.appendChild(yearOption);
-  for (let y = 1920; y <= new Date().getFullYear(); y++) {
+  for (let y = 1920; y <= new Date().getFullYear(); y+=1) {
     const opt = document.createElement('option');
     opt.value = y;
     opt.textContent = y;
@@ -39,7 +39,7 @@ export default async function decorate(block) {
   monthOption.textContent = 'Month';
   monthOption.value = '';
   monthSelect.appendChild(monthOption);
-  for (let m = 1; m <= 12; m++) {
+  for (let m = 1; m <= 12; m+=1) {
     const opt = document.createElement('option');
     opt.value = m;
     opt.textContent = m;
@@ -52,7 +52,7 @@ export default async function decorate(block) {
   dayOption.textContent = 'Day';
   dayOption.value = '';
   daySelect.appendChild(dayOption);
-  for (let d = 1; d <= 31; d++) {
+  for (let d = 1; d <= 31; d+=1) {
     const opt = document.createElement('option');
     opt.value = d;
     opt.textContent = d;
