@@ -126,3 +126,7 @@
 .footer .footer-tnc p a {
   color: #007cb0;
 }
+
+.footer .social-icon-widgets span.icon img {
+  background-color: #fff;
+}
