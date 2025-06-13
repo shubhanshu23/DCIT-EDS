@@ -50,7 +50,7 @@
   border-color: #86bc25;
 }
 
-.header .nav-wrapper nav .header-level-one .button::after {
+.header .nav-wrapper nav .header-level-one .nav-drop .button::after {
   content: '';
   width: 8px;
   height: 8px;

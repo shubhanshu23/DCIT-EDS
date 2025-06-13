@@ -91,6 +91,7 @@
 
 .footer .footer-nav .social-icon-widgets ul {
   column-gap: 16px;
+  display: flex;
 }
 
 /* Footer TnC */
