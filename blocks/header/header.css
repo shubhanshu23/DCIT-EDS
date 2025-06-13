@@ -99,6 +99,16 @@
   padding: 8px 24px 8px 16px;
 }
 
+.header .nav-wrapper nav .header-level-two > li:not(:has(.button)) {
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 300;
+  min-width: 180px;
+  border: 0;
+  color: #fff !important;
+  padding: 8px 24px 8px 16px;
+}
+
 .header .nav-wrapper nav .header-level-two > li:hover .button {
   color: #86bc25 !important;
   background-color: #000;
