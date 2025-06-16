@@ -5320,5 +5320,17 @@
         "value": ""
       }
     ]
+  },
+  {
+    "id": "right-plan",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "button-text",
+        "label": "Button Text",
+        "value": ""
+      }
+    ]
   }
 ]
