@@ -67,6 +67,13 @@ export default async function decorate(block) {
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
   submitBtn.textContent = 'Start Quiz';
+  submitBtn.disabled = true;
+  submitBtn.classList.add('disabled-btn');
+
+  agreeInput.addEventListener('change', () => {
+    submitBtn.disabled = !agreeInput.checked;
+    submitBtn.classList.toggle('disabled-btn', !agreeInput.checked);
+  });
 
   form.append(
     firstNameInput,

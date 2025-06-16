@@ -96,3 +96,11 @@
 .quiz-form.active {
   display: block;
 }
+
+.disabled-btn {
+  background: #ccc !important;
+  color: #888 !important;
+  cursor: not-allowed !important;
+  border: 1px solid #bbb !important;
+  opacity: 0.7;
+}
