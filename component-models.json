@@ -185,6 +185,11 @@
         "label": "Section Name",
         "description": "The label shown for this section in the Content Tree"
       },
+       {
+        "component": "text",
+        "name": "linkText",
+        "label": "LinkText"
+      },
       {
         "component": "multiselect",
         "name": "style",
