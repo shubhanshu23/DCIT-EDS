@@ -71,15 +71,15 @@ export default async function decorate(block) {
   submitBtn.classList.add('disabled-btn');
 
   function updateSubmitState() {
-  const allFilled = firstNameInput.value.trim() &&
-    lastNameInput.value.trim() &&
-    emailInput.value.trim() &&
-    agreeInput.checked;
+    const allFilled = firstNameInput.value.trim()
+    && lastNameInput.value.trim()
+    && emailInput.value.trim()
+    && agreeInput.checked;
     submitBtn.disabled = !allFilled;
     submitBtn.classList.toggle('disabled-btn', !allFilled);
   }
 
-  [firstNameInput, lastNameInput, emailInput, agreeInput].forEach(el => {
+  [firstNameInput, lastNameInput, emailInput, agreeInput].forEach((el) => {
     el.addEventListener('input', updateSubmitState);
     el.addEventListener('change', updateSubmitState);
   });
