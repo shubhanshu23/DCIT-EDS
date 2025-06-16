@@ -1,6 +1,7 @@
 export default function decorate(block) {
   const tabs = [
-    { label: 'Life Insurance', form: `
+    {
+      label: 'Life Insurance', form: `
       <form class="tab-form">
         <h3>Life Insurance Calculator</h3>
         <label>Name <input type="text" name="name" required></label>
@@ -9,8 +10,10 @@ export default function decorate(block) {
         <label>Income <input type="number" name="income" required></label>
         <button type="submit">Calculate Premium- INR XX</button>
       </form>
-    ` },
-    { label: 'Health Insurance', form: `
+    `,
+    },
+    {
+      label: 'Health Insurance', form: `
       <form class="tab-form">
         <h3>Health Insurance Calculator</h3>
         <label>Name <input type="text" name="name" required></label>
@@ -19,8 +22,10 @@ export default function decorate(block) {
         <label>Income <input type="number" name="income" required></label>
         <button type="submit">Calculate Premium- INR XX</button>
       </form>
-    ` },
-    { label: 'Retirement Planner', form: `
+    `,
+    },
+    {
+      label: 'Retirement Planner', form: `
       <form class="tab-form">
         <h3>Retirement Planner</h3>
         <label>Name <input type="text" name="name" required></label>
@@ -29,8 +34,10 @@ export default function decorate(block) {
         <label>Monthly Savings <input type="number" name="savings" required></label>
         <button type="submit">Calculate Plan</button>
       </form>
-    ` },
-    { label: 'Home Loan Calculator', form: `
+    `,
+    },
+    {
+      label: 'Home Loan Calculator', form: `
       <form class="tab-form">
         <h3>Home Loan Calculator</h3>
         <label>Loan Amount <input type="number" name="amount" required></label>
@@ -38,8 +45,10 @@ export default function decorate(block) {
         <label>Interest Rate (%) <input type="number" name="rate" required></label>
         <button type="submit">Calculate EMI</button>
       </form>
-    ` },
-    { label: 'Car Loan Calculator', form: `
+    `,
+    },
+    {
+      label: 'Car Loan Calculator', form: `
       <form class="tab-form">
         <h3>Car Loan Calculator</h3>
         <label>Loan Amount <input type="number" name="amount" required></label>
@@ -47,8 +56,10 @@ export default function decorate(block) {
         <label>Interest Rate (%) <input type="number" name="rate" required></label>
         <button type="submit">Calculate EMI</button>
       </form>
-    ` },
-    { label: 'EMI Calculator', form: `
+    `,
+    },
+    {
+      label: 'EMI Calculator', form: `
       <form class="tab-form">
         <h3>EMI Calculator</h3>
         <label>Loan Amount <input type="number" name="amount" required></label>
@@ -56,7 +67,8 @@ export default function decorate(block) {
         <label>Interest Rate (%) <input type="number" name="rate" required></label>
         <button type="submit">Calculate EMI</button>
       </form>
-    ` },
+    `,
+    },
   ];
 
   // Tabs header
@@ -71,7 +83,7 @@ export default function decorate(block) {
     btn.className = 'tab-btn';
     if (idx === 0) btn.classList.add('active');
     btn.addEventListener('click', () => {
-      block.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      block.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
       tabContent.innerHTML = tab.form;
     });
