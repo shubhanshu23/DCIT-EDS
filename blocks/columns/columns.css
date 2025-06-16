@@ -31,3 +31,52 @@
     order: unset;
   }
 }
+
+.plans-section .default-content-wrapper:first-child {
+  padding-block-end: 1rem;
+}
+
+.cards-section.plans-section .columns-wrapper .columns div div {
+  padding: 20px;
+  box-shadow: 0 2px 7px gray;
+}
+
+.plans-section .columns h4 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.plans-section .columns h5 {
+  color: #707377;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.plans-section .columns .button-container {
+  margin-top: 12px;
+}
+
+.plans-section a.button.primary {
+  background-color: #1076a8;
+  color: #fff;
+  border-radius: 6.25em;
+  font-weight: 600;
+  border: 1px solid #1076a8;
+  padding: 5px 15px;
+}
+
+.plans-section .columns a.button.primary:hover {
+  background-color: #0d5e86;
+  opacity: 1;
+  text-decoration: none;
+}
+
+.plans-section .columns ul {
+  font-size: 1rem;
+}
+
+.plans-section a.button.primary::after {
+  display: none;
+}
