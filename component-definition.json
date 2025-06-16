@@ -764,7 +764,7 @@
           }
         },
         {
-          "title": "Choose Right Plan",
+          "title": "Right Plan",
           "id": "right-plan",
           "plugins": {
             "xwalk": {
