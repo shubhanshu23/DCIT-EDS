@@ -12,6 +12,7 @@
 /* Header container */
 .header .nav-wrapper nav {
   position: relative;
+  
   /* max-width: 1200px; */
   display: flex;
   align-items: center;
