@@ -15,7 +15,7 @@ const getUsernameFromCookie = () => {
 
 const checkLoginCookie = () => {
   const username = getUsernameFromCookie();
-  return username ? true : false;
+  return !!username;
 };
 
 function closeOnEscape(e) {
@@ -188,7 +188,7 @@ export default async function decorate(block) {
   navWrapper.append(nav);
   block.append(navWrapper);
 
-  if(checkLoginCookie()) {
+  if (checkLoginCookie()) {
     const navTools = nav.querySelector('.nav-tools');
     if (navTools) {
       const uname = getUsernameFromCookie();
@@ -199,11 +199,11 @@ export default async function decorate(block) {
       navTools.prepend(unameDiv);
       const links = navTools.querySelectorAll('li a');
       if (links.length > 0) {
-        links.forEach(link => {
-          if(link?.getAttribute('href') === '/login') {
+        links.forEach((link) => {
+          if (link?.getAttribute('href') === '/login') {
             link.remove();
           }
-        })
+        });
       }
     }
   } else {

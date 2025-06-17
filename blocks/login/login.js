@@ -24,7 +24,6 @@ export default async function decorate(block) {
   const checkLoginCookie = () => {
     const username = getUsernameFromCookie();
     if (username) {
-      console.log('Logged in user:', username);
       window.location.href = '/';
       return true;
     }
