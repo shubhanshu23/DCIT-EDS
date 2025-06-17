@@ -80,3 +80,9 @@
 .plans-section a.button.primary::after {
   display: none;
 }
+
+.plans-section {
+  background-color: #f5f6f6;
+  margin: 0 !important;
+  padding: 40px 0;
+}
