@@ -12,7 +12,7 @@
 /* Header container */
 .header .nav-wrapper nav {
   position: relative;
-  
+
   /* max-width: 1200px; */
   display: flex;
   align-items: center;
@@ -172,6 +172,7 @@
 
 /* Right side section(login, search) */
 .header .nav-wrapper nav .nav-tools {
+  
   /* display: none; */
   margin-left: auto;
   display: flex;
