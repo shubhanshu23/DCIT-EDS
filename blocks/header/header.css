@@ -172,8 +172,6 @@
 
 /* Right side section(login, search) */
 .header .nav-wrapper nav .nav-tools {
-  
-  /* display: none; */
   margin-left: auto;
   display: flex;
   align-items: center;
