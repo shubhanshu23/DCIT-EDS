@@ -5,9 +5,9 @@ export default function decorate(block) {
       <form class="tab-form">
         <h3>Life Insurance Calculator</h3>
         <label>Name <input type="text" name="name" required></label>
-        <label>Age <input type="number" name="age" required></label>
+        <label>Age <input type="text" name="age" required></label>
         <label>Email ID <input type="email" name="email" required></label>
-        <label>Income <input type="number" name="income" required></label>
+        <label>Income <input type="text" name="income" required></label>
         <button type="submit">Calculate Premium- INR XX</button>
       </form>
     `,
@@ -17,9 +17,9 @@ export default function decorate(block) {
       <form class="tab-form">
         <h3>Health Insurance Calculator</h3>
         <label>Name <input type="text" name="name" required></label>
-        <label>Age <input type="number" name="age" required></label>
+        <label>Age <input type="text" name="age" required></label>
         <label>Email ID <input type="email" name="email" required></label>
-        <label>Income <input type="number" name="income" required></label>
+        <label>Income <input type="text" name="income" required></label>
         <button type="submit">Calculate Premium- INR XX</button>
       </form>
     `,
@@ -29,9 +29,9 @@ export default function decorate(block) {
       <form class="tab-form">
         <h3>Retirement Planner</h3>
         <label>Name <input type="text" name="name" required></label>
-        <label>Current Age <input type="number" name="age" required></label>
-        <label>Retirement Age <input type="number" name="retirement_age" required></label>
-        <label>Monthly Savings <input type="number" name="savings" required></label>
+        <label>Current Age <input type="text" name="age" required></label>
+        <label>Retirement Age <input type="text" name="retirement_age" required></label>
+        <label>Monthly Savings <input type="text" name="savings" required></label>
         <button type="submit">Calculate Plan</button>
       </form>
     `,
@@ -40,9 +40,9 @@ export default function decorate(block) {
       label: 'Home Loan Calculator', form: `
       <form class="tab-form">
         <h3>Home Loan Calculator</h3>
-        <label>Loan Amount <input type="number" name="amount" required></label>
-        <label>Tenure (years) <input type="number" name="tenure" required></label>
-        <label>Interest Rate (%) <input type="number" name="rate" required></label>
+        <label>Loan Amount <input type="text" name="amount" required></label>
+        <label>Tenure (years) <input type="text" name="tenure" required></label>
+        <label>Interest Rate (%) <input type="text" name="rate" required></label>
         <button type="submit">Calculate EMI</button>
       </form>
     `,
@@ -51,9 +51,9 @@ export default function decorate(block) {
       label: 'Car Loan Calculator', form: `
       <form class="tab-form">
         <h3>Car Loan Calculator</h3>
-        <label>Loan Amount <input type="number" name="amount" required></label>
-        <label>Tenure (years) <input type="number" name="tenure" required></label>
-        <label>Interest Rate (%) <input type="number" name="rate" required></label>
+        <label>Loan Amount <input type="text" name="amount" required></label>
+        <label>Tenure (years) <input type="text" name="tenure" required></label>
+        <label>Interest Rate (%) <input type="text" name="rate" required></label>
         <button type="submit">Calculate EMI</button>
       </form>
     `,
@@ -62,9 +62,9 @@ export default function decorate(block) {
       label: 'EMI Calculator', form: `
       <form class="tab-form">
         <h3>EMI Calculator</h3>
-        <label>Loan Amount <input type="number" name="amount" required></label>
-        <label>Tenure (months) <input type="number" name="tenure" required></label>
-        <label>Interest Rate (%) <input type="number" name="rate" required></label>
+        <label>Loan Amount <input type="text" name="amount" required></label>
+        <label>Tenure (months) <input type="text" name="tenure" required></label>
+        <label>Interest Rate (%) <input type="text" name="rate" required></label>
         <button type="submit">Calculate EMI</button>
       </form>
     `,
