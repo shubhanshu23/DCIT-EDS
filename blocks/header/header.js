@@ -4,6 +4,20 @@ import { loadFragment } from '../fragment/fragment.js';
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
+const getUsernameFromCookie = () => {
+  const cookies = document.cookie.split(';');
+  const userCookie = cookies.find((cookie) => cookie.trim().startsWith('dcit_username='));
+  if (userCookie) {
+    return userCookie.split('=')[1];
+  }
+  return null;
+};
+
+const checkLoginCookie = () => {
+  const username = getUsernameFromCookie();
+  return username ? true : false;
+};
+
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
@@ -173,4 +187,38 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  if(checkLoginCookie()) {
+    const navTools = nav.querySelector('.nav-tools');
+    if (navTools) {
+      const uname = getUsernameFromCookie();
+      const unameDiv = document.createElement('div');
+      unameDiv.className = 'nav-username';
+      unameDiv.textContent = uname ? `Welcome, ${uname}` : '';
+      unameDiv.style.fontWeight = 'bold';
+      navTools.prepend(unameDiv);
+      const links = navTools.querySelectorAll('li a');
+      if (links.length > 0) {
+        links.forEach(link => {
+          if(link?.getAttribute('href') === '/login') {
+            link.remove();
+          }
+        })
+      }
+    }
+  } else {
+    const loginLink = nav.querySelector('.nav-tools a[href="#logout"]');
+    if (loginLink) {
+      loginLink.remove();
+    }
+  }
+
+  const logoutBtn = nav.querySelector('.nav-tools a[href="#logout"]');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.cookie = 'dcit_username=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+      window.location.href = '/';
+    });
+  }
 }

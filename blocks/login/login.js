@@ -1,4 +1,40 @@
 export default async function decorate(block) {
+
+  const MOCK_CREDENTIALS = {
+    Deloitte: 'deloitte@123!',
+    Admin: 'admin@123!',
+  };
+
+  const setCookie = (name, value, hours) => {
+    const date = new Date();
+    date.setTime(date.getTime() + hours * 60 * 60 * 1000);
+    const expires = `expires=${date.toUTCString()}`;
+    document.cookie = `${name}=${value};${expires};path=/`;
+  };
+
+  const getUsernameFromCookie = () => {
+    const cookies = document.cookie.split(';');
+    const userCookie = cookies.find((cookie) => cookie.trim().startsWith('dcit_username='));
+    if (userCookie) {
+      return userCookie.split('=')[1];
+    }
+    return null;
+  };
+
+  const checkLoginCookie = () => {
+    const username = getUsernameFromCookie();
+    if (username) {
+      console.log('Logged in user:', username);
+      window.location.href = '/';
+      return true;
+    }
+    return false;
+  };
+
+  if (checkLoginCookie()) {
+    return;
+  }
+
   const cells = [...block.children];
 
   if (cells[0]) {
@@ -65,48 +101,13 @@ export default async function decorate(block) {
     errorDiv.style.display = 'none';
     errorDiv.textContent = '';
 
-    const formData = new FormData(form);
-
-    try {
-      const loginUrl = `${window.location.origin}/j_security_check`;
-      const response = await fetch(loginUrl, {
-        method: 'POST',
-        body: formData,
-        credentials: 'include',
-      });
-
-      if (response.ok) {
-        const finalUrl = response.url || '';
-        if (
-          response.redirected
-          || (finalUrl && !finalUrl.includes('j_security_check'))
-        ) {
-          window.location.href = finalUrl || '/';
-        } else {
-          window.location.reload();
-        }
-      } else {
-        showError('Invalid username or password.');
-      }
-    } catch (err) {
-      showError('An error occurred. Please try again.');
+    const username = userInput.value.trim();
+    const password = passInput.value;
+    if (MOCK_CREDENTIALS[username] === password) {
+      setCookie('dcit_username', username, 24);
+      window.location.href = '/';
+    } else {
+      showError('Invalid username or password.');
     }
   });
-
-  try {
-    const sessionInfo = await fetch(
-      `${window.location.origin}/system/sling/info.sessionInfo.json`,
-      {
-        credentials: 'include',
-      },
-    );
-    if (sessionInfo.ok) {
-      const infoData = await sessionInfo.json();
-      if (infoData && infoData.userID && infoData.userID !== 'anonymous') {
-        window.location.href = '/';
-      }
-    }
-  } catch (e) {
-    // ignore
-  }
 }
