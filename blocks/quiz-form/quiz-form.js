@@ -38,6 +38,38 @@ export default async function decorate(block) {
   emailInput.placeholder = 'Email*';
   emailInput.required = true;
 
+  const otpWrapper = document.createElement('div');
+  otpWrapper.className = 'otp-wrapper';
+
+  const getOtpBtn = document.createElement('button');
+  getOtpBtn.type = 'button';
+  getOtpBtn.textContent = 'Send OTP to Email';
+  getOtpBtn.className = 'get-otp-btn';
+  getOtpBtn.disabled = true;
+
+  otpWrapper.appendChild(getOtpBtn);
+
+  const otpFieldsContainer = document.createElement('div');
+  otpFieldsContainer.className = 'otp-fields-container';
+
+  const otpInputs = [];
+  for (let i = 0; i < 4; i += 1) {
+    const otpDigit = document.createElement('input');
+    otpDigit.type = 'text';
+    otpDigit.inputMode = 'numeric';
+    otpDigit.maxLength = 1;
+    otpDigit.className = 'otp-digit';
+    otpDigit.style.display = 'none';
+    otpInputs.push(otpDigit);
+    otpFieldsContainer.appendChild(otpDigit);
+  }
+  otpWrapper.appendChild(otpFieldsContainer);
+
+  // get OTP value
+  function getOtpValue() {
+    return otpInputs.map((input) => input.value).join('');
+  }
+
   // Subscribe newsletter
   const subscribeDiv = document.createElement('div');
   subscribeDiv.className = 'form-checkbox';
@@ -73,21 +105,72 @@ export default async function decorate(block) {
   function updateSubmitState() {
     const allFilled = firstNameInput.value.trim()
     && lastNameInput.value.trim()
-    && emailInput.value.trim()
-    && agreeInput.checked;
+    && emailInput.validity.valid
+    && agreeInput.checked
+    && otpInputs[0].style.display !== 'none'
+    && getOtpValue() === '1234';
     submitBtn.disabled = !allFilled;
     submitBtn.classList.toggle('disabled-btn', !allFilled);
   }
 
-  [firstNameInput, lastNameInput, emailInput, agreeInput].forEach((el) => {
-    el.addEventListener('input', updateSubmitState);
-    el.addEventListener('change', updateSubmitState);
+  // Focus next input on input
+  otpInputs.forEach((input, index) => {
+    input.addEventListener('input', () => {
+      if (input.value.length === 1 && index < otpInputs.length - 1) {
+        otpInputs[index + 1].focus();
+      }
+      updateSubmitState();
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !input.value && index > 0) {
+        otpInputs[index - 1].focus();
+      }
+    });
   });
+
+  [firstNameInput, lastNameInput, agreeInput, emailInput].forEach((el) => {
+    el.addEventListener('input', () => {
+      updateSubmitState();
+      if (el === emailInput) {
+        getOtpBtn.disabled = !emailInput.validity.valid;
+        submitBtn.disabled = true;
+        submitBtn.classList.add('disabled-btn');
+        otpInputs.forEach((input) => {
+          input.style.display = 'none';
+          input.value = '';
+        });
+      }
+    });
+    el.addEventListener('change', () => {
+      updateSubmitState();
+      if (el === emailInput) {
+        getOtpBtn.disabled = !emailInput.validity.valid;
+        submitBtn.disabled = true;
+        submitBtn.classList.add('disabled-btn');
+        otpInputs.forEach((input) => {
+          input.style.display = 'none';
+          input.value = '';
+        });
+      }
+    });
+  });
+
+  getOtpBtn.addEventListener('click', () => {
+    otpInputs.forEach((input) => {
+      input.style.display = 'inline-block';
+      input.value = '';
+    });
+    otpInputs[0].focus();
+    updateSubmitState();
+  });
+
+  otpWrapper.insertBefore(getOtpBtn, otpWrapper.firstChild);
 
   form.append(
     firstNameInput,
     lastNameInput,
     emailInput,
+    otpWrapper,
     subscribeDiv,
     agreeDiv,
     submitBtn,
