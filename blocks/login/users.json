@@ -1,0 +1,19 @@
+{
+    "users": [
+        {
+            "username": "admin",
+            "password": "dcit@1234",
+            "name": "Administrator"
+        },
+        {
+            "username": "deloitte",
+            "password": "dcit@1234",
+            "name": "Deloitte"
+        },
+        {
+            "username": "john",
+            "password": "dcit@1234",
+            "name": "John Doe"
+        }
+    ]
+}
