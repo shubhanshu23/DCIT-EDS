@@ -6,9 +6,9 @@ const isDesktop = window.matchMedia('(min-width: 900px)');
 
 const getUsernameFromCookie = () => {
   const cookies = document.cookie.split(';');
-  const userCookie = cookies.find((cookie) => cookie.trim().startsWith('dcit_username='));
+  const userCookie = cookies.find((cookie) => cookie.trim().startsWith('dcit_name='));
   if (userCookie) {
-    return userCookie.split('=')[1];
+    return atob(userCookie.split('=')[1]);
   }
   return null;
 };
@@ -194,8 +194,7 @@ export default async function decorate(block) {
       const uname = getUsernameFromCookie();
       const unameDiv = document.createElement('div');
       unameDiv.className = 'nav-username';
-      unameDiv.textContent = uname ? `Welcome, ${uname}` : '';
-      unameDiv.style.fontWeight = 'bold';
+      unameDiv.innerHTML = uname ? `Welcome, <b>${uname}</b>` : '';
       navTools.prepend(unameDiv);
       const links = navTools.querySelectorAll('li a');
       if (links.length > 0) {
@@ -217,7 +216,7 @@ export default async function decorate(block) {
   if (logoutBtn) {
     logoutBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      document.cookie = 'dcit_username=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+      document.cookie = 'dcit_name=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
       window.location.href = '/';
     });
   }

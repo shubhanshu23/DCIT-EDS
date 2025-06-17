@@ -178,6 +178,11 @@
   gap: 20px;
 }
 
+.header .nav-wrapper nav .nav-tools .nav-username {
+  border-right: 1px solid white;
+  padding-right: 25px;
+}
+
 .header .nav-wrapper nav .nav-tools .default-content-wrapper ul {
   display: flex;
   align-items: center;

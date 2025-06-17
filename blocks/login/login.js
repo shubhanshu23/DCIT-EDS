@@ -1,8 +1,4 @@
 export default async function decorate(block) {
-  const MOCK_CREDENTIALS = {
-    Deloitte: 'deloitte@123!',
-    Admin: 'admin@123!',
-  };
   const setCookie = (name, value, hours) => {
     const date = new Date();
     date.setTime(date.getTime() + hours * 60 * 60 * 1000);
@@ -11,9 +7,9 @@ export default async function decorate(block) {
   };
   const getUsernameFromCookie = () => {
     const cookies = document.cookie.split(';');
-    const userCookie = cookies.find((cookie) => cookie.trim().startsWith('dcit_username='));
+    const userCookie = cookies.find((cookie) => cookie.trim().startsWith('dcit_name='));
     if (userCookie) {
-      return userCookie.split('=')[1];
+      return atob(userCookie.split('=')[1]);
     }
     return null;
   };
@@ -85,11 +81,21 @@ export default async function decorate(block) {
     errorDiv.textContent = '';
     const username = userInput.value.trim();
     const password = passInput.value;
-    if (MOCK_CREDENTIALS[username] === password) {
-      setCookie('dcit_username', username, 24);
-      window.location.href = '/';
-    } else {
-      showError('Invalid username or password.');
+
+    try {
+      const response = await fetch('/blocks/login/users.json');
+      if (!response.ok) throw new Error('Failed to load users data');
+      const data = await response.json();
+
+      const user = data.users.find((u) => u.username.toLowerCase() === username.toLowerCase());
+      if (user && user.password === password) {
+        setCookie('dcit_name', btoa(user.name), 24);
+        window.location.href = '/';
+      } else {
+        showError('Invalid username or password.');
+      }
+    } catch (error) {
+      showError('An error occurred during login. Please try again.');
     }
   });
 }
