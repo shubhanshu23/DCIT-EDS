@@ -12,11 +12,12 @@
 /* Header container */
 .header .nav-wrapper nav {
   position: relative;
-  max-width: 1200px;
+
+  /* max-width: 1200px; */
   display: flex;
   align-items: center;
   column-gap: 45px;
-  margin: 0 auto;
+  margin: 0 20px;
 }
 
 /* Hamburger menu icon */
@@ -171,6 +172,24 @@
 
 /* Right side section(login, search) */
 .header .nav-wrapper nav .nav-tools {
-  display: none;
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
+
+.header .nav-wrapper nav .nav-tools .default-content-wrapper ul {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header .nav-wrapper nav .nav-tools .default-content-wrapper ul li a {
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
+    align-items: center;
+    gap: 5px;
+}
+
+
