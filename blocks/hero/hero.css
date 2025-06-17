@@ -10,7 +10,7 @@ main .section.hero-container {
 .hero {
   position: relative;
   padding: 40px 24px;
-  min-height: 300px;
+  min-height: 235px;
 }
 
 .hero h1 {
@@ -34,8 +34,28 @@ main .section.hero-container {
   height: 100%;
 }
 
+main:has(.hero-container) {
+  margin-top: 50px;
+}
+
+@media (width >= 767px) {
+  .hero {
+    padding: 200px 40px;
+    min-height: 100%;
+  }
+  
+  main:has(.hero-container) {
+    margin-top: 50px;
+  }
+}
+
 @media (width >= 900px) {
   .hero {
-    padding: 325px 12px;
+    padding: 400px 12px;
+    min-height: auto;
+  }
+
+  main:has(.hero-container) {
+    margin-top: 70px;
   }
 }
