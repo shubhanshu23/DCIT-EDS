@@ -25,7 +25,7 @@ function waitForElement(parent, selector, callback) {
 }
 
 const consentScreen = document.querySelector('footer .footer .consent-screen');
-if(consentScreen && !document.cookie.includes('dcit_ca=')) {
+if (consentScreen && !document.cookie.includes('dcit_ca=')) {
   const acceptBtn = consentScreen.querySelector('.button[href="#acceptcookies"]');
   const denyBtn = consentScreen.querySelector('.button[href="#denycookies"]');
   acceptBtn?.addEventListener('click', (e) => {
