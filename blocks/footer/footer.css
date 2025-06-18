@@ -130,3 +130,79 @@
 .footer .social-icon-widgets span.icon img {
   background-color: #fff;
 }
+
+.footer .consent-screen {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 -2px 5px #0003;
+  z-index: 1000;
+  padding: 20px 10vw;
+  display: none;
+}
+
+.footer .consent-screen h2, .footer .consent-screen p {
+  text-align: center;
+}
+
+.footer .consent-screen p a {
+    text-decoration: underline;
+    color: #0076A8;
+  }
+
+
+.footer .consent-screen .button-container {
+  padding: 10px;
+  border-radius: 50px;
+  background-color: #0076A8;
+  margin: 10px auto;
+  width: 50%;
+}
+
+.footer .consent-screen .button-container a {
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.footer .consent-screen .button-container a::after {
+  display: none;
+}
+
+.footer .consent-screen .button-container:has(a.button.secondary) {
+  background-color: #fff;
+  border: 2px solid #0076A8;
+}
+
+.footer .consent-screen .button-container a.button.secondary {
+  color: #0076A8;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: bold;
+}
+
+@media (width <=767px) {
+  .footer .consent-screen .default-content-wrapper {
+    padding: 0 10vw;
+  }
+
+  .footer .consent-screen h2 {
+    font-size: 24px;
+  }
+
+  .footer .consent-screen p {
+    font-size: 16px;
+  }
+
+  .footer .consent-screen .button-container {
+  width: 100%;
+  }
+
+  .footer .consent-screen {
+  padding: 20px 5vw;
+  }
+}
