@@ -209,9 +209,9 @@
 
 .footer .consent-screen .columns-wrapper {
   flex: 1 1 0;
-} 
-@media (width <=767px) {
+}
 
+@media (width <=767px) {
   .footer .consent-screen h3 {
     font-size: 18px;
   }
