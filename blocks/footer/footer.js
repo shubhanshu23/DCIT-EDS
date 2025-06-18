@@ -24,22 +24,6 @@ function waitForElement(parent, selector, callback) {
   observer.observe(parent, { childList: true, subtree: true });
 }
 
-const consentScreen = document.querySelector('footer .footer .consent-screen');
-if (consentScreen && !localStorage.getItem('dcit_ca')) {
-  const acceptBtn = consentScreen.querySelector('.button[href="#acceptcookies"]');
-  const denyBtn = consentScreen.querySelector('.button[href="#denycookies"]');
-  acceptBtn?.addEventListener('click', (e) => {
-    e.preventDefault();
-    consentScreen.style.display = 'none';
-    localStorage.setItem('dcit_ca', 'true');
-  });
-  denyBtn?.addEventListener('click', (e) => {
-    e.preventDefault();
-    consentScreen.style.display = 'none';
-    localStorage.setItem('dcit_ca', 'false');
-  });
-}
-
 export default async function decorate(block) {
   // load footer as fragment
   const footerMeta = getMetadata('footer');
@@ -52,6 +36,21 @@ export default async function decorate(block) {
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
   block.append(footer);
+
+  waitForElement(block, '.consent-screen', (consentScreen) => {
+    const acceptBtn = consentScreen.querySelector('.button[href="#acceptcookies"]');
+    const denyBtn = consentScreen.querySelector('.button[href="#denycookies"]');
+    acceptBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      consentScreen.style.display = 'none';
+      localStorage.setItem('dcit_ca', 'true');
+    });
+    denyBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      consentScreen.style.display = 'none';
+      localStorage.setItem('dcit_ca', 'false');
+    });
+  });
 
   // Use observer to wait for .footer-nav
   waitForElement(block, '.footer-nav .default-content-wrapper li span.icon', (liIcon) => {
