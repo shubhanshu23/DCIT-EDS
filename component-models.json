@@ -381,6 +381,22 @@
         "valueType": "string"
       }
     ]
+  },
+   {
+    "id": "download",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "pdf-viewer",
+        "label": "PDF Viewer",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "language"
+      }
+    ]
   },  
   {
     "id": "form",
