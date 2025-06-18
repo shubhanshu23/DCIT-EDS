@@ -395,7 +395,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   z-index: 9999;
   left: 0; top: 0;
   width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgb(0 0 0 / 60%);
 }
 
 .modal-content {
@@ -420,7 +420,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 .downloadBtn {
   padding: 10px 20px;
   font-size: 16px;
-  background: #0077cc;
+  background: #07c;
   color: white;
   border: none;
   border-radius: 6px;
