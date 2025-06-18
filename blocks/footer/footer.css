@@ -137,8 +137,7 @@
   left: 0;
   width: 100%;
   background: #fff;
-  padding: 1rem;
-  box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 -2px 5px #00000033;
   z-index: 1000;
   padding: 20px 10vw;
 }
@@ -162,7 +161,7 @@
 }
 
 .footer .consent-screen .button-container a {
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
   border: none;
   font-style: normal;
@@ -189,15 +188,19 @@
   .footer .consent-screen .default-content-wrapper {
     padding: 0 10vw;
   }
+
   .footer .consent-screen h2 {
     font-size: 24px;
   }
+
   .footer .consent-screen p {
     font-size: 16px;
   }
+
   .footer .consent-screen .button-container {
   width: 100%;
   }
+  
   .footer .consent-screen {
   padding: 20px 5vw;
   }
