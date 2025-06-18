@@ -386,15 +386,64 @@
     "id": "download",
     "fields": [
       {
-        "component": "reference",
-        "name": "pdf-viewer",
-        "label": "PDF Viewer",
-        "valueType": "string"
+        "component": "container",
+        "name": "basic",
+        "label": "Basic",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "reference",
+            "name": "pdf-viewer",
+            "label": "PDF Viewer",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "name": "Language",
+            "label": "language",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "English",
+                "value": "en"
+              },
+              {
+                "name": "Hindi",
+                "value": "hi"
+              }
+            ]
+          }
+        ]
       },
       {
-        "component": "text",
-        "name": "imageAlt",
-        "label": "language"
+        "component": "container",
+        "name": "basic",
+        "label": "Basic",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "reference",
+            "name": "pdf-viewer",
+            "label": "PDF Viewer",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "name": "Language",
+            "label": "language",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "English",
+                "value": "en"
+              },
+              {
+                "name": "Hindi",
+                "value": "hi"
+              }
+            ]
+          }
+        ]
       }
     ]
   },  
