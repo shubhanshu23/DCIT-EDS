@@ -1,13 +1,38 @@
 export default function decorate(block) {
+  const leftContent = document.createElement('div');
+  leftContent.className = 'right-plan-left';
+  leftContent.innerHTML = `
+    <h2>Life Insurance</h2>
+    <p>Life is unpredictable, and while we all hope for the best, being prepared is essential. Life insurance is a financial safety net that protects your loved ones in your absence. It helps your family manage expenses and maintain stability during difficult times.</p>
+    <h3>Understanding Life Insurance: Definition and Meaning</h3>
+    <ul>
+      <li>Life insurance is a contract between a policyholder and an insurance company where the insurer pays a set amount to the nominee if the policyholder dies during the policy term, in return for regular premium payments.</li>
+      <li>Some plans also offer survival or maturity benefits, critical illness coverage, and tax benefits, making life insurance a smart tool for protection and long-term financial planning.</li>
+    </ul>
+    <div class="right-plan-stats">
+      <div><strong>4.8 Rated</strong><br><span>Policies Sold</span></div>
+      <div><strong>5.3 Crore</strong><br><span>Registered Consumer</span></div>
+      <div><strong>10.5 Crore</strong><br><span>Insurance Partners</span></div>
+    </div>
+  `;
   const tabs = [
     {
       label: 'Life Insurance', form: `
       <form class="tab-form">
-        <h3>Life Insurance Calculator</h3>
-        <label>Name <input type="text" name="name" required></label>
-        <label>Age <input type="text" name="age" required></label>
-        <label>Email ID <input type="email" name="email" required></label>
-        <label>Income <input type="text" name="income" required></label>
+        <p class="tabs-subtext">Protect your family today and get <b>₹1 Crore <span class="highlight">@487/month</span></b></p class="tabs-subtext">
+        <div class="gender-group">
+          <label class="gender-label">
+            <input type="radio" name="gender" value="male" required>
+            <span>Male</span>
+          </label>
+          <label class="gender-label">
+            <input type="radio" name="gender" value="female" required>
+            <span>Female</span>
+          </label>
+        </div>
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="age" placeholder="Age" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
         <button type="submit">Calculate Premium- INR XX</button>
       </form>
     `,
@@ -15,57 +40,21 @@ export default function decorate(block) {
     {
       label: 'Health Insurance', form: `
       <form class="tab-form">
-        <h3>Health Insurance Calculator</h3>
-        <label>Name <input type="text" name="name" required></label>
-        <label>Age <input type="text" name="age" required></label>
-        <label>Email ID <input type="email" name="email" required></label>
-        <label>Income <input type="text" name="income" required></label>
+        <p class="tabs-subtext">Get 20 Lakh Surgery Cover</p>
+        <div class="gender-group">
+          <label class="gender-label">
+            <input type="radio" name="gender" value="male" required>
+            <span>Male</span>
+          </label>
+          <label class="gender-label">
+            <input type="radio" name="gender" value="female" required>
+            <span>Female</span>
+          </label>
+        </div>
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="age" placeholder="Age" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
         <button type="submit">Calculate Premium- INR XX</button>
-      </form>
-    `,
-    },
-    {
-      label: 'Retirement Planner', form: `
-      <form class="tab-form">
-        <h3>Retirement Planner</h3>
-        <label>Name <input type="text" name="name" required></label>
-        <label>Current Age <input type="text" name="age" required></label>
-        <label>Retirement Age <input type="text" name="retirement_age" required></label>
-        <label>Monthly Savings <input type="text" name="savings" required></label>
-        <button type="submit">Calculate Plan</button>
-      </form>
-    `,
-    },
-    {
-      label: 'Home Loan Calculator', form: `
-      <form class="tab-form">
-        <h3>Home Loan Calculator</h3>
-        <label>Loan Amount <input type="text" name="amount" required></label>
-        <label>Tenure (years) <input type="text" name="tenure" required></label>
-        <label>Interest Rate (%) <input type="text" name="rate" required></label>
-        <button type="submit">Calculate EMI</button>
-      </form>
-    `,
-    },
-    {
-      label: 'Car Loan Calculator', form: `
-      <form class="tab-form">
-        <h3>Car Loan Calculator</h3>
-        <label>Loan Amount <input type="text" name="amount" required></label>
-        <label>Tenure (years) <input type="text" name="tenure" required></label>
-        <label>Interest Rate (%) <input type="text" name="rate" required></label>
-        <button type="submit">Calculate EMI</button>
-      </form>
-    `,
-    },
-    {
-      label: 'EMI Calculator', form: `
-      <form class="tab-form">
-        <h3>EMI Calculator</h3>
-        <label>Loan Amount <input type="text" name="amount" required></label>
-        <label>Tenure (months) <input type="text" name="tenure" required></label>
-        <label>Interest Rate (%) <input type="text" name="rate" required></label>
-        <button type="submit">Calculate EMI</button>
       </form>
     `,
     },
@@ -90,10 +79,18 @@ export default function decorate(block) {
     tabsHeader.appendChild(btn);
   });
 
-  // Show the first tab's form by default
   tabContent.innerHTML = tabs[0].form;
 
+  const rightContent = document.createElement('div');
+  rightContent.className = 'right-plan-right';
+  rightContent.appendChild(tabsHeader);
+  rightContent.appendChild(tabContent);
+
+  const container = document.createElement('div');
+  container.className = 'right-plan-container';
+  container.appendChild(leftContent);
+  container.appendChild(rightContent);
+
   block.innerHTML = '';
-  block.appendChild(tabsHeader);
-  block.appendChild(tabContent);
+  block.appendChild(container);
 }
