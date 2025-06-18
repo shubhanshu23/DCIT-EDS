@@ -24,6 +24,22 @@ function waitForElement(parent, selector, callback) {
   observer.observe(parent, { childList: true, subtree: true });
 }
 
+const consentScreen = document.querySelector('footer .footer .consent-screen');
+if (consentScreen && !document.cookie.includes('dcit_ca=')) {
+  const acceptBtn = consentScreen.querySelector('.button[href="#acceptcookies"]');
+  const denyBtn = consentScreen.querySelector('.button[href="#denycookies"]');
+  acceptBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    consentScreen.style.display = 'none';
+    localStorage.setItem('dcit_ca', 'true');
+  });
+  denyBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    consentScreen.style.display = 'none';
+    localStorage.setItem('dcit_ca', 'false');
+  });
+}
+
 export default async function decorate(block) {
   // load footer as fragment
   const footerMeta = getMetadata('footer');
