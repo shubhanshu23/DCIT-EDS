@@ -38,18 +38,21 @@ export default async function decorate(block) {
   block.append(footer);
 
   waitForElement(block, '.consent-screen', (consentScreen) => {
-    const acceptBtn = consentScreen.querySelector('.button[href="#acceptcookies"]');
-    const denyBtn = consentScreen.querySelector('.button[href="#denycookies"]');
-    acceptBtn?.addEventListener('click', (e) => {
-      e.preventDefault();
-      consentScreen.style.display = 'none';
-      localStorage.setItem('dcit_ca', 'true');
-    });
-    denyBtn?.addEventListener('click', (e) => {
-      e.preventDefault();
-      consentScreen.style.display = 'none';
-      localStorage.setItem('dcit_ca', 'false');
-    });
+    if (consentScreen && localStorage.getItem('dcit_ca') == null) {
+      consentScreen.style.display = 'block';
+      const acceptBtn = consentScreen.querySelector('.button[href="#acceptcookies"]');
+      const denyBtn = consentScreen.querySelector('.button[href="#denycookies"]');
+      acceptBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        consentScreen.style.display = 'none';
+        localStorage.setItem('dcit_ca', 'true');
+      });
+      denyBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        consentScreen.style.display = 'none';
+        localStorage.setItem('dcit_ca', 'false');
+      });
+    }
   });
 
   // Use observer to wait for .footer-nav
