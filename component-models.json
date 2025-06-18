@@ -218,6 +218,10 @@
           {
             "name": "Footer TnC",
             "value": "footer-tnc"
+          },
+          {
+            "name": "Cookie Consent Screen",
+            "value": "consent-screen"
           }
         ]
       }
