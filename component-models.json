@@ -387,19 +387,19 @@
     "fields": [
       {
         "component": "container",
-        "name": "basic",
-        "label": "Basic",
+        "name": "filedownload",
+        "label": "Download",
         "collapsible": false,
         "fields": [
           {
             "component": "reference",
-            "name": "pdf-viewer",
+            "name": "pdf-viewer1",
             "label": "PDF Viewer",
             "valueType": "string"
           },
           {
             "component": "select",
-            "name": "Language",
+            "name": "Language1",
             "label": "language",
             "valueType": "string",
             "options": [
@@ -417,19 +417,19 @@
       },
       {
         "component": "container",
-        "name": "basic",
+        "name": "basic1",
         "label": "Basic",
         "collapsible": false,
         "fields": [
           {
             "component": "reference",
-            "name": "pdf-viewer",
+            "name": "pdf-viewer2",
             "label": "PDF Viewer",
             "valueType": "string"
           },
           {
             "component": "select",
-            "name": "Language",
+            "name": "Language2",
             "label": "language",
             "valueType": "string",
             "options": [
