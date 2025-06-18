@@ -141,6 +141,41 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   // }
 }
 
+const fileLinkHandle = (filename, url, target) => {
+  const modal = document.getElementById('pdfModal');
+  const closeBtn = document.querySelector('.close');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const pdfViewer = document.getElementById('pdfViewer');
+  const pdfUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${url}`;
+  // const googleViewer = `https://docs.google.com/gview?url=${encodeURIComponent(url)}&embedded=true`;
+
+  target.onclick = () => {
+    modal.style.display = 'block';
+    pdfViewer.src = pdfUrl;
+  };
+
+  closeBtn.onclick = () => {
+    modal.style.display = 'none';
+    pdfViewer.src = ''; // clear iframe to stop loading
+    downloadBtn.style.display = 'none';
+  };
+
+  window.onclick = (event) => {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+      pdfViewer.src = '';
+      downloadBtn.style.display = 'none';
+    }
+  };
+
+  downloadBtn.onclick = () => {
+    const a = document.createElement('a');
+    a.href = pdfUrl;
+    a.download = filename;
+    a.click();
+  };
+};
+
 /**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -193,6 +228,17 @@ export default async function decorate(block) {
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });
+
+      navSection.querySelectorAll('a[href]').forEach((anchor) => {
+        const href = anchor.getAttribute('href');
+        if (href && /\.(pdf|docx?|pptx?)$/i.test(href)) {
+          const fileName = href.split('/').pop().split('?')[0].split('#')[0];
+          anchor.addEventListener('click', (e) => {
+            e.preventDefault(); // Stop default navigation
+            fileLinkHandle(fileName, href, anchor);
+          });
+        }
+      });
     });
   }
 
@@ -211,6 +257,32 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  // PDF viewver
+  const main = document.querySelector('main');
+  const container = document.createElement('div');
+  container.innerHTML = `
+<!-- Modal -->
+<div id="pdfModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+
+    <!-- PDF Preview -->
+    <iframe id="pdfViewer"
+            src=""
+            width="100%"
+            height="600px"
+            style="border: none;"></iframe>
+
+    <!-- Download Button -->
+    <button id="downloadBtn" class='downloadBtn' style="display: none; margin-top: 10px;">
+      Download PDF
+    </button>
+  </div>
+</div>
+  `;
+
+  main.appendChild(container);
 
   if (checkLoginCookie()) {
     const navTools = nav.querySelector('.nav-tools');
