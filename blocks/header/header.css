@@ -369,3 +369,17 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 }
 
 }
+
+@media (width <= 767px) {
+  .nav-tools .nav-username {
+      display: none;
+  }
+
+  .header .nav-wrapper nav[aria-expanded="true"],  .header .nav-wrapper nav[aria-expanded="false"] {
+    column-gap: 20px;
+  }
+
+  .header .nav-wrapper nav .header-level-one .header-level-two > li:not(:has(> ul)) .button::after {
+    content: none;
+  }
+}

@@ -38,16 +38,6 @@ main:has(.hero-container) {
   margin-top: 50px;
 }
 
-@media (width <= 767px) {
-  .nav-tools .nav-username {
-      display: none;
-  }
-
-  .header .nav-wrapper nav[aria-expanded="true"],  .header .nav-wrapper nav[aria-expanded="false"] {
-    column-gap: 20px;
-  }
-}
-
 @media (width >= 767px) {
   .hero {
     padding: 200px 40px;
