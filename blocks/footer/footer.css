@@ -140,6 +140,7 @@
   box-shadow: 0 -2px 5px #0003;
   z-index: 1000;
   padding: 20px 10vw;
+  display: none;
 }
 
 .footer .consent-screen h2, .footer .consent-screen p {
