@@ -39,7 +39,7 @@ export default async function decorate(block) {
 
   waitForElement(block, '.consent-screen', (consentScreen) => {
     if (consentScreen && localStorage.getItem('dcit_ca') == null) {
-      consentScreen.style.display = 'block';
+      consentScreen.style.display = 'flex';
       const acceptBtn = consentScreen.querySelector('.button[href="#acceptcookies"]');
       const denyBtn = consentScreen.querySelector('.button[href="#denycookies"]');
       acceptBtn?.addEventListener('click', (e) => {
