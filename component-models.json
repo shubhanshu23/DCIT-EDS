@@ -50,7 +50,7 @@
       },
       {
       "component": "aem-content",
-      "name": "link",
+      "name": "imageLink",
       "value": "",
       "label": "Link",
       "valueType": "string",
