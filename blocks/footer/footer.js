@@ -36,6 +36,21 @@ export default async function decorate(block) {
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
   block.append(footer);
 
+  const metaTags = document.getElementsByTagName('meta');
+  const metadata = {};
+  metadata['title'] = document.title || 'Default Title';
+  for (let meta of metaTags) {
+    const name = meta.getAttribute('name') || meta.getAttribute('property') || meta.getAttribute('http-equiv');
+    const content = meta.getAttribute('content');
+
+    if (name && content) {
+      metadata[name] = content;
+    }
+  } 
+  window.adobeDataLayer.push({
+    "page": metadata
+  });
+
   waitForElement(block, '.consent-screen', (consentScreen) => {
     if (consentScreen && localStorage.getItem('dcit_ca') == null) {
       consentScreen.style.display = 'flex';
