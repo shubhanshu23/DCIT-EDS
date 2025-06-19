@@ -15,71 +15,98 @@ export default function decorate(block) {
       <div><strong>10.5 Crore</strong><br><span>Insurance Partners</span></div>
     </div>
   `;
-  const tabs = [
-    {
-      label: 'Life Insurance', form: `
-      <form class="tab-form">
-        <p class="tabs-subtext">Protect your family today and get <b>₹1 Crore <span class="highlight">@487/month</span></b></p class="tabs-subtext">
-        <div class="gender-group">
-          <label class="gender-label">
-            <input type="radio" name="gender" value="male" required>
-            <span>Male</span>
-          </label>
-          <label class="gender-label">
-            <input type="radio" name="gender" value="female" required>
-            <span>Female</span>
-          </label>
-        </div>
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="text" name="age" placeholder="Age" required>
-        <input type="text" name="phone" placeholder="Phone Number" required>
-        <button type="submit">Calculate Premium- INR XX</button>
-      </form>
-    `,
-    },
-    {
-      label: 'Health Insurance', form: `
-      <form class="tab-form">
-        <p class="tabs-subtext">Get 20 Lakh Surgery Cover</p>
-        <div class="gender-group">
-          <label class="gender-label">
-            <input type="radio" name="gender" value="male" required>
-            <span>Male</span>
-          </label>
-          <label class="gender-label">
-            <input type="radio" name="gender" value="female" required>
-            <span>Female</span>
-          </label>
-        </div>
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="text" name="age" placeholder="Age" required>
-        <input type="text" name="phone" placeholder="Phone Number" required>
-        <button type="submit">Calculate Premium- INR XX</button>
-      </form>
-    `,
-    },
-  ];
+  const lifeForm = document.createElement('form');
+  lifeForm.className = 'tab-form life-form';
+  lifeForm.innerHTML = `
+    <p class="tabs-subtext">Protect your family today and get <b>₹1 Crore <span class="highlight">@487/month</span></b></p>
+    <div class="gender-group">
+      <label class="gender-label">
+        <input type="radio" name="gender" value="male" required>
+        <span>Male</span>
+      </label>
+      <label class="gender-label">
+        <input type="radio" name="gender" value="female" required>
+        <span>Female</span>
+      </label>
+    </div>
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="number" name="age" placeholder="Age" required>
+    <input type="number" name="phone" placeholder="Phone Number" required>
+    <button type="submit">Calculate Premium</button>
+  `;
+
+  const healthForm = document.createElement('form');
+  healthForm.className = 'tab-form health-form';
+  healthForm.innerHTML = `
+    <p class="tabs-subtext">Get 20 Lakh Surgery Cover</p>
+    <div class="gender-group">
+      <label class="gender-label">
+        <input type="radio" name="gender" value="male" required>
+        <span>Male</span>
+      </label>
+      <label class="gender-label">
+        <input type="radio" name="gender" value="female" required>
+        <span>Female</span>
+      </label>
+    </div>
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="number" name="age" placeholder="Age" required>
+    <input type="number" name="phone" placeholder="Phone Number" required>
+    <button type="submit">Calculate Premium</button>
+  `;
+
+  // Attach premium logic to both forms
+  [lifeForm, healthForm].forEach((form) => {
+    const btn = form.querySelector('button[type="submit"]');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const premium = Math.floor(Math.random() * 800) + 400;
+      btn.textContent = `Premium: ₹${premium}`;
+      btn.classList.add('flip-btn-animate');
+      btn.disabled = true;
+      setTimeout(() => btn.classList.remove('flip-btn-animate'), 1000);
+    });
+
+    // Listen for any input change to reset the button
+    form.querySelectorAll('input').forEach((input) => {
+      input.addEventListener('input', () => {
+        btn.textContent = 'Calculate Premium';
+        btn.disabled = false;
+      });
+    });
+  });
 
   // Tabs header
   const tabsHeader = document.createElement('div');
   tabsHeader.className = 'tabs-header';
+
+  const tabBtns = [
+    { label: 'Life Insurance', form: lifeForm },
+    { label: 'Health Insurance', form: healthForm },
+  ];
+
   const tabContent = document.createElement('div');
   tabContent.className = 'tab-content';
+  tabContent.appendChild(lifeForm);
+  tabContent.appendChild(healthForm);
 
-  tabs.forEach((tab, idx) => {
+  // Show first form by default
+  lifeForm.style.display = '';
+  healthForm.style.display = 'none';
+
+  tabBtns.forEach((tab, index) => {
     const btn = document.createElement('button');
     btn.textContent = tab.label;
     btn.className = 'tab-btn';
-    if (idx === 0) btn.classList.add('active');
+    if (index === 0) btn.classList.add('active');
     btn.addEventListener('click', () => {
-      block.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('active'));
+      tabsHeader.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
-      tabContent.innerHTML = tab.form;
+      lifeForm.style.display = index === 0 ? '' : 'none';
+      healthForm.style.display = index === 1 ? '' : 'none';
     });
     tabsHeader.appendChild(btn);
   });
-
-  tabContent.innerHTML = tabs[0].form;
 
   const rightContent = document.createElement('div');
   rightContent.className = 'right-plan-right';
