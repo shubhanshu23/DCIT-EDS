@@ -1,6 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
-import { sendPageBeacon } from '../../scripts/datalayer.js';
+import { sendCookieConsentBeacon, sendPageBeacon } from '../../scripts/datalayer.js';
 
 /**
  * loads and decorates the footer
@@ -45,11 +45,13 @@ export default async function decorate(block) {
         e.preventDefault();
         consentScreen.style.display = 'none';
         localStorage.setItem('dcit_ca', 'true');
+        sendCookieConsentBeacon(true);
       });
       denyBtn?.addEventListener('click', (e) => {
         e.preventDefault();
         consentScreen.style.display = 'none';
         localStorage.setItem('dcit_ca', 'false');
+        sendCookieConsentBeacon(false);
       });
     }
     sendPageBeacon();

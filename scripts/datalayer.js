@@ -41,4 +41,20 @@ function sendAuthInfoBeacon(user = null, state = null) {
     }
 }
 
-export { sendPageBeacon, sendAuthInfoBeacon };
+function sendCookieConsentBeacon(accepted = false) {
+    const metaOgUrl = document.querySelector('meta[property="og:url"]');
+    const page = metaOgUrl ? metaOgUrl.getAttribute('content') : window.location.href;
+    window.adobeDataLayer.push({
+        event: "cookie-consent",
+        eventInfo: {
+                page: page,
+                timestamp: new Date().toISOString()
+        },
+        consent: {
+            accepted: !!accepted
+        }
+    });
+}
+
+
+export { sendPageBeacon, sendAuthInfoBeacon, sendCookieConsentBeacon };
