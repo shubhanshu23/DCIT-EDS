@@ -130,3 +130,113 @@
 .footer .social-icon-widgets span.icon img {
   background-color: #fff;
 }
+
+.footer .consent-screen {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 -2px 5px #0003;
+  z-index: 1000;
+  padding: 20px;
+  display: none;
+  flex-direction: row;
+}
+
+.footer .consent-screen p a {
+    text-decoration: underline;
+    color: #0076A8;
+}
+
+.footer .consent-screen h3 {
+    font-size: 24px;
+}
+
+.footer .consent-screen p {
+    font-size: 16px;
+}
+
+
+.footer .consent-screen .button-container {
+  padding: 10px;
+  border-radius: 50px;
+  background-color: #0076A8;
+  margin: 10px auto;
+}
+
+.footer .consent-screen .columns-wrapper .columns > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  grid-gap: 20px;
+}
+
+.footer .consent-screen .columns-wrapper, .footer .consent-screen .columns-wrapper .columns > div div {
+  width: 100%;
+  text-align: center;
+}
+
+.footer .consent-screen .button-container a {
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.footer .consent-screen .button-container a::after {
+  display: none;
+}
+
+.footer .consent-screen .button-container:has(a.button.secondary) {
+  background-color: #fff;
+  border: 2px solid #0076A8;
+}
+
+.footer .consent-screen .button-container a.button.secondary {
+  color: #0076A8;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.footer .consent-screen .default-content-wrapper {
+  flex: 2 1 0;
+}
+
+.footer .consent-screen .columns-wrapper {
+  flex: 1 1 0;
+}
+
+@media (width <=767px) {
+  .footer .consent-screen h3 {
+    font-size: 18px;
+  }
+
+  .footer .consent-screen p {
+    font-size: 12px;
+  }
+
+  .footer .consent-screen p a {
+    font-size: 12px;
+  }
+
+  .footer .consent-screen .button-container {
+  width: 80%;
+  margin: 5px auto;
+  }
+
+  .footer .consent-screen {
+  padding: 10px;
+  flex-direction: column;
+  text-align: center;
+  }
+
+  .footer .consent-screen .columns-wrapper .columns > div {
+  flex-direction: column;
+  grid-gap: 0;
+  }
+}

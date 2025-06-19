@@ -40,6 +40,32 @@
     ]
   },
   {
+    "id": "image-with-link",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+      "component": "aem-content",
+      "name": "imageLink",
+      "value": "",
+      "label": "Link",
+      "valueType": "string",
+      "validation": {
+            "rootPath": "/content/dcit-insurance"
+        }
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Alt Text"
+      }
+    ]
+  },
+  {
     "id": "text",
     "fields": [
       {
@@ -185,6 +211,11 @@
         "label": "Section Name",
         "description": "The label shown for this section in the Content Tree"
       },
+       {
+        "component": "text",
+        "name": "linkText",
+        "label": "LinkText"
+      },
       {
         "component": "multiselect",
         "name": "style",
@@ -213,6 +244,10 @@
           {
             "name": "Footer TnC",
             "value": "footer-tnc"
+          },
+          {
+            "name": "Cookie Consent Screen",
+            "value": "consent-screen"
           }
         ]
       }
@@ -370,6 +405,71 @@
         "name": "pdf-viewer",
         "label": "PDF Viewer",
         "valueType": "string"
+      }
+    ]
+  },
+   {
+    "id": "download",
+    "fields": [
+      {
+        "component": "container",
+        "name": "filedownload",
+        "label": "File and Language",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "reference",
+            "name": "pdf-viewer1",
+            "label": "File Path",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "name": "Language1",
+            "label": "language",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "English",
+                "value": "en"
+              },
+              {
+                "name": "Hindi",
+                "value": "hi"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "name": "filedownload2",
+        "label": "File and Language",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "reference",
+            "name": "pdf-viewer2",
+            "label": "File Path",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "name": "Language2",
+            "label": "language",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "English",
+                "value": "en"
+              },
+              {
+                "name": "Hindi",
+                "value": "hi"
+              }
+            ]
+          }
+        ]
       }
     ]
   },  
