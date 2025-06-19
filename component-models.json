@@ -49,10 +49,14 @@
         "multi": false
       },
       {
-        "component": "reference",
-        "name": "link",
-        "label": "Link",
-        "multi": false
+      "component": "aem-content",
+      "name": "link",
+      "value": "",
+      "label": "Link",
+      "valueType": "string",
+      "validation": {
+            "rootPath": "/content/dcit-insurance"
+        }
       },
       {
         "component": "text",

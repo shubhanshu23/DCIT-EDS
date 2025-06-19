@@ -1,4 +1,4 @@
-export default function decorate(block) {
+export default async function decorate(block) {
   const { src, alt, link } = block.dataset;
   const picture = document.createElement('picture');
   const img = document.createElement('img');
