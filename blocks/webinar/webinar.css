@@ -6,6 +6,16 @@
   margin-top: 10px;
 }
 
+.webinar-section input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.webinar-section input[type="number"] {
+  appearance: textfield;
+}
+
 .webinar-section form input[type="text"],
 .webinar-section form input[type="email"],
 .webinar-section form input[type="number"],
@@ -34,16 +44,6 @@
   border: none;
   border-radius: 7px;
   cursor: pointer;
-}
-
-.webinar-section input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  appearance: none;
-  margin: 0;
-}
-
-.webinar-section input[type="number"] {
-  appearance: textfield;
 }
 
 .webinar-section p{
