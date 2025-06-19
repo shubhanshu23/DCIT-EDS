@@ -1,22 +1,26 @@
 const fileViewer = (filename, url) => {
   const modal = document.getElementById('pdfModal');
-  const closeBtn = modal.querySelector('.close');
-  const downloadBtn = modal.querySelector('#downloadBtn');
-  const pdfViewer = modal.querySelector('#pdfViewer');
-
-  const viewerUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(url)}`;
+  const closeBtn = document.querySelector('.close');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const pdfViewer = document.getElementById('pdfViewer');
+  const pdfUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(url)}`;
 
   modal.style.display = 'block';
-  pdfViewer.src = viewerUrl;
+  pdfViewer.src = pdfUrl;
 
-  const closeModal = () => {
+  closeBtn.onclick = () => {
     modal.style.display = 'none';
     pdfViewer.src = '';
     downloadBtn.style.display = 'none';
   };
 
-  closeBtn.onclick = closeModal;
-  window.onclick = (e) => e.target === modal && closeModal();
+  window.onclick = (event) => {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+      pdfViewer.src = '';
+      downloadBtn.style.display = 'none';
+    }
+  };
 
   downloadBtn.onclick = () => {
     const a = document.createElement('a');
@@ -26,20 +30,19 @@ const fileViewer = (filename, url) => {
   };
 };
 
-export default function decorate(block) {
+export default async function decorate(block) {
   const LanguageOne = { path: '', lang: '' };
   const LanguageTwo = { path: '', lang: '' };
 
-  const divs = Array.from(block.querySelectorAll(':scope > div'));
-  LanguageOne.path = divs[0]?.querySelector('a')?.getAttribute('title') || '';
-  LanguageOne.lang = divs[1]?.textContent.trim() || '';
-  LanguageTwo.path = divs[2]?.querySelector('a')?.getAttribute('title') || '';
-  LanguageTwo.lang = divs[3]?.textContent.trim() || '';
+  const items = Array.from(block.querySelectorAll(':scope > div'));
+  if (items.length >= 4) {
+    LanguageOne.path = items[0].querySelector('a')?.getAttribute('title') || '';
+    LanguageOne.lang = items[1].textContent.trim();
+    LanguageTwo.path = items[2].querySelector('a')?.getAttribute('title') || '';
+    LanguageTwo.lang = items[3].textContent.trim();
+  }
 
-  // Clear block content
   block.innerHTML = '';
-
-  // Create form
   const form = document.createElement('form');
   form.method = 'POST';
   form.action = '#';
@@ -53,7 +56,11 @@ export default function decorate(block) {
     return input;
   };
 
-  // Goal dropdown
+  const firstNameInput = createInput('text', 'firstName', 'First Name*');
+  const lastNameInput = createInput('text', 'lastName', 'Last Name*');
+  const emailInput = createInput('email', 'email', 'Email*');
+
+  // Goal Dropdown
   const goalContainer = document.createElement('div');
   goalContainer.className = 'goal-container';
 
@@ -64,59 +71,65 @@ export default function decorate(block) {
   const goalSelect = document.createElement('select');
   goalSelect.name = 'goal';
   goalSelect.id = 'goalSelect';
-  goalSelect.className = 'goalSelect';
   goalSelect.required = true;
 
   const goals = ['Buy a car', 'Buy a house', "Plan for child's education"];
-  goalSelect.appendChild(new Option('Choose a goal', '', true, true)).disabled = true;
-  goals.forEach((goal) => goalSelect.appendChild(new Option(goal, goal)));
+  const defaultOption = document.createElement('option');
+  defaultOption.textContent = 'Choose a goal';
+  defaultOption.disabled = true;
+  defaultOption.selected = true;
+  goalSelect.appendChild(defaultOption);
+  goals.forEach((g) => {
+    const opt = document.createElement('option');
+    opt.value = g;
+    opt.textContent = g;
+    goalSelect.appendChild(opt);
+  });
 
-  goalContainer.append(goalLabel, goalSelect);
+  goalContainer.appendChild(goalLabel);
+  goalContainer.appendChild(goalSelect);
 
-  // Language radio group
+  // Language Radios
   const langContainer = document.createElement('div');
   langContainer.className = 'language-selection';
-  langContainer.innerHTML = '<p>Select Language:</p>';
+  const langLabel = document.createElement('p');
+  langLabel.textContent = 'Select Language:';
+  langContainer.appendChild(langLabel);
 
-  const createRadio = (value, labelText, isChecked) => {
+  const createRadio = (val, labelText, checked = false) => {
     const label = document.createElement('label');
-    label.style.marginRight = '10px';
     const radio = document.createElement('input');
     radio.type = 'radio';
     radio.name = 'language';
-    radio.value = value;
-    if (isChecked) radio.checked = true;
-    label.append(radio, ` ${labelText}`);
+    radio.value = val;
+    radio.checked = checked;
+    label.appendChild(radio);
+    label.append(` ${labelText}`);
+    label.style.marginRight = '10px';
     return label;
   };
 
-  langContainer.append(
-    createRadio('one', LanguageOne.lang.toUpperCase(), true),
-    createRadio('two', LanguageTwo.lang.toUpperCase()),
-  );
+  langContainer.appendChild(createRadio('one', LanguageOne.lang.toUpperCase(), true));
+  langContainer.appendChild(createRadio('two', LanguageTwo.lang.toUpperCase()));
 
+  // Submit Button
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
   submitBtn.textContent = 'Submit';
 
-  form.append(
-    createInput('text', 'firstName', 'First Name*'),
-    createInput('text', 'lastName', 'Last Name*'),
-    createInput('email', 'email', 'Email*'),
-    goalContainer,
-    langContainer,
-    document.createElement('br'),
-    submitBtn,
-  );
+  // Append all to form
+  [firstNameInput, lastNameInput, emailInput, goalContainer, langContainer, document.createElement('br'), submitBtn]
+    .forEach((el) => form.appendChild(el));
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+
     const selected = form.querySelector('input[name="language"]:checked')?.value;
     const selectedLang = selected === 'one' ? LanguageOne : LanguageTwo;
-    const filename = `${selectedLang.path.split('/').pop()}.pdf`;
-    const fullUrl = `https://publish-p156702-e1664409.adobeaemcloud.com${selectedLang.path}.pdf`;
-
-    fileViewer(filename, fullUrl);
+    const baseUrl = 'https://publish-p156702-e1664409.adobeaemcloud.com';
+    const lastSegment = selectedLang.path.split('/').pop();
+    const fullUrl = `${baseUrl}${selectedLang.path}.pdf`;
+    fileViewer(`${lastSegment}.pdf`, fullUrl);
   });
 
   block.appendChild(form);
