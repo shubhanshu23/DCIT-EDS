@@ -24,6 +24,12 @@
           "multi": false
         },
         {
+          "component": "reference",
+          "name": "link",
+          "label": "Link",
+          "multi": false
+        },
+        {
           "component": "text",
           "name": "imageAlt",
           "label": "Alt Text"
