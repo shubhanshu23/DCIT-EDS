@@ -36,7 +36,6 @@ export default async function decorate(block) {
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
   block.append(footer);
 
-  const metaTags = document.getElementsByTagName('meta');
   const metadata = {};
   Array.from(document.getElementsByTagName('meta')).forEach((meta) => {
     const nameAttr = meta.getAttribute('name');
