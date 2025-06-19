@@ -28,10 +28,12 @@
 .download label {
   font-weight: bold;
   margin: 0.5rem 0 0.2rem;
+  font-size: 1rem;
 }
 
 .download input[type="text"],
-.download input[type="password"] {
+.download input[type="password"],
+.download input[type="email"], select {
   padding: 0.5rem;
   font-size: 1rem;
   margin-bottom: 1rem;
@@ -52,4 +54,17 @@
 
 .download button[type="submit"]:hover {
   background-color: #009adb;
+}
+
+.download .goal-container label {
+    font-weight: normal;
+}
+
+.download .goal-container select {
+    width: 100%;
+}
+
+.download .language-selection p {
+    margin: 0;
+    font-size: 1rem;
 }

@@ -1,151 +1,123 @@
 const fileViewer = (filename, url) => {
   const modal = document.getElementById('pdfModal');
-  const closeBtn = document.querySelector('.close');
-  const downloadBtn = document.getElementById('downloadBtn');
-  const pdfViewer = document.getElementById('pdfViewer');
-  const pdfUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${url}`;
-  // const googleViewer = `https://docs.google.com/gview?url=${encodeURIComponent(url)}&embedded=true`;
-  modal.style.display = 'block';
-  pdfViewer.src = pdfUrl;
+  const closeBtn = modal.querySelector('.close');
+  const downloadBtn = modal.querySelector('#downloadBtn');
+  const pdfViewer = modal.querySelector('#pdfViewer');
 
-  closeBtn.onclick = () => {
+  const viewerUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(url)}`;
+
+  modal.style.display = 'block';
+  pdfViewer.src = viewerUrl;
+
+  const closeModal = () => {
     modal.style.display = 'none';
-    pdfViewer.src = ''; // clear iframe to stop loading
+    pdfViewer.src = '';
     downloadBtn.style.display = 'none';
   };
 
-  window.onclick = (event) => {
-    if (event.target === modal) {
-      modal.style.display = 'none';
-      pdfViewer.src = '';
-      downloadBtn.style.display = 'none';
-    }
-  };
+  closeBtn.onclick = closeModal;
+  window.onclick = (e) => e.target === modal && closeModal();
 
   downloadBtn.onclick = () => {
     const a = document.createElement('a');
-    a.href = pdfUrl;
+    a.href = url;
     a.download = filename;
     a.click();
   };
 };
 
-export default async function decorate(block) {
-  const LanguageOneIndex = [0, 1];
-  const LanguageTwoIndex = [2, 3];
-
+export default function decorate(block) {
   const LanguageOne = { path: '', lang: '' };
   const LanguageTwo = { path: '', lang: '' };
 
-  await block.querySelectorAll(':scope > div').forEach((element, index) => {
-    const path = element.querySelector('.button-container a')?.getAttribute('title') || '';
-    const lang = [...element.querySelectorAll('p')]
-      .find((p) => !p.querySelector('a'))
-      ?.textContent.trim();
-    if (LanguageOneIndex.includes(index)) {
-      if (index === 0) LanguageOne.path = path;
-      if (index === 1) LanguageOne.lang = lang;
-    } else if (LanguageTwoIndex.includes(index)) {
-      if (index === 2) LanguageTwo.path = path;
-      if (index === 3) LanguageTwo.lang = lang;
-    }
-  });
+  const divs = Array.from(block.querySelectorAll(':scope > div'));
+  LanguageOne.path = divs[0]?.querySelector('a')?.getAttribute('title') || '';
+  LanguageOne.lang = divs[1]?.textContent.trim() || '';
+  LanguageTwo.path = divs[2]?.querySelector('a')?.getAttribute('title') || '';
+  LanguageTwo.lang = divs[3]?.textContent.trim() || '';
+
+  // Clear block content
   block.innerHTML = '';
+
+  // Create form
   const form = document.createElement('form');
-  form.setAttribute('method', 'POST');
-  form.setAttribute('action', '#');
+  form.method = 'POST';
+  form.action = '#';
 
-  // First Name
-  const firstNameInput = document.createElement('input');
-  firstNameInput.type = 'text';
-  firstNameInput.name = 'firstName';
-  firstNameInput.placeholder = 'First Name*';
-  firstNameInput.required = true;
+  const createInput = (type, name, placeholder) => {
+    const input = document.createElement('input');
+    input.type = type;
+    input.name = name;
+    input.placeholder = placeholder;
+    input.required = true;
+    return input;
+  };
 
-  // Last Name
-  const lastNameInput = document.createElement('input');
-  lastNameInput.type = 'text';
-  lastNameInput.name = 'lastName';
-  lastNameInput.placeholder = 'Last Name*';
-  lastNameInput.required = true;
+  // Goal dropdown
+  const goalContainer = document.createElement('div');
+  goalContainer.className = 'goal-container';
 
-  // Email
-  const emailInput = document.createElement('input');
-  emailInput.type = 'email';
-  emailInput.name = 'email';
-  emailInput.placeholder = 'Email*';
-  emailInput.required = true;
-
-  // --- Goal Dropdown ---
   const goalLabel = document.createElement('label');
   goalLabel.textContent = 'Select Your Goal:';
+  goalLabel.setAttribute('for', 'goalSelect');
 
   const goalSelect = document.createElement('select');
   goalSelect.name = 'goal';
+  goalSelect.id = 'goalSelect';
+  goalSelect.className = 'goalSelect';
   goalSelect.required = true;
 
   const goals = ['Buy a car', 'Buy a house', "Plan for child's education"];
-  goals.forEach((goal) => {
-    const option = document.createElement('option');
-    option.value = goal;
-    option.textContent = goal;
-    goalSelect.appendChild(option);
-  });
+  goalSelect.appendChild(new Option('Choose a goal', '', true, true)).disabled = true;
+  goals.forEach((goal) => goalSelect.appendChild(new Option(goal, goal)));
 
-  // --- Language Radio Group ---
-  const langLabel = document.createElement('p');
-  langLabel.textContent = 'Select Language:';
+  goalContainer.append(goalLabel, goalSelect);
 
-  const langOneLabel = document.createElement('label');
-  const langOneRadio = document.createElement('input');
-  langOneRadio.type = 'radio';
-  langOneRadio.name = 'language';
-  langOneRadio.value = 'one';
-  langOneRadio.checked = true;
-  langOneLabel.appendChild(langOneRadio);
-  langOneLabel.append(` ${LanguageOne.lang.toUpperCase()}`);
+  // Language radio group
+  const langContainer = document.createElement('div');
+  langContainer.className = 'language-selection';
+  langContainer.innerHTML = '<p>Select Language:</p>';
 
-  const langTwoLabel = document.createElement('label');
-  const langTwoRadio = document.createElement('input');
-  langTwoRadio.type = 'radio';
-  langTwoRadio.name = 'language';
-  langTwoRadio.value = 'two';
-  langTwoLabel.appendChild(langTwoRadio);
-  langTwoLabel.append(` ${LanguageTwo.lang.toUpperCase()}`);
+  const createRadio = (value, labelText, isChecked) => {
+    const label = document.createElement('label');
+    label.style.marginRight = '10px';
+    const radio = document.createElement('input');
+    radio.type = 'radio';
+    radio.name = 'language';
+    radio.value = value;
+    if (isChecked) radio.checked = true;
+    label.append(radio, ` ${labelText}`);
+    return label;
+  };
 
-  // --- Submit Button ---
+  langContainer.append(
+    createRadio('one', LanguageOne.lang.toUpperCase(), true),
+    createRadio('two', LanguageTwo.lang.toUpperCase()),
+  );
+
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
   submitBtn.textContent = 'Submit';
 
-  // --- Append all ---
-  form.appendChild(firstNameInput);
-  form.appendChild(lastNameInput);
-  form.appendChild(emailInput);
-  form.appendChild(goalLabel);
-  form.appendChild(document.createElement('br'));
-  form.appendChild(goalSelect);
-  form.appendChild(document.createElement('br'));
-  form.appendChild(langLabel);
-  form.appendChild(langOneLabel);
-  form.appendChild(document.createElement('br'));
-  form.appendChild(langTwoLabel);
-  form.appendChild(document.createElement('br'));
-  form.appendChild(submitBtn);
+  form.append(
+    createInput('text', 'firstName', 'First Name*'),
+    createInput('text', 'lastName', 'Last Name*'),
+    createInput('email', 'email', 'Email*'),
+    goalContainer,
+    langContainer,
+    document.createElement('br'),
+    submitBtn,
+  );
 
-  // --- Handle Submit ---
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const baseUrl = 'https://publish-p156702-e1664409.adobeaemcloud.com';
     const selected = form.querySelector('input[name="language"]:checked')?.value;
     const selectedLang = selected === 'one' ? LanguageOne : LanguageTwo;
-    const lastSegment = selectedLang.path.split('/').pop();
+    const filename = `${selectedLang.path.split('/').pop()}.pdf`;
+    const fullUrl = `https://publish-p156702-e1664409.adobeaemcloud.com${selectedLang.path}.pdf`;
 
-    console.log('Selected PDF Path:', selectedLang.path, lastSegment);
-
-    fileViewer(`${lastSegment}.pdf`, `${baseUrl}${selectedLang.path}.pdf`);
+    fileViewer(filename, fullUrl);
   });
 
-  // Add to page
   block.appendChild(form);
 }
