@@ -5427,5 +5427,17 @@
         "value": ""
       }
     ]
+  },
+  {
+    "id": "webinar",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "button-text",
+        "label": "Button Text",
+        "value": ""
+      }
+    ]
   }
 ]
