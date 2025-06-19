@@ -33,6 +33,22 @@
         "multi": false
       },
       {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Alt Text"
+      }
+    ]
+  },
+  {
+    "id": "custom-image",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
         "component": "reference",
         "name": "link",
         "label": "Link",
