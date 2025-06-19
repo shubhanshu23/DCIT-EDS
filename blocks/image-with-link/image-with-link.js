@@ -1,6 +1,6 @@
 export default async function decorate(block) {
   const items = Array.from(block.querySelectorAll(':scope > div'));
-  console.log(items[1]);
+  console.log(items[0]);
 
   const originalPicture = items[0]?.querySelector('div > div > picture');
   const originalLink = items[1]?.querySelector('div > div > p > a');

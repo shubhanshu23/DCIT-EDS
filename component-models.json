@@ -33,6 +33,22 @@
         "multi": false
       },
       {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Alt Text"
+      }
+    ]
+  },
+  {
+    "id": "image-with-link",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
       "component": "aem-content",
       "name": "imageLink",
       "value": "",
