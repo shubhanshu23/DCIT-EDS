@@ -387,6 +387,71 @@
         "valueType": "string"
       }
     ]
+  },
+   {
+    "id": "download",
+    "fields": [
+      {
+        "component": "container",
+        "name": "filedownload",
+        "label": "Download",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "reference",
+            "name": "pdf-viewer1",
+            "label": "PDF Viewer",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "name": "Language1",
+            "label": "language",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "English",
+                "value": "en"
+              },
+              {
+                "name": "Hindi",
+                "value": "hi"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "name": "basic1",
+        "label": "Basic",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "reference",
+            "name": "pdf-viewer2",
+            "label": "PDF Viewer",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "name": "Language2",
+            "label": "language",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "English",
+                "value": "en"
+              },
+              {
+                "name": "Hindi",
+                "value": "hi"
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },  
   {
     "id": "form",
