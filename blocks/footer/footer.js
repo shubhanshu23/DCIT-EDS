@@ -38,7 +38,7 @@ export default async function decorate(block) {
 
   const metaTags = document.getElementsByTagName('meta');
   const metadata = {};
-  Array.from(metaTags).forEach(function (meta) {
+  Array.from(document.getElementsByTagName('meta')).forEach((meta) => {
     const nameAttr = meta.getAttribute('name');
     const propertyAttr = meta.getAttribute('property');
     const httpEquivAttr = meta.getAttribute('http-equiv');
@@ -55,7 +55,7 @@ export default async function decorate(block) {
   });
   metadata.title = document.title || 'Default Title';
   window.adobeDataLayer.push({
-    'page': metadata
+    page: metadata,
   });
   waitForElement(block, '.consent-screen', (consentScreen) => {
     if (consentScreen && localStorage.getItem('dcit_ca') == null) {
