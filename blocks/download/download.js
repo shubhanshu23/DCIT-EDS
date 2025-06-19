@@ -1,3 +1,5 @@
+import { sendDownloadBeacon } from "../../scripts/datalayer.js";
+
 const fileViewer = (filename, url) => {
   const modal = document.getElementById('pdfModal');
   const closeBtn = document.querySelector('.close');
@@ -129,6 +131,16 @@ export default async function decorate(block) {
     const baseUrl = 'https://publish-p156702-e1664409.adobeaemcloud.com';
     const lastSegment = selectedLang.path.split('/').pop();
     const fullUrl = `${baseUrl}${selectedLang.path}.pdf`;
+
+    const formData = {
+      firstName: firstNameInput.value.trim(),
+      lastName: lastNameInput.value.trim(),
+      email: emailInput.value.trim(),
+      goal: goalSelect.value,
+      language: form.querySelector('input[name="language"]:checked')?.value,
+      pdf: fullUrl
+    };
+    sendDownloadBeacon(formData);
     fileViewer(`${lastSegment}.pdf`, fullUrl);
   });
 

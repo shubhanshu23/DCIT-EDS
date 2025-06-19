@@ -56,5 +56,18 @@ function sendCookieConsentBeacon(accepted = false) {
     });
 }
 
+function sendDownloadBeacon(details = {}) {
+    const metaOgUrl = document.querySelector('meta[property="og:url"]');
+    const page = metaOgUrl ? metaOgUrl.getAttribute('content') : window.location.href;
+    window.adobeDataLayer.push({
+        event: "download",
+        eventInfo: {
+            page: page,
+            timestamp: new Date().toISOString()
+        },
+        details: details
+    });
+}
 
-export { sendPageBeacon, sendAuthInfoBeacon, sendCookieConsentBeacon };
+
+export { sendPageBeacon, sendAuthInfoBeacon, sendCookieConsentBeacon, sendDownloadBeacon };
