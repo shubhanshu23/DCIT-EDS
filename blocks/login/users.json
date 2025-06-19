@@ -3,17 +3,26 @@
         {
             "username": "admin",
             "password": "dcit@1234",
-            "name": "Administrator"
+            "name": "Administrator",
+            "email": "admin@dcit.com",
+            "phone": "9878987675",
+            "location": "in"
         },
         {
             "username": "deloitte",
             "password": "dcit@1234",
-            "name": "Deloitte"
+            "name": "Deloitte",
+            "email": "deloitte@dcit.com",
+            "phone": "9234564738",
+            "location": "in"
         },
         {
             "username": "john",
             "password": "dcit@1234",
-            "name": "John Doe"
+            "name": "John Doe",
+            "email": "jdoe@dcit.com",
+            "phone": "2234364732",
+            "location": "us"
         }
     ]
 }

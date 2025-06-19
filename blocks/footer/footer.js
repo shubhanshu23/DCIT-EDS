@@ -1,5 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { sendPageBeacon } from '../../scripts/datalayer.js';
 
 /**
  * loads and decorates the footer
@@ -35,27 +36,6 @@ export default async function decorate(block) {
   const footer = document.createElement('div');
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
   block.append(footer);
-
-  const metadata = {};
-  Array.from(document.getElementsByTagName('meta')).forEach((meta) => {
-    const nameAttr = meta.getAttribute('name');
-    const propertyAttr = meta.getAttribute('property');
-    const httpEquivAttr = meta.getAttribute('http-equiv');
-    const content = meta.getAttribute('content');
-    const key = nameAttr || propertyAttr || httpEquivAttr;
-    if (key && content) {
-      // Use dot notation only if key is a valid JS identifier
-      if (/^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key)) {
-        metadata[key] = content;
-      } else {
-        metadata[key] = content; // fallback for keys like 'og:title'
-      }
-    }
-  });
-  metadata.title = document.title || 'Default Title';
-  window.adobeDataLayer.push({
-    page: metadata,
-  });
   waitForElement(block, '.consent-screen', (consentScreen) => {
     if (consentScreen && localStorage.getItem('dcit_ca') == null) {
       consentScreen.style.display = 'flex';
@@ -72,6 +52,7 @@ export default async function decorate(block) {
         localStorage.setItem('dcit_ca', 'false');
       });
     }
+    sendPageBeacon();
   });
 
   // Use observer to wait for .footer-nav

@@ -20,6 +20,12 @@
   margin-bottom: 1rem;
 }
 
+.login .login-success {
+  display: none;
+  color: green;
+  margin-bottom: 1rem;
+}
+
 .login form {
   display: flex;
   flex-direction: column;

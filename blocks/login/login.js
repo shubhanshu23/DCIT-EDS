@@ -1,3 +1,5 @@
+import { sendAuthInfoBeacon } from "../../scripts/datalayer.js";
+
 export default async function decorate(block) {
   const setCookie = (name, value, hours) => {
     const date = new Date();
@@ -7,15 +9,15 @@ export default async function decorate(block) {
   };
   const getUsernameFromCookie = () => {
     const cookies = document.cookie.split(';');
-    const userCookie = cookies.find((cookie) => cookie.trim().startsWith('dcit_name='));
+    const userCookie = cookies.find((cookie) => cookie.trim().startsWith('dcit_ud='));
     if (userCookie) {
       return atob(userCookie.split('=')[1]);
     }
     return null;
   };
   const checkLoginCookie = () => {
-    const username = getUsernameFromCookie();
-    if (username) {
+    const userDetails = getUsernameFromCookie();
+    if (userDetails) {
       window.location.href = '/';
       return true;
     }
@@ -46,6 +48,9 @@ export default async function decorate(block) {
   const errorDiv = document.createElement('div');
   errorDiv.className = 'login-error';
   block.append(errorDiv);
+  const successDiv = document.createElement('div');
+  successDiv.className = 'login-success';
+  block.append(successDiv);
   const form = document.createElement('form');
   form.setAttribute('method', 'POST');
   form.setAttribute('action', '#');
@@ -75,6 +80,10 @@ export default async function decorate(block) {
     errorDiv.style.display = 'block';
     userInput.focus();
   };
+  const showSuccess = (msg) => {
+    successDiv.textContent = msg;
+    successDiv.style.display = 'block';
+  };
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorDiv.style.display = 'none';
@@ -89,8 +98,13 @@ export default async function decorate(block) {
 
       const user = data.users.find((u) => u.username.toLowerCase() === username.toLowerCase());
       if (user && user.password === password) {
-        setCookie('dcit_name', btoa(user.name), 24);
-        window.location.href = '/';
+        delete user.password;
+        setCookie('dcit_ud', btoa(JSON.stringify(user)), 24);
+        sendAuthInfoBeacon(user, 'login');
+        showSuccess(`Welcome back, ${user.name}! Redirecting to home page...`);
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 2000);
       } else {
         showError('Invalid username or password.');
       }
