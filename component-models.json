@@ -388,13 +388,13 @@
       {
         "component": "container",
         "name": "filedownload",
-        "label": "Download",
+        "label": "File and Language",
         "collapsible": false,
         "fields": [
           {
             "component": "reference",
             "name": "pdf-viewer1",
-            "label": "PDF Viewer",
+            "label": "File Path",
             "valueType": "string"
           },
           {
@@ -417,14 +417,14 @@
       },
       {
         "component": "container",
-        "name": "basic1",
-        "label": "Basic",
+        "name": "filedownload2",
+        "label": "File and Language",
         "collapsible": false,
         "fields": [
           {
             "component": "reference",
             "name": "pdf-viewer2",
-            "label": "PDF Viewer",
+            "label": "File Path",
             "valueType": "string"
           },
           {
