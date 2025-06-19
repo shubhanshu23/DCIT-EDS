@@ -1,8 +1,5 @@
 export default function decorate(block) {
-  const src = block.dataset.src;
-  const alt = block.dataset.alt || '';
-  const link = block.dataset.link || '';
-
+  const { src, alt, link } = block.dataset;
   const picture = document.createElement('picture');
   const img = document.createElement('img');
   img.src = src;
