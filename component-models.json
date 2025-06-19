@@ -248,6 +248,10 @@
           {
             "name": "Cookie Consent Screen",
             "value": "consent-screen"
+          },
+          {
+            "name": "Webinar Section",
+            "value": "webinar-section"
           }
         ]
       }
@@ -5418,6 +5422,18 @@
   },
   {
     "id": "right-plan",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "button-text",
+        "label": "Button Text",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "webinar",
     "fields": [
       {
         "component": "text-input",

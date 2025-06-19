@@ -6,7 +6,7 @@ export default async function decorate(block) {
 
   block.innerHTML = '';
 
-  const sourceData = Array.from(originalPicture.querySelectorAll('source')).map(src => ({
+  const sourceData = Array.from(originalPicture.querySelectorAll('source')).map((src) => ({
     type: src.getAttribute('type'),
     srcset: src.getAttribute('srcset'),
     media: src.getAttribute('media') || null,
