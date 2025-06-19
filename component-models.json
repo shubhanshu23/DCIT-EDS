@@ -248,6 +248,10 @@
           {
             "name": "Cookie Consent Screen",
             "value": "consent-screen"
+          },
+          {
+            "name": "Webinar Section",
+            "value": "webinar-section"
           }
         ]
       }

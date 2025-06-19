@@ -32,7 +32,7 @@ export default async function decorate(block) {
 
   // Phone Number
   const phoneInput = document.createElement('input');
-  phoneInput.type = 'tel';
+  phoneInput.type = 'number';
   phoneInput.name = 'phone';
   phoneInput.placeholder = 'Phone Number*';
   phoneInput.required = true;
