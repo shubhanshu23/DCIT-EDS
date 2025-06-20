@@ -1,5 +1,5 @@
-import { getCookieConsentState, getCurrentPage } from "../../scripts/aem.js";
-import { sendFormBeacon } from "../../scripts/datalayer.js";
+import { getCookieConsentState, getCurrentPage } from '../../scripts/aem.js';
+import { sendFormBeacon } from '../../scripts/datalayer.js';
 import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
@@ -97,7 +97,7 @@ export default async function decorate(block) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = sessionStorage.getItem('quizInitiationData') ? JSON.parse(sessionStorage.getItem('quizInitiationData')) : null;
-    if(formData) {
+    if (formData) {
       formData.page = getCurrentPage();
       formData.timestamp = new Date().toISOString();
       formData.cookieConsentAccepted = getCookieConsentState();

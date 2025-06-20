@@ -1,6 +1,9 @@
 import { sendAuthInfoBeacon } from '../../scripts/datalayer.js';
+import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
+  const placeholders = await fetchPlaceholdersForLocale();
+
   const setCookie = (name, value, hours) => {
     const date = new Date();
     date.setTime(date.getTime() + hours * 60 * 60 * 1000);
@@ -56,7 +59,7 @@ export default async function decorate(block) {
   form.setAttribute('action', '#');
   const userLabel = document.createElement('label');
   userLabel.setAttribute('for', 'login-username');
-  userLabel.textContent = 'Username';
+  userLabel.textContent = placeholders.username;
   const userInput = document.createElement('input');
   userInput.type = 'text';
   userInput.id = 'login-username';
@@ -64,7 +67,7 @@ export default async function decorate(block) {
   userInput.required = true;
   const passLabel = document.createElement('label');
   passLabel.setAttribute('for', 'login-password');
-  passLabel.textContent = 'Password';
+  passLabel.textContent = placeholders.password;
   const passInput = document.createElement('input');
   passInput.type = 'password';
   passInput.id = 'login-password';
@@ -72,7 +75,7 @@ export default async function decorate(block) {
   passInput.required = true;
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
-  submitBtn.textContent = 'Log In';
+  submitBtn.textContent = placeholders.logIn;
   form.append(userLabel, userInput, passLabel, passInput, submitBtn);
   block.append(form);
   const showError = (msg) => {
@@ -101,15 +104,15 @@ export default async function decorate(block) {
         delete user.password;
         setCookie('dcit_ud', btoa(JSON.stringify(user)), 24);
         sendAuthInfoBeacon(user, 'login');
-        showSuccess(`Welcome back, ${user.name}! Redirecting to home page...`);
+        showSuccess(`${placeholders.welcomeBack}, ${user.name}! ${placeholders.loginRedirectMessage}`);
         setTimeout(() => {
           window.location.href = '/';
         }, 2000);
       } else {
-        showError('Invalid username or password.');
+        showError(placeholders.invalidLogin);
       }
     } catch (error) {
-      showError('An error occurred during login. Please try again.');
+      showError(placeholders.errorApiLogin);
     }
   });
 }

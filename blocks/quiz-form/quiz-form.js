@@ -1,5 +1,5 @@
-import { getCookieConsentState, getCurrentPage } from "../../scripts/aem.js";
-import { sendFormBeacon } from "../../scripts/datalayer.js";
+import { getCookieConsentState, getCurrentPage } from '../../scripts/aem.js';
+import { sendFormBeacon } from '../../scripts/datalayer.js';
 import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
@@ -193,7 +193,7 @@ export default async function decorate(block) {
       lastName: lastNameInput.value.trim(),
       email: emailInput.value.trim(),
       subscribeToNewsletter: subscribeInput.checked,
-      agreeToTerms: agreeInput.checked
+      agreeToTerms: agreeInput.checked,
     };
     sessionStorage.setItem('quizInitiationData', JSON.stringify(formData));
     sendFormBeacon(formData, 'quiz-initiation');

@@ -1,4 +1,4 @@
-import { getCookieConsentState } from "./aem.js";
+import { getCookieConsentState } from './aem.js';
 
 /* eslint-disable prefer-const */
 function sendPageBeacon() {
@@ -39,8 +39,8 @@ function sendAuthInfoBeacon(user = null, state = null) {
         eventType: state || 'n/a',
         timestamp: new Date().toISOString(),
         cookieConsentAccepted: getCookieConsentState(),
-        details
-      }
+        details,
+      },
     });
   }
 }
@@ -60,11 +60,11 @@ function sendCookieConsentBeacon(accepted = false) {
   });
 }
 
-function sendFormBeacon(eventInfo = {}, event= null) {
-  if(event) {
+function sendFormBeacon(eventInfo = {}, event = null) {
+  if (event) {
     window.adobeDataLayer.push({
       event,
-      eventInfo
+      eventInfo,
     });
   }
 }

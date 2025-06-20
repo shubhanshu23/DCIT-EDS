@@ -137,7 +137,7 @@ export default async function decorate(block) {
     const fullUrl = `${baseUrl}${selectedLang.path}.pdf`;
 
     const formData = {
-      page : getCurrentPage(),
+      page: getCurrentPage(),
       timestamp: new Date().toISOString(),
       cookieConsentAccepted: getCookieConsentState(),
       firstName: firstNameInput.value.trim(),
@@ -145,7 +145,7 @@ export default async function decorate(block) {
       email: emailInput.value.trim(),
       goal: goalSelect.value,
       language: form.querySelector('input[name="language"]:checked')?.parentElement?.innerText.trim(),
-      pdf: fullUrl
+      pdf: fullUrl,
     };
     sendFormBeacon(formData, 'download');
     fileViewer(`${lastSegment}.pdf`, fullUrl);

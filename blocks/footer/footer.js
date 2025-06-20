@@ -28,6 +28,7 @@ function waitForElement(parent, selector, callback) {
 export default async function decorate(block) {
   // load footer as fragment
   const footerMeta = getMetadata('locale');
+  // eslint-disable-next-line prefer-template
   const footerPath = (footerMeta ? '/' + footerMeta : '') + '/footer';
   const fragment = await loadFragment(footerPath);
 

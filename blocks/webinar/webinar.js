@@ -1,5 +1,5 @@
-import { getCookieConsentState, getCurrentPage } from "../../scripts/aem.js";
-import { sendFormBeacon } from "../../scripts/datalayer.js";
+import { getCookieConsentState, getCurrentPage } from '../../scripts/aem.js';
+import { sendFormBeacon } from '../../scripts/datalayer.js';
 
 export default async function decorate(block) {
   const cells = [...block.children];
@@ -98,14 +98,14 @@ export default async function decorate(block) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = {
-      page : getCurrentPage(),
+      page: getCurrentPage(),
       timestamp: new Date().toISOString(),
       cookieConsentAccepted: getCookieConsentState(),
       firstName: firstNameInput.value.trim(),
       lastName: lastNameInput.value.trim(),
       phone: phoneInput.value.trim(),
       email: emailInput.value.trim(),
-      preferredTimeSlot: timeSlotSelect.value.trim()
+      preferredTimeSlot: timeSlotSelect.value.trim(),
     };
     sendFormBeacon(formData, 'webinar-signup');
     showSuccess('Thank you for signing up for the webinar! We will contact you soon.');
