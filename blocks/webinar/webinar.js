@@ -86,5 +86,13 @@ export default async function decorate(block) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log('Webinar signup submitted!');
+    form.remove();
+    const confirmation = document.createElement('p');
+    confirmation.style.padding = '5rem';
+    confirmation.innerHTML = `
+      Thank you for signing up for the webinar!<br>
+      <strong>We've reserved your spot for the webinar on:</strong> <br>${timeSlotSelect.value}
+    `;
+    block.append(confirmation);
   });
 }
