@@ -4,7 +4,7 @@
     --border-color: #818a91;
     --form-error-color: #ff5f3f;
     --button-primary-color: #5F8DDA;
-    --button-secondary-color: #666;
+    --button-secondary-color: #17408b;
     --button-primary-hover-color: #035fe6;
     --form-font-size-m: 22px;
     --form-font-size-s: 18px;
@@ -15,7 +15,7 @@
     --form-field-horz-gap: 40px;
     --form-field-vert-gap: 20px;
     --form-invalid-border-color: #ff5f3f;
-    --form-input-padding: 0.75rem 0.6rem;
+    --form-input-padding: 0.6rem 0.6rem;
     --form-input-font-size: 1rem;
     --form-input-disable-color: #ebebe4;
     --form-input-border-size: 1px;
@@ -106,7 +106,7 @@ main .form > div:not(:first-child) {
 main .form form {
     display: grid;
     grid-template-columns: repeat(var(--form-columns), minmax(0, 1fr));
-    gap: var(--form-field-vert-gap) var(--form-field-horz-gap);
+    /* gap: var(--form-field-vert-gap) var(--form-field-horz-gap); */
 }
 
 main .form form fieldset {
@@ -517,7 +517,7 @@ main .form .button-wrapper button {
 }
 
 main .form .button-wrapper button:hover {
-    border: 3px solid var(--background-color-primary);
+    /* border: 3px solid var(--background-color-primary); */
     color: #fff;
     background-color: var(--button-secondary-color);
 }
@@ -768,9 +768,9 @@ main .form form .checkbox-group-wrapper.horizontal .field-description {
 
 main div.form-wrapper {
     background: white;
-    padding: 40px;
+    padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 4px 24px rgb(0 0 0 / 8%);
+    /* box-shadow: 0 4px 24px rgb(0 0 0 / 8%); */
 }
 
 /* Responsive adjustments for mobile */
