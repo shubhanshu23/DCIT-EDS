@@ -3,7 +3,9 @@
     "/content/dcit-insurance/hi/:/hi/",
     "/content/dcit-insurance/en/:/en/",
     "/content/dcit-insurance/configuration:/.helix/config.json",
-    "/content/dcit-insurance/metadata:/metadata.json"
+    "/content/dcit-insurance/metadata:/metadata.json",
+    "/content/dcit-insurance/en/placeholders:/en/placeholders.json",
+    "/content/dcit-insurance/hi/placeholders:/hi/placeholders.json"
   ],
   "includes": [
     "/content/dcit-insurance/"

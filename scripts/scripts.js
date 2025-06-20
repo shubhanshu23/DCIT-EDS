@@ -10,6 +10,7 @@ import {
   loadSection,
   loadSections,
   loadCSS,
+  fetchPlaceholders,
 } from './aem.js';
 
 /**
@@ -107,6 +108,23 @@ async function loadEager(doc) {
   } catch (e) {
     // do nothing
   }
+}
+
+/**
+ * Calls placeholders for a current document language
+ * @returns placeholders for the language
+ */
+export async function fetchPlaceholdersForLocale() {
+  const firstSegment = window.location.pathname.split('/')[1];
+  const langCode = firstSegment || document.documentElement.lang;
+  let placeholders = null;
+  if (!langCode) {
+    placeholders = await fetchPlaceholders();
+  } else {
+    placeholders = await fetchPlaceholders(`/${langCode.toLowerCase()}`);
+  }
+
+  return placeholders;
 }
 
 /**

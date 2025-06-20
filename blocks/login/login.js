@@ -1,4 +1,4 @@
-import { sendAuthInfoBeacon } from "../../scripts/datalayer.js";
+import { sendAuthInfoBeacon } from '../../scripts/datalayer.js';
 
 export default async function decorate(block) {
   const setCookie = (name, value, hours) => {

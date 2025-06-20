@@ -1,4 +1,5 @@
-import { sendDownloadBeacon } from "../../scripts/datalayer.js";
+import { sendDownloadBeacon } from '../../scripts/datalayer.js';
+import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
 
 const fileViewer = (filename, url) => {
   const modal = document.getElementById('pdfModal');
@@ -33,6 +34,8 @@ const fileViewer = (filename, url) => {
 };
 
 export default async function decorate(block) {
+  const placeholders = await fetchPlaceholdersForLocale();
+  console.log(placeholders, 'placeholders download');
   const LanguageOne = { path: '', lang: '' };
   const LanguageTwo = { path: '', lang: '' };
 
@@ -138,7 +141,7 @@ export default async function decorate(block) {
       email: emailInput.value.trim(),
       goal: goalSelect.value,
       language: form.querySelector('input[name="language"]:checked')?.value,
-      pdf: fullUrl
+      pdf: fullUrl,
     };
     sendDownloadBeacon(formData);
     fileViewer(`${lastSegment}.pdf`, fullUrl);
