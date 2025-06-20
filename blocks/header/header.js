@@ -1,6 +1,7 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { sendAuthInfoBeacon } from '../../scripts/datalayer.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -182,6 +183,7 @@ const fileLinkHandle = (filename, url, target) => {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
+  const placeholders = await fetchPlaceholdersForLocale();
   // load nav as fragment
   const navMeta = getMetadata('locale');
   // eslint-disable-next-line prefer-template
@@ -292,7 +294,7 @@ export default async function decorate(block) {
       const userDetails = getUsernameFromCookie();
       const unameDiv = document.createElement('div');
       unameDiv.className = 'nav-username';
-      unameDiv.innerHTML = userDetails ? `Welcome, <b>${JSON.parse(userDetails).name}</b>` : '';
+      unameDiv.innerHTML = userDetails ? `${placeholders.welcome}, <b>${JSON.parse(userDetails).name}</b>` : '';
       navTools.prepend(unameDiv);
       const links = navTools.querySelectorAll('li a');
       if (links.length > 0) {
@@ -318,7 +320,7 @@ export default async function decorate(block) {
       document.cookie = 'dcit_ud=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
       sendAuthInfoBeacon(JSON.parse(user), 'logout');
       setTimeout(() => {
-        window.location.href = '/';
+        window.location.href = '/en/';
       }, 1000);
     });
   }

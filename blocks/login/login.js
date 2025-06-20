@@ -106,7 +106,7 @@ export default async function decorate(block) {
         sendAuthInfoBeacon(user, 'login');
         showSuccess(`${placeholders.welcomeBack}, ${user.name}! ${placeholders.loginRedirectMessage}`);
         setTimeout(() => {
-          window.location.href = '/';
+          window.location.href = window.location.href.replace(/\/login$/, '/');
         }, 2000);
       } else {
         showError(placeholders.invalidLogin);

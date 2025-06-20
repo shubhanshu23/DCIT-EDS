@@ -1,7 +1,9 @@
 import { getCookieConsentState, getCurrentPage } from '../../scripts/aem.js';
 import { sendFormBeacon } from '../../scripts/datalayer.js';
+import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
+  const placeholders = await fetchPlaceholdersForLocale();
   const cells = [...block.children];
 
   if (cells[0]) {
@@ -23,21 +25,21 @@ export default async function decorate(block) {
   const firstNameInput = document.createElement('input');
   firstNameInput.type = 'text';
   firstNameInput.name = 'firstName';
-  firstNameInput.placeholder = 'First Name*';
+  firstNameInput.placeholder = `${placeholders.firstname}*`;
   firstNameInput.required = true;
 
   // Last Name
   const lastNameInput = document.createElement('input');
   lastNameInput.type = 'text';
   lastNameInput.name = 'lastName';
-  lastNameInput.placeholder = 'Last Name*';
+  lastNameInput.placeholder = `${placeholders.lastname}*`;
   lastNameInput.required = true;
 
   // Phone Number
   const phoneInput = document.createElement('input');
   phoneInput.type = 'number';
   phoneInput.name = 'phone';
-  phoneInput.placeholder = 'Phone Number*';
+  phoneInput.placeholder = `${placeholders.phone}*`;
   phoneInput.required = true;
   phoneInput.pattern = '[0-9]{10,15}';
 
@@ -45,7 +47,7 @@ export default async function decorate(block) {
   const emailInput = document.createElement('input');
   emailInput.type = 'email';
   emailInput.name = 'email';
-  emailInput.placeholder = 'Email Address*';
+  emailInput.placeholder = `${placeholders.email}*`;
   emailInput.required = true;
 
   // Preferred Time Slot
@@ -60,7 +62,7 @@ export default async function decorate(block) {
   ];
   const defaultOption = document.createElement('option');
   defaultOption.value = '';
-  defaultOption.textContent = 'Select Preferred Time Slot*';
+  defaultOption.textContent =`${placeholders.preferredTimeSlot}*`;
   defaultOption.disabled = true;
   defaultOption.selected = true;
   timeSlotSelect.appendChild(defaultOption);
@@ -74,7 +76,7 @@ export default async function decorate(block) {
   // Submit Button
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
-  submitBtn.textContent = 'Sign Up';
+  submitBtn.textContent = `${placeholders.signUp}*`;
 
   form.append(
     firstNameInput,
@@ -104,8 +106,7 @@ export default async function decorate(block) {
     const confirmation = document.createElement('p');
     confirmation.style.padding = '5rem';
     confirmation.innerHTML = `
-      Thank you for signing up for the webinar!<br>
-      <strong>We've reserved your spot for the webinar on:</strong> <br>${timeSlotSelect.value}
+      ${placeholders.webinarThankYou} ${timeSlotSelect.value}
       `;
     block.append(confirmation);
   });
