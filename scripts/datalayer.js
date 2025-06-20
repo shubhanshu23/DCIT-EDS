@@ -57,18 +57,14 @@ function sendCookieConsentBeacon(accepted = false) {
   });
 }
 
-function sendDownloadBeacon(details = {}) {
-  const metaOgUrl = document.querySelector('meta[property="og:url"]');
-  const page = metaOgUrl ? metaOgUrl.getAttribute('content') : window.location.href;
-  window.adobeDataLayer.push({
-    event: 'download',
-    eventInfo: {
-      page,
-      timestamp: new Date().toISOString(),
-    },
-    details,
-  });
+function sendFormBeacon(eventInfo = {}, event= null) {
+  if(event) {
+    window.adobeDataLayer.push({
+      event,
+      eventInfo
+    });
+  }
 }
 
 // eslint-disable-next-line object-curly-newline
-export { sendPageBeacon, sendAuthInfoBeacon, sendCookieConsentBeacon, sendDownloadBeacon };
+export { sendPageBeacon, sendAuthInfoBeacon, sendCookieConsentBeacon, sendFormBeacon };

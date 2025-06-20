@@ -1,3 +1,6 @@
+import { getCookieConsentState, getCurrentPage } from "../../scripts/aem.js";
+import { sendFormBeacon } from "../../scripts/datalayer.js";
+
 export default async function decorate(block) {
   const cells = [...block.children];
   document.querySelector('.quiz-form').classList.add('active');
@@ -75,10 +78,10 @@ export default async function decorate(block) {
   subscribeDiv.className = 'form-checkbox';
   const subscribeInput = document.createElement('input');
   subscribeInput.type = 'checkbox';
-  subscribeInput.id = 'subscribe';
-  subscribeInput.name = 'subscribe';
+  subscribeInput.id = 'subscribeToNewsletter';
+  subscribeInput.name = 'subscribeToNewsletter';
   const subscribeLabel = document.createElement('label');
-  subscribeLabel.setAttribute('for', 'subscribe');
+  subscribeLabel.setAttribute('for', 'subscribeToNewsletter');
   subscribeLabel.textContent = 'Subscribe to newsletter';
   subscribeDiv.append(subscribeInput, subscribeLabel);
 
@@ -87,11 +90,11 @@ export default async function decorate(block) {
   agreeDiv.className = 'form-checkbox';
   const agreeInput = document.createElement('input');
   agreeInput.type = 'checkbox';
-  agreeInput.id = 'agree';
-  agreeInput.name = 'agree';
+  agreeInput.id = 'agreeToTerms';
+  agreeInput.name = 'agreeToTerms';
   agreeInput.required = true;
   const agreeLabel = document.createElement('label');
-  agreeLabel.setAttribute('for', 'agree');
+  agreeLabel.setAttribute('for', 'agreeToTerms');
   agreeLabel.innerHTML = 'I agree to the processing of personal data*';
   agreeDiv.append(agreeInput, agreeLabel);
 
@@ -180,6 +183,18 @@ export default async function decorate(block) {
   const questions = Array.from(document.querySelectorAll('.quiz-question'));
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    const formData = {
+      page: getCurrentPage(),
+      timestamp: new Date().toISOString(),
+      cookieConsentAccepted: getCookieConsentState(),
+      firstName: firstNameInput.value.trim(),
+      lastName: lastNameInput.value.trim(),
+      email: emailInput.value.trim(),
+      subscribeToNewsletter: subscribeInput.checked,
+      agreeToTerms: agreeInput.checked
+    };
+    sessionStorage.setItem('quizInitiationData', JSON.stringify(formData));
+    sendFormBeacon(formData, 'quiz-initiation');
     form.parentElement.classList.remove('active');
     if (questions[0]) questions[0].classList.add('active');
     console.log('Quiz started!');

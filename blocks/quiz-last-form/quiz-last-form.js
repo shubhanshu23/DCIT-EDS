@@ -1,3 +1,6 @@
+import { getCookieConsentState, getCurrentPage } from "../../scripts/aem.js";
+import { sendFormBeacon } from "../../scripts/datalayer.js";
+
 export default async function decorate(block) {
   const form = document.createElement('form');
   form.setAttribute('method', 'POST');
@@ -91,6 +94,18 @@ export default async function decorate(block) {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    const formData = sessionStorage.getItem('quizInitiationData') ? JSON.parse(sessionStorage.getItem('quizInitiationData')) : null;
+    if(formData) {
+      formData.page = getCurrentPage();
+      formData.timestamp = new Date().toISOString();
+      formData.cookieConsentAccepted = getCookieConsentState();
+      formData.jobTitle = jobInput.value.trim();
+      formData.phone = phoneInput.value.trim();
+      formData.birthday = `${daySelect.value}-${monthSelect.value}-${yearSelect.value}`;
+      formData.address = addressInput.value.trim();
+    }
+    sessionStorage.removeItem('quizInitiationData');
+    sendFormBeacon(formData, 'quiz-submission');
     form.parentElement.classList.remove('active');
     form.parentElement.parentElement.nextSibling.children[0].classList.add('active');
     console.log('Form last submitted!');

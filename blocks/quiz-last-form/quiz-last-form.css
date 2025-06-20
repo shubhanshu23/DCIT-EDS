@@ -9,12 +9,13 @@
 .quiz-last-form form input[type="text"] {
   width: 100%;
   max-width: 400px;
-  padding: 18px 16px;
-  border: 2px solid #b5c6e3;
-  border-radius: 7px;
-  font-size: 1.1rem;
+  border: 1.5px solid #cfd8dc;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 1rem;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border 0.2s;
+  background: #f8fafc;
 }
 
 .quiz-last-form form input[type="text"]:focus {
@@ -39,16 +40,16 @@
 .birthday-fields select {
   width: 32%;
   max-width: 130px;
-  padding: 12px 10px;
-  border: 2px solid #b5c6e3;
-  border-radius: 7px;
-  font-size: 1.1rem;
-  outline: none;
   margin-right: 8px;
   margin-bottom: 0;
-  transition: border-color 0.2s;
-  background: #fff;
   appearance: none;
+  border: 1.5px solid #cfd8dc;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  background: #f8fafc;
 }
 
 .birthday-fields select:focus {
@@ -77,16 +78,16 @@
 }
 
 .quiz-last-form form button[type="submit"] {
-  margin-top: 18px;
-  width: 200px;
-  padding: 14px 0;
   background: #1976d2;
   color: #fff;
-  font-size: 1.15rem;
   border: none;
-  border-radius: 7px;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 5px;
   cursor: pointer;
-  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgb(44 62 80 / 10%);
 }
 
 .quiz-last-form form button[type="submit"]:hover {

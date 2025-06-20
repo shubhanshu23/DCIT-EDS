@@ -724,6 +724,16 @@ async function loadSections(element) {
   }
 }
 
+function getCurrentPage() {
+  const metaOgUrl = document.querySelector('meta[property="og:url"]');
+  return metaOgUrl ? metaOgUrl.getAttribute('content') : window.location.href;
+}
+
+function getCookieConsentState() {
+  const dcit_ca = localStorage.getItem('dcit_ca');
+  return dcit_ca === 'true';
+}
+
 init();
 
 export {
@@ -751,4 +761,6 @@ export {
   waitForFirstImage,
   wrapTextNodes,
   fetchPlaceholders,
+  getCurrentPage,
+  getCookieConsentState
 };

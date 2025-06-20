@@ -59,16 +59,16 @@
 }
 
 .plans-section a.button.primary {
-  background-color: #1076a8;
+  background-color: #1976d2;
   color: #fff;
   border-radius: 6.25em;
   font-weight: 600;
-  border: 1px solid #1076a8;
+  border: 1px solid #1976d2;
   padding: 5px 15px;
 }
 
 .plans-section .columns a.button.primary:hover {
-  background-color: #0d5e86;
+  background-color: #1976d2;
   opacity: 1;
   text-decoration: none;
 }

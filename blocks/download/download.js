@@ -1,4 +1,5 @@
-import { sendDownloadBeacon } from '../../scripts/datalayer.js';
+import { getCookieConsentState, getCurrentPage } from '../../scripts/aem.js';
+import { sendFormBeacon } from '../../scripts/datalayer.js';
 import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
 
 const fileViewer = (filename, url) => {
@@ -41,6 +42,7 @@ export default async function decorate(block) {
 
   const items = Array.from(block.querySelectorAll(':scope > div'));
   if (items.length >= 4) {
+    console.log(items[1]);
     LanguageOne.path = items[0].querySelector('a')?.getAttribute('title') || '';
     LanguageOne.lang = items[1].textContent.trim();
     LanguageTwo.path = items[2].querySelector('a')?.getAttribute('title') || '';
@@ -136,14 +138,17 @@ export default async function decorate(block) {
     const fullUrl = `${baseUrl}${selectedLang.path}.pdf`;
 
     const formData = {
+      page : getCurrentPage(),
+      timestamp: new Date().toISOString(),
+      cookieConsentAccepted: getCookieConsentState(),
       firstName: firstNameInput.value.trim(),
       lastName: lastNameInput.value.trim(),
       email: emailInput.value.trim(),
       goal: goalSelect.value,
-      language: form.querySelector('input[name="language"]:checked')?.value,
-      pdf: fullUrl,
+      language: form.querySelector('input[name="language"]:checked')?.parentElement?.innerText.trim(),
+      pdf: fullUrl
     };
-    sendDownloadBeacon(formData);
+    sendFormBeacon(formData, 'download');
     fileViewer(`${lastSegment}.pdf`, fullUrl);
   });
 
