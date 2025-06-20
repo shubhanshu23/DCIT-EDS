@@ -106,6 +106,7 @@ main .form > div:not(:first-child) {
 main .form form {
     display: grid;
     grid-template-columns: repeat(var(--form-columns), minmax(0, 1fr));
+
     /* gap: var(--form-field-vert-gap) var(--form-field-horz-gap); */
 }
 
@@ -770,6 +771,7 @@ main div.form-wrapper {
     background: white;
     padding: 20px;
     border-radius: 12px;
+    
     /* box-shadow: 0 4px 24px rgb(0 0 0 / 8%); */
 }
 
