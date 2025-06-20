@@ -1,4 +1,5 @@
 import { getMetadata } from '../../scripts/aem.js';
+import { sendAuthInfoBeacon } from '../../scripts/datalayer.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
@@ -6,7 +7,7 @@ const isDesktop = window.matchMedia('(min-width: 900px)');
 
 const getUsernameFromCookie = () => {
   const cookies = document.cookie.split(';');
-  const userCookie = cookies.find((cookie) => cookie.trim().startsWith('dcit_name='));
+  const userCookie = cookies.find((cookie) => cookie.trim().startsWith('dcit_ud='));
   if (userCookie) {
     return atob(userCookie.split('=')[1]);
   }
@@ -14,8 +15,8 @@ const getUsernameFromCookie = () => {
 };
 
 const checkLoginCookie = () => {
-  const username = getUsernameFromCookie();
-  return !!username;
+  const userDetails = getUsernameFromCookie();
+  return !!userDetails;
 };
 
 // function closeOnEscape(e) {
@@ -182,8 +183,9 @@ const fileLinkHandle = (filename, url, target) => {
  */
 export default async function decorate(block) {
   // load nav as fragment
-  const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+  const navMeta = getMetadata('locale');
+  // eslint-disable-next-line prefer-template
+  const navPath = (navMeta ? '/' + navMeta : '') + '/nav';
   const fragment = await loadFragment(navPath);
 
   // decorate nav DOM
@@ -287,10 +289,10 @@ export default async function decorate(block) {
   if (checkLoginCookie()) {
     const navTools = nav.querySelector('.nav-tools');
     if (navTools) {
-      const uname = getUsernameFromCookie();
+      const userDetails = getUsernameFromCookie();
       const unameDiv = document.createElement('div');
       unameDiv.className = 'nav-username';
-      unameDiv.innerHTML = uname ? `Welcome, <b>${uname}</b>` : '';
+      unameDiv.innerHTML = userDetails ? `Welcome, <b>${JSON.parse(userDetails).name}</b>` : '';
       navTools.prepend(unameDiv);
       const links = navTools.querySelectorAll('li a');
       if (links.length > 0) {
@@ -312,8 +314,12 @@ export default async function decorate(block) {
   if (logoutBtn) {
     logoutBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      document.cookie = 'dcit_name=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
-      window.location.href = '/';
+      const user = getUsernameFromCookie();
+      document.cookie = 'dcit_ud=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+      sendAuthInfoBeacon(JSON.parse(user), 'logout');
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1000);
     });
   }
 }

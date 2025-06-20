@@ -1,3 +1,7 @@
+import { getCookieConsentState, getCurrentPage } from '../../scripts/aem.js';
+import { sendFormBeacon } from '../../scripts/datalayer.js';
+import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
+
 const fileViewer = (filename, url) => {
   const modal = document.getElementById('pdfModal');
   const closeBtn = document.querySelector('.close');
@@ -31,11 +35,13 @@ const fileViewer = (filename, url) => {
 };
 
 export default async function decorate(block) {
+  const placeholders = await fetchPlaceholdersForLocale();
   const LanguageOne = { path: '', lang: '' };
   const LanguageTwo = { path: '', lang: '' };
 
   const items = Array.from(block.querySelectorAll(':scope > div'));
   if (items.length >= 4) {
+    console.log(items[1]);
     LanguageOne.path = items[0].querySelector('a')?.getAttribute('title') || '';
     LanguageOne.lang = items[1].textContent.trim();
     LanguageTwo.path = items[2].querySelector('a')?.getAttribute('title') || '';
@@ -56,16 +62,16 @@ export default async function decorate(block) {
     return input;
   };
 
-  const firstNameInput = createInput('text', 'firstName', 'First Name*');
-  const lastNameInput = createInput('text', 'lastName', 'Last Name*');
-  const emailInput = createInput('email', 'email', 'Email*');
+  const firstNameInput = createInput('text', 'firstName', `${placeholders.firstname}*`);
+  const lastNameInput = createInput('text', 'lastName', `${placeholders.lastname}*`);
+  const emailInput = createInput('email', 'email', `${placeholders.email}*`);
 
   // Goal Dropdown
   const goalContainer = document.createElement('div');
   goalContainer.className = 'goal-container';
 
   const goalLabel = document.createElement('label');
-  goalLabel.textContent = 'Select Your Goal:';
+  goalLabel.textContent = `${placeholders.selectGoal}:`;
   goalLabel.setAttribute('for', 'goalSelect');
 
   const goalSelect = document.createElement('select');
@@ -75,7 +81,7 @@ export default async function decorate(block) {
 
   const goals = ['Buy a car', 'Buy a house', "Plan for child's education"];
   const defaultOption = document.createElement('option');
-  defaultOption.textContent = 'Choose a goal';
+  defaultOption.textContent = `${placeholders.selectGoal}`;
   defaultOption.disabled = true;
   defaultOption.selected = true;
   goalSelect.appendChild(defaultOption);
@@ -93,7 +99,7 @@ export default async function decorate(block) {
   const langContainer = document.createElement('div');
   langContainer.className = 'language-selection';
   const langLabel = document.createElement('p');
-  langLabel.textContent = 'Select Language:';
+  langLabel.textContent = `${placeholders.selectLanguage}:`;
   langContainer.appendChild(langLabel);
 
   const createRadio = (val, labelText, checked = false) => {
@@ -115,7 +121,7 @@ export default async function decorate(block) {
   // Submit Button
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
-  submitBtn.textContent = 'Submit';
+  submitBtn.textContent = `${placeholders.submit}`;
 
   // Append all to form
   [firstNameInput, lastNameInput, emailInput, goalContainer, langContainer, document.createElement('br'), submitBtn]
@@ -129,6 +135,19 @@ export default async function decorate(block) {
     const baseUrl = 'https://publish-p156702-e1664409.adobeaemcloud.com';
     const lastSegment = selectedLang.path.split('/').pop();
     const fullUrl = `${baseUrl}${selectedLang.path}.pdf`;
+
+    const formData = {
+      page: getCurrentPage(),
+      timestamp: new Date().toISOString(),
+      cookieConsentAccepted: getCookieConsentState(),
+      firstName: firstNameInput.value.trim(),
+      lastName: lastNameInput.value.trim(),
+      email: emailInput.value.trim(),
+      goal: goalSelect.value,
+      language: form.querySelector('input[name="language"]:checked')?.parentElement?.innerText.trim(),
+      pdf: fullUrl,
+    };
+    sendFormBeacon(formData, 'download');
     fileViewer(`${lastSegment}.pdf`, fullUrl);
   });
 

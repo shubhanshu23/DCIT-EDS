@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /*
  * Copyright 2025 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -583,6 +584,44 @@ async function loadBlock(block) {
 }
 
 /**
+ * Gets placeholders object.
+ * @param {string} [prefix] Location of placeholders
+ * @returns {object} Window placeholders object
+ */
+// eslint-disable-next-line import/prefer-default-export
+async function fetchPlaceholders(prefix = 'default') {
+  window.placeholders = window.placeholders || {};
+  if (!window.placeholders[prefix]) {
+    window.placeholders[prefix] = new Promise((resolve) => {
+      // fetch(`${prefix === 'default' ? '' : ''}${prefix}-placeholders.json`)
+      fetch(`${prefix === 'default' ? '' : ''}${prefix}-placeholders.json`)
+        .then((resp) => {
+          if (resp.ok) {
+            return resp.json();
+          }
+          return {};
+        })
+        .then((json) => {
+          const placeholders = {};
+          json.data
+            .filter((placeholder) => placeholder.Key)
+            .forEach((placeholder) => {
+              placeholders[toCamelCase(placeholder.Key)] = placeholder.Text;
+            });
+          window.placeholders[prefix] = placeholders;
+          resolve(window.placeholders[prefix]);
+        })
+        .catch(() => {
+          // error loading placeholders
+          window.placeholders[prefix] = {};
+          resolve(window.placeholders[prefix]);
+        });
+    });
+  }
+  return window.placeholders[`${prefix}`];
+}
+
+/**
  * Decorates a block.
  * @param {Element} block The block element
  */
@@ -687,6 +726,16 @@ async function loadSections(element) {
   }
 }
 
+function getCurrentPage() {
+  const metaOgUrl = document.querySelector('meta[property="og:url"]');
+  return metaOgUrl ? metaOgUrl.getAttribute('content') : window.location.href;
+}
+
+function getCookieConsentState() {
+  const dcit_ca = localStorage.getItem('dcit_ca');
+  return dcit_ca === 'true';
+}
+
 init();
 
 export {
@@ -713,4 +762,7 @@ export {
   toClassName,
   waitForFirstImage,
   wrapTextNodes,
+  fetchPlaceholders,
+  getCurrentPage,
+  getCookieConsentState,
 };

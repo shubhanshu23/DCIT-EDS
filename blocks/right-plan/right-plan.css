@@ -9,19 +9,19 @@
   width: 55%;
   padding-right: 28px;
   font-size: 1.05rem;
-  color: #1a237e;
+  color: #17408b;
 }
 
 .right-plan-left h2 {
   font-size: 2rem;
   margin-bottom: 10px;
-  color: #1a237e;
+  color: #17408b;
 }
 
 .right-plan-left h3 {
   font-size: 1.1rem;
   margin-top: 18px;
-  color: #2563eb;
+  color: #17408b;
 }
 
 .right-plan-left ul {
@@ -43,13 +43,13 @@
   padding: 12px 16px;
   text-align: center;
   min-width: 90px;
-  color: #1a237e;
+  color: #17408b;
   font-size: 0.98rem;
 }
 
 .right-plan-stats strong {
   font-size: 1.2rem;
-  color: #2563eb;
+  color: #1976d2;
 }
 
 .right-plan-right {
@@ -95,7 +95,7 @@
   background: #f0f6ff;
   border: none;
   border-radius: 20px;
-  color: #1a237e;
+  color: #17408b;
   font-weight: 600;
   padding: 10px 24px;
   cursor: pointer;
@@ -103,7 +103,7 @@
 
 .tab-btn.active,
 .tab-btn:hover {
-  background: #2563eb;
+  background: #1976d2;
   color: #fff;
 }
 
@@ -115,7 +115,7 @@
 }
 
 .tab-form h3 {
-  color: #1a237e;
+  color: #17408b;
   font-size: 1.2rem;
   font-weight: 700;
 }
@@ -142,12 +142,12 @@
 }
 
 .tab-form input:focus {
-  border-color: #2563eb;
+  border-color: #1976d2;
   background: #fff;
 }
 
 .tab-form button[type="submit"] {
-  background: #2563eb;
+  background: #1976d2;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -160,7 +160,7 @@
 }
 
 .tab-form button[type="submit"]:hover {
-  background: #1a237e;
+  background: #17408b;
 }
 
 /* Responsive */
@@ -182,12 +182,12 @@
   align-items: center;
   gap: 8px;
   font-size: 1.1rem;
-  color: #2563eb;
+  color: #1976d2;
   font-weight: 500;
 }
 
 .gender-label input[type="radio"] {
-  accent-color: #2563eb;
+  accent-color: #1976d2;
   width: 20px;
   height: 20px;
 }
@@ -200,7 +200,7 @@
 }
 
 .tabs-subtext .highlight {
-  color: #2563eb;
+  color: #1976d2;
   font-weight: 700;
 }
 

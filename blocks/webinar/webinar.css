@@ -22,11 +22,14 @@ input[type="number"]::-webkit-outer-spin-button {
 .webinar-section form select {
   width: 100%;
   max-width: 400px;
-  padding: 18px 16px;
-  border: 2px solid #b5c6e3;
-  border-radius: 7px;
-  font-size: 1.1rem;
+  border: 1.5px solid #cfd8dc;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 1rem;
   outline: none;
+  transition: border 0.2s;
+  background: #f8fafc;
+  margin-bottom: 1rem;
 }
 
 .webinar-section form input[type="text"]:focus,
@@ -36,14 +39,17 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .webinar-section form button[type="submit"] {
-  width: 200px;
-  padding: 14px 0;
   background: #1976d2;
   color: #fff;
-  font-size: 1.15rem;
   border: none;
-  border-radius: 7px;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 5px;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgb(44 62 80 / 10%);
+  width: 200px;
 }
 
 .webinar-section p{
@@ -53,4 +59,12 @@ input[type="number"]::-webkit-outer-spin-button {
     margin-bottom: 8px;
     font-weight: 700;
     margin-top: 30px;
+    padding-top: 24px;
+}
+
+.webinar-section .webinar-success {
+  display: none;
+  color: green;
+  margin-top: 1rem;
+  text-align: center;
 }

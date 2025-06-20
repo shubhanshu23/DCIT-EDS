@@ -1,3 +1,6 @@
+import { getCookieConsentState, getCurrentPage } from '../../scripts/aem.js';
+import { sendFormBeacon } from '../../scripts/datalayer.js';
+
 export default async function decorate(block) {
   const cells = [...block.children];
 
@@ -83,16 +86,36 @@ export default async function decorate(block) {
   );
   block.append(form);
 
+  const successDiv = document.createElement('div');
+  successDiv.className = 'webinar-success';
+  block.append(successDiv);
+
+  const showSuccess = (msg) => {
+    successDiv.textContent = msg;
+    successDiv.style.display = 'block';
+  };
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log('Webinar signup submitted!');
+    const formData = {
+        page: getCurrentPage(),
+        timestamp: new Date().toISOString(),
+        cookieConsentAccepted: getCookieConsentState(),
+        firstName: firstNameInput.value.trim(),
+      lastName: lastNameInput.value.trim(),
+      phone: phoneInput.value.trim(),
+      email: emailInput.value.trim(),
+      preferredTimeSlot: timeSlotSelect.value.trim(),
+    };
+    sendFormBeacon(formData, 'webinar-signup');
     form.remove();
     const confirmation = document.createElement('p');
     confirmation.style.padding = '5rem';
     confirmation.innerHTML = `
       Thank you for signing up for the webinar!<br>
       <strong>We've reserved your spot for the webinar on:</strong> <br>${timeSlotSelect.value}
-    `;
+      `;
     block.append(confirmation);
-  });
+});
 }

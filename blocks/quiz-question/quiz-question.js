@@ -1,5 +1,9 @@
+import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
+
 let lastScore = 0;
 export default async function decorate(block) {
+  const placeholders = await fetchPlaceholdersForLocale();
+
   const cells = [...block.children];
 
   // Extract question and options from cells
@@ -64,7 +68,7 @@ export default async function decorate(block) {
   // Create "Go back" link
   const goBackLink = document.createElement('a');
   goBackLink.href = '#';
-  goBackLink.textContent = 'Go back';
+  goBackLink.textContent = `${placeholders.goBack}`;
   goBackLink.className = 'go-back';
   goBackLink.addEventListener('click', (e) => {
     e.preventDefault();
