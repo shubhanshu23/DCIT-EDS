@@ -1,0 +1,21 @@
+.webinar-section .form.block{
+    padding: 20px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgb(0 0 0 / 8%);
+    max-width: 40%;;
+    margin: 0 auto;
+}
+
+.webinar-section .button-wrapper {
+    text-align: center;
+}
+
+.webinar-section button[type="submit"] {
+    background: #1976d2;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.webinar-section button[type="submit"]:hover {
+    background-color: #17408b;
+}
