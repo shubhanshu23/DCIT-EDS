@@ -86,17 +86,9 @@ export default async function decorate(block) {
   );
   block.append(form);
 
-  const successDiv = document.createElement('div');
-  successDiv.className = 'webinar-success';
-  block.append(successDiv);
-
-  const showSuccess = (msg) => {
-    successDiv.textContent = msg;
-    successDiv.style.display = 'block';
-  };
-
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    console.log('Webinar signup submitted!');
     const formData = {
       page: getCurrentPage(),
       timestamp: new Date().toISOString(),
@@ -108,6 +100,13 @@ export default async function decorate(block) {
       preferredTimeSlot: timeSlotSelect.value.trim(),
     };
     sendFormBeacon(formData, 'webinar-signup');
-    showSuccess('Thank you for signing up for the webinar! We will contact you soon.');
+    form.remove();
+    const confirmation = document.createElement('p');
+    confirmation.style.padding = '5rem';
+    confirmation.innerHTML = `
+      Thank you for signing up for the webinar!<br>
+      <strong>We've reserved your spot for the webinar on:</strong> <br>${timeSlotSelect.value}
+      `;
+    block.append(confirmation);
   });
 }
