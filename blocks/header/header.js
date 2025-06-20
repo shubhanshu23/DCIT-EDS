@@ -184,6 +184,7 @@ const fileLinkHandle = (filename, url, target) => {
 export default async function decorate(block) {
   // load nav as fragment
   const navMeta = getMetadata('locale');
+  // eslint-disable-next-line prefer-template
   const navPath = (navMeta ? '/' + navMeta : '') + '/nav';
   const fragment = await loadFragment(navPath);
 
