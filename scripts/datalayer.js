@@ -1,3 +1,5 @@
+import { getCookieConsentState } from "./aem.js";
+
 /* eslint-disable prefer-const */
 function sendPageBeacon() {
   const metadata = {};
@@ -36,8 +38,9 @@ function sendAuthInfoBeacon(user = null, state = null) {
       eventInfo: {
         eventType: state || 'n/a',
         timestamp: new Date().toISOString(),
-      },
-      user: details,
+        cookieConsentAccepted: getCookieConsentState(),
+        details
+      }
     });
   }
 }
