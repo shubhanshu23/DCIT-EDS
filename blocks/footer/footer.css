@@ -240,3 +240,36 @@
   grid-gap: 0;
   }
 }
+
+.language-switcher {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #000;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.language-switcher a {
+  color: #fff;
+}
+
+.language-switcher p.button-container {
+  display: none;
+}
+
+.language-switcher p.button-container.active {
+  display: block;
+}
+
+.language-switcher p.button-container.active > a:hover {
+  text-decoration: underline;
+}
+
+.language-switcher > .default-content-wrapper > p:first-child {
+  cursor: pointer;
+  line-height: 0;
+}

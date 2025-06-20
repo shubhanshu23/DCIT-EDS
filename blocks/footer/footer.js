@@ -58,6 +58,34 @@ export default async function decorate(block) {
     sendPageBeacon();
   });
 
+  waitForElement(block, '.language-switcher', (languageSwitcher) => {
+    if (languageSwitcher) {
+      const expander = languageSwitcher.querySelector('.default-content-wrapper > p > span.icon.icon-language');
+      expander?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const wrapper = languageSwitcher.querySelectorAll('p.button-container');
+        wrapper?.forEach(wrap => {
+          wrap.classList.toggle('active');
+        });
+      });
+
+      const languages = languageSwitcher.querySelectorAll('.default-content-wrapper > p.button-container > a');
+      languages.forEach((lang) => {
+        lang.addEventListener('click', (e) => {
+          e.preventDefault();
+          const currentPath = window.location.pathname;
+          const langHref = lang.getAttribute('href');
+          if (langHref && !currentPath.startsWith(langHref)) {
+            const newUrl = window.location.origin + langHref + window.location.pathname.substring(4) + window.location.search + window.location.hash;
+            window.location.href = newUrl;
+          } else {
+            window.location.reload();
+          }
+        });
+      });
+    }
+  });
+
   // Use observer to wait for .footer-nav
   waitForElement(block, '.footer-nav .default-content-wrapper li span.icon', (liIcon) => {
     const wrapper = liIcon.closest('.default-content-wrapper');
