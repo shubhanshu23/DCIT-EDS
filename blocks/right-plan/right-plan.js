@@ -1,58 +1,61 @@
-export default function decorate(block) {
+import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
+
+export default async function decorate(block) {
+  const placeholders = await fetchPlaceholdersForLocale();
   const leftContent = document.createElement('div');
   leftContent.className = 'right-plan-left';
   leftContent.innerHTML = `
-    <h2>Life Insurance</h2>
-    <p>Life is unpredictable, and while we all hope for the best, being prepared is essential. Life insurance is a financial safety net that protects your loved ones in your absence. It helps your family manage expenses and maintain stability during difficult times.</p>
-    <h3>Understanding Life Insurance: Definition and Meaning</h3>
+    <h2>${placeholders.planLeftTitle}</h2>
+    <p>${placeholders.planLeftDesc}</p>
+    <h3>${placeholders.planLeftSubTitle}</h3>
     <ul>
-      <li>Life insurance is a contract between a policyholder and an insurance company where the insurer pays a set amount to the nominee if the policyholder dies during the policy term, in return for regular premium payments.</li>
-      <li>Some plans also offer survival or maturity benefits, critical illness coverage, and tax benefits, making life insurance a smart tool for protection and long-term financial planning.</li>
+      <li>${placeholders.planLeftDescListOne}</li>
+      <li>${placeholders.planLeftDescListTwo}</li>
     </ul>
     <div class="right-plan-stats">
-      <div><strong>4.8 Rated</strong><br><span>Policies Sold</span></div>
-      <div><strong>5.3 Crore</strong><br><span>Registered Consumer</span></div>
-      <div><strong>10.5 Crore</strong><br><span>Insurance Partners</span></div>
+      <div><strong>${placeholders.planLeftPolicyRated}</strong><br><span>${placeholders.policiesSold}</span></div>
+      <div><strong>${placeholders.planLeftRegisteredCount}</strong><br><span>${placeholders.registeredConsumer}</span></div>
+      <div><strong>${placeholders.planLeftPartnerCount}</strong><br><span>${placeholders.insurancePartners}</span></div>
     </div>
   `;
   const lifeForm = document.createElement('form');
   lifeForm.className = 'tab-form life-form';
   lifeForm.innerHTML = `
-    <p class="tabs-subtext">Protect your family today and get <b>₹1 Crore <span class="highlight">@487/month</span></b></p>
+    <p class="tabs-subtext"> ${placeholders.lifeFormTitle} <b>₹1 Crore <span class="highlight">@487/month</span></b></p>
     <div class="gender-group">
       <label class="gender-label">
         <input type="radio" name="gender" value="male" required>
-        <span>Male</span>
+        <span>${placeholders.male}</span>
       </label>
       <label class="gender-label">
         <input type="radio" name="gender" value="female" required>
-        <span>Female</span>
+        <span>${placeholders.female}</span>
       </label>
     </div>
-    <input type="text" name="name" placeholder="Name" required>
-    <input type="number" name="age" placeholder="Age" required>
-    <input type="number" name="phone" placeholder="Phone Number" required>
-    <button type="submit">Calculate Premium</button>
+    <input type="text" name="name" placeholder="${placeholders.name}" required>
+    <input type="number" name="age" placeholder="${placeholders.age}" required>
+    <input type="number" name="phone" placeholder="${placeholders.phone}" required>
+    <button type="submit">${placeholders.calculatePremium}</button>
   `;
 
   const healthForm = document.createElement('form');
   healthForm.className = 'tab-form health-form';
   healthForm.innerHTML = `
-    <p class="tabs-subtext">Get 20 Lakh Surgery Cover</p>
+    <p class="tabs-subtext">${placeholders.healthFormTitle}</p>
     <div class="gender-group">
       <label class="gender-label">
         <input type="radio" name="gender" value="male" required>
-        <span>Male</span>
+        <span>${placeholders.male}</span>
       </label>
       <label class="gender-label">
         <input type="radio" name="gender" value="female" required>
-        <span>Female</span>
+        <span>${placeholders.female}</span>
       </label>
     </div>
-    <input type="text" name="name" placeholder="Name" required>
-    <input type="number" name="age" placeholder="Age" required>
-    <input type="number" name="phone" placeholder="Phone Number" required>
-    <button type="submit">Calculate Premium</button>
+    <input type="text" name="name" placeholder="${placeholders.name}" required>
+    <input type="number" name="age" placeholder="${placeholders.age}" required>
+    <input type="number" name="phone" placeholder="${placeholders.phone}" required>
+    <button type="submit">${placeholders.calculatePremium}</button>
   `;
 
   // Attach premium logic to both forms
@@ -61,7 +64,7 @@ export default function decorate(block) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const premium = Math.floor(Math.random() * 800) + 400;
-      btn.textContent = `Premium: ₹${premium}`;
+      btn.textContent = `${placeholders.premium}: ₹${premium}`;
       btn.classList.add('flip-btn-animate');
       btn.disabled = true;
       setTimeout(() => btn.classList.remove('flip-btn-animate'), 1000);
@@ -70,7 +73,7 @@ export default function decorate(block) {
     // Listen for any input change to reset the button
     form.querySelectorAll('input').forEach((input) => {
       input.addEventListener('input', () => {
-        btn.textContent = 'Calculate Premium';
+        btn.textContent = `${placeholders.calculatePremium}`;
         btn.disabled = false;
       });
     });
@@ -81,8 +84,8 @@ export default function decorate(block) {
   tabsHeader.className = 'tabs-header';
 
   const tabBtns = [
-    { label: 'Life Insurance', form: lifeForm },
-    { label: 'Health Insurance', form: healthForm },
+    { label: `${placeholders.lifeInsurance}`, form: lifeForm },
+    { label: `${placeholders.healthInsurance}`, form: healthForm },
   ];
 
   const tabContent = document.createElement('div');

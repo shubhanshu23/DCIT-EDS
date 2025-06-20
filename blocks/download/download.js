@@ -35,7 +35,6 @@ const fileViewer = (filename, url) => {
 
 export default async function decorate(block) {
   const placeholders = await fetchPlaceholdersForLocale();
-  console.log(placeholders, 'placeholders download');
   const LanguageOne = { path: '', lang: '' };
   const LanguageTwo = { path: '', lang: '' };
 
@@ -61,16 +60,16 @@ export default async function decorate(block) {
     return input;
   };
 
-  const firstNameInput = createInput('text', 'firstName', 'First Name*');
-  const lastNameInput = createInput('text', 'lastName', 'Last Name*');
-  const emailInput = createInput('email', 'email', 'Email*');
+  const firstNameInput = createInput('text', 'firstName', `${placeholders.firstname}*`);
+  const lastNameInput = createInput('text', 'lastName', `${placeholders.lastname}*`);
+  const emailInput = createInput('email', 'email', `${placeholders.email}*`);
 
   // Goal Dropdown
   const goalContainer = document.createElement('div');
   goalContainer.className = 'goal-container';
 
   const goalLabel = document.createElement('label');
-  goalLabel.textContent = 'Select Your Goal:';
+  goalLabel.textContent = `${placeholders.selectGoal}:`;
   goalLabel.setAttribute('for', 'goalSelect');
 
   const goalSelect = document.createElement('select');
@@ -80,7 +79,7 @@ export default async function decorate(block) {
 
   const goals = ['Buy a car', 'Buy a house', "Plan for child's education"];
   const defaultOption = document.createElement('option');
-  defaultOption.textContent = 'Choose a goal';
+  defaultOption.textContent = `${placeholders.selectGoal}`;
   defaultOption.disabled = true;
   defaultOption.selected = true;
   goalSelect.appendChild(defaultOption);
@@ -98,7 +97,7 @@ export default async function decorate(block) {
   const langContainer = document.createElement('div');
   langContainer.className = 'language-selection';
   const langLabel = document.createElement('p');
-  langLabel.textContent = 'Select Language:';
+  langLabel.textContent = `${placeholders.selectLanguage}:`;
   langContainer.appendChild(langLabel);
 
   const createRadio = (val, labelText, checked = false) => {
@@ -120,7 +119,7 @@ export default async function decorate(block) {
   // Submit Button
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
-  submitBtn.textContent = 'Submit';
+  submitBtn.textContent = `${placeholders.submit}`;
 
   // Append all to form
   [firstNameInput, lastNameInput, emailInput, goalContainer, langContainer, document.createElement('br'), submitBtn]

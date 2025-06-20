@@ -1,4 +1,7 @@
+import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
+
 export default async function decorate(block) {
+  const placeholders = await fetchPlaceholdersForLocale();
   const form = document.createElement('form');
   form.setAttribute('method', 'POST');
   form.setAttribute('action', '#');
@@ -7,14 +10,14 @@ export default async function decorate(block) {
   const jobInput = document.createElement('input');
   jobInput.type = 'text';
   jobInput.name = 'jobTitle';
-  jobInput.placeholder = 'Job title*';
+  jobInput.placeholder = `${placeholders.jobTitle}*`;
   jobInput.required = true;
 
   // Phone
   const phoneInput = document.createElement('input');
   phoneInput.type = 'text';
   phoneInput.name = 'phone';
-  phoneInput.placeholder = 'Phone*';
+  phoneInput.placeholder = `${placeholders.phone}*`;
   phoneInput.required = true;
 
   // Birthday
@@ -25,7 +28,7 @@ export default async function decorate(block) {
   yearSelect.name = 'birthYear';
   yearSelect.required = true;
   const yearOption = document.createElement('option');
-  yearOption.textContent = 'Year';
+  yearOption.textContent = `${placeholders.year}*`;
   yearOption.value = '';
   yearSelect.appendChild(yearOption);
   for (let y = new Date().getFullYear(); y >= 1920; y -= 1) {
@@ -39,7 +42,7 @@ export default async function decorate(block) {
   monthSelect.name = 'birthMonth';
   monthSelect.required = true;
   const monthOption = document.createElement('option');
-  monthOption.textContent = 'Month';
+  monthOption.textContent = `${placeholders.month}*`;
   monthOption.value = '';
   monthSelect.appendChild(monthOption);
   for (let m = 1; m <= 12; m += 1) {
@@ -53,7 +56,7 @@ export default async function decorate(block) {
   daySelect.name = 'birthDay';
   daySelect.required = true;
   const dayOption = document.createElement('option');
-  dayOption.textContent = 'Day';
+  dayOption.textContent = `${placeholders.day}*`;
   dayOption.value = '';
   daySelect.appendChild(dayOption);
   for (let d = 1; d <= 31; d += 1) {
@@ -64,7 +67,7 @@ export default async function decorate(block) {
   }
 
   const birthdayLabel = document.createElement('label');
-  birthdayLabel.textContent = 'Birthday*';
+  birthdayLabel.textContent = `${placeholders.birthday}*`;
 
   birthdayDiv.append(birthdayLabel, yearSelect, monthSelect, daySelect);
 
@@ -72,13 +75,13 @@ export default async function decorate(block) {
   const addressInput = document.createElement('input');
   addressInput.type = 'text';
   addressInput.name = 'streetAddress';
-  addressInput.placeholder = 'Street address*';
+  addressInput.placeholder = `${placeholders.streetAddress}*`;
   addressInput.required = true;
 
   // See Result button
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
-  submitBtn.textContent = 'See Result';
+  submitBtn.textContent = `${placeholders.seeResult}`;
 
   form.append(
     jobInput,

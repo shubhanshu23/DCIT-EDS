@@ -1,4 +1,7 @@
+import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
+
 export default async function decorate(block) {
+  const placeholders = await fetchPlaceholdersForLocale();
   const cells = [...block.children];
   document.querySelector('.quiz-form').classList.add('active');
 
@@ -21,21 +24,21 @@ export default async function decorate(block) {
   const firstNameInput = document.createElement('input');
   firstNameInput.type = 'text';
   firstNameInput.name = 'firstName';
-  firstNameInput.placeholder = 'First Name*';
+  firstNameInput.placeholder = `${placeholders.firstname}*`;
   firstNameInput.required = true;
 
   // Last Name
   const lastNameInput = document.createElement('input');
   lastNameInput.type = 'text';
   lastNameInput.name = 'lastName';
-  lastNameInput.placeholder = 'Last Name*';
+  lastNameInput.placeholder = `${placeholders.lastname}*`;
   lastNameInput.required = true;
 
   // Email
   const emailInput = document.createElement('input');
   emailInput.type = 'email';
   emailInput.name = 'email';
-  emailInput.placeholder = 'Email*';
+  emailInput.placeholder = `${placeholders.email}*`;
   emailInput.required = true;
 
   const otpWrapper = document.createElement('div');
@@ -43,7 +46,7 @@ export default async function decorate(block) {
 
   const getOtpBtn = document.createElement('button');
   getOtpBtn.type = 'button';
-  getOtpBtn.textContent = 'Send OTP to Email';
+  getOtpBtn.textContent = `${placeholders.sendOtpBtn}*`;
   getOtpBtn.className = 'get-otp-btn';
   getOtpBtn.disabled = true;
 
@@ -79,7 +82,7 @@ export default async function decorate(block) {
   subscribeInput.name = 'subscribe';
   const subscribeLabel = document.createElement('label');
   subscribeLabel.setAttribute('for', 'subscribe');
-  subscribeLabel.textContent = 'Subscribe to newsletter';
+  subscribeLabel.textContent = `${placeholders.subscribeNewsletters}`;
   subscribeDiv.append(subscribeInput, subscribeLabel);
 
   // Agree to processing personal data
@@ -92,13 +95,13 @@ export default async function decorate(block) {
   agreeInput.required = true;
   const agreeLabel = document.createElement('label');
   agreeLabel.setAttribute('for', 'agree');
-  agreeLabel.innerHTML = 'I agree to the processing of personal data*';
+  agreeLabel.innerHTML = `${placeholders.agreePersonaldata}`;
   agreeDiv.append(agreeInput, agreeLabel);
 
   // Start Quiz button
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
-  submitBtn.textContent = 'Start Quiz';
+  submitBtn.textContent = `${placeholders.startQuiz}`;
   submitBtn.disabled = true;
   submitBtn.classList.add('disabled-btn');
 
