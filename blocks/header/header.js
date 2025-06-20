@@ -297,7 +297,7 @@ export default async function decorate(block) {
       const links = navTools.querySelectorAll('li a');
       if (links.length > 0) {
         links.forEach((link) => {
-          if (link?.getAttribute('href') === '/login') {
+          if (link?.getAttribute('href').includes('/login')) {
             link.remove();
           }
         });
