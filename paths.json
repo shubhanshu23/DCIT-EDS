@@ -1,8 +1,6 @@
 {
   "mappings": [
     "/content/dcit-insurance/:/",
-    "/content/dcit-insurance/en/:/en/",
-    "/content/dcit-insurance/hi/:/hi/",
     "/content/dcit-insurance/configuration:/.helix/config.json",
     "/content/dcit-insurance/metadata:/metadata.json",
     "/content/dcit-insurance/placeholders-global:/placeholders-global.json",
