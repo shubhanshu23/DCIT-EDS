@@ -1,4 +1,7 @@
+import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
+
 export default async function decorate(block) {
+  const placeholders = await fetchPlaceholdersForLocale();
   const cells = [...block.children];
 
   const title = cells[0].textContent.trim();
@@ -16,7 +19,7 @@ export default async function decorate(block) {
   // Score
   const scoreElem = document.createElement('div');
   scoreElem.className = 'quiz-score-value';
-  scoreElem.innerHTML = '<span>Score: <b class="quiz-last-score--event"></b></span>';
+  scoreElem.innerHTML = `<span>${placeholders.score}: <b class="quiz-last-score--event"></b></span>`;
 
   // Button
   const button = document.createElement('button');

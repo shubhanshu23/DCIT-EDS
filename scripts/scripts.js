@@ -115,8 +115,8 @@ async function loadEager(doc) {
  * @returns placeholders for the language
  */
 export async function fetchPlaceholdersForLocale() {
-  const firstSegment = window.location.pathname.split('/')[1];
-  const langCode = firstSegment || document.documentElement.lang;
+  const locale = document.querySelector('meta[name="locale"]')?.content;
+  const langCode = locale || document.documentElement.lang;
   let placeholders = null;
   if (!langCode) {
     placeholders = await fetchPlaceholders();
