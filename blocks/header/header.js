@@ -183,8 +183,8 @@ const fileLinkHandle = (filename, url, target) => {
  */
 export default async function decorate(block) {
   // load nav as fragment
-  const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+  const navMeta = getMetadata('locale');
+  const navPath = (navMeta ? '/' + navMeta : '') + '/nav';
   const fragment = await loadFragment(navPath);
 
   // decorate nav DOM
