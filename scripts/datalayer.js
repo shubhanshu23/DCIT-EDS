@@ -23,7 +23,7 @@ function sendPageBeacon() {
   window.dcitDataLayer.push({
     event: 'page-load',
     eventInfo: {
-      page: metadata,
+      page: metadata
     },
   });
 }
@@ -46,11 +46,11 @@ function sendAuthInfoBeacon(user = null, state = null) {
         details,
       },
     });
-    console.log(window.dcitDataLayer);
+    console.log(window.dcitDataLayer)
   }
 }
 
-function sendCookieConsentBeacon(accepted = 'false') {
+function sendCookieConsentBeacon(accepted = "false") {
   const metaOgUrl = document.querySelector('meta[property="og:url"]');
   const page = metaOgUrl ? metaOgUrl.getAttribute('content') : window.location.href;
   window.dcitDataLayer.push({
