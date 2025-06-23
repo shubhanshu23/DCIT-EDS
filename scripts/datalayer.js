@@ -43,6 +43,7 @@ function sendAuthInfoBeacon(user = null, state = null) {
         details,
       },
     });
+    console.log(window.dcitDataLayer)
   }
 }
 
@@ -67,6 +68,7 @@ function sendFormBeacon(eventInfo = {}, event = null) {
       event,
       eventInfo,
     });
+    console.log(window.dcitDataLayer);
   }
 }
 
