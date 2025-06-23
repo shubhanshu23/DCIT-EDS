@@ -2,7 +2,7 @@ import { getCookieConsentState } from './aem.js';
 
 /* eslint-disable prefer-const */
 function sendPageBeacon() {
-  //window.adobeDataLayer = window.adobeDataLayer || [];
+  window.adobeDataLayer = window.adobeDataLayer || [];
   const metadata = {};
   Array.from(document.getElementsByTagName('meta')).forEach((meta) => {
     const nameAttr = meta.getAttribute('name');
@@ -37,7 +37,6 @@ function sendAuthInfoBeacon(user = null, state = null) {
       }
     });
     details.state = state || 'n/a';
-    window.adobeDataLayer = window.adobeDataLayer || [];
     window.adobeDataLayer.push({
       event: 'user-authentication',
       eventInfo: {
@@ -53,7 +52,6 @@ function sendAuthInfoBeacon(user = null, state = null) {
 function sendCookieConsentBeacon(accepted = "false") {
   const metaOgUrl = document.querySelector('meta[property="og:url"]');
   const page = metaOgUrl ? metaOgUrl.getAttribute('content') : window.location.href;
-  window.adobeDataLayer = window.adobeDataLayer || [];
   window.adobeDataLayer.push({
     event: 'cookie-consent',
     eventInfo: {
@@ -68,7 +66,6 @@ function sendCookieConsentBeacon(accepted = "false") {
 
 function sendFormBeacon(eventInfo = {}, event = null) {
   if (event) {
-    window.adobeDataLayer = window.adobeDataLayer || [];
     window.adobeDataLayer.push({
       event,
       eventInfo,
