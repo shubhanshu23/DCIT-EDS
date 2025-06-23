@@ -732,8 +732,7 @@ function getCurrentPage() {
 }
 
 function getCookieConsentState() {
-  const dcit_ca = localStorage.getItem('dcit_ca');
-  return dcit_ca === 'true';
+  return localStorage.getItem('dcit_ca');
 }
 
 init();

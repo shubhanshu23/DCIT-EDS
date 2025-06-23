@@ -192,8 +192,8 @@ export default async function decorate(block) {
       firstName: firstNameInput.value.trim(),
       lastName: lastNameInput.value.trim(),
       email: emailInput.value.trim(),
-      subscribeToNewsletter: subscribeInput.checked,
-      agreeToTerms: agreeInput.checked,
+      subscribeToNewsletter: `${subscribeInput.checked}`,
+      agreeToTerms: `${agreeInput.checked}`,
     };
     sessionStorage.setItem('quizInitiationData', JSON.stringify(formData));
     sendFormBeacon(formData, 'quiz-initiation');

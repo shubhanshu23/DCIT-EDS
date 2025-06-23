@@ -21,7 +21,10 @@ function sendPageBeacon() {
   });
   metadata.title = document.title || 'Default Title';
   window.dcitDataLayer.push({
-    page: metadata,
+    event: 'page-load',
+    eventInfo: {
+      page: metadata
+    },
   });
 }
 
@@ -47,7 +50,7 @@ function sendAuthInfoBeacon(user = null, state = null) {
   }
 }
 
-function sendCookieConsentBeacon(accepted = false) {
+function sendCookieConsentBeacon(accepted = "false") {
   const metaOgUrl = document.querySelector('meta[property="og:url"]');
   const page = metaOgUrl ? metaOgUrl.getAttribute('content') : window.location.href;
   window.dcitDataLayer.push({
@@ -57,7 +60,7 @@ function sendCookieConsentBeacon(accepted = false) {
       timestamp: new Date().toISOString(),
     },
     consent: {
-      accepted: !!accepted,
+      accepted,
     },
   });
 }
