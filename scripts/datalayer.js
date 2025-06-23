@@ -49,7 +49,7 @@ function sendAuthInfoBeacon(user = null, state = null) {
   }
 }
 
-function sendCookieConsentBeacon(accepted = "false") {
+function sendCookieConsentBeacon(accepted = 'false') {
   const metaOgUrl = document.querySelector('meta[property="og:url"]');
   const page = metaOgUrl ? metaOgUrl.getAttribute('content') : window.location.href;
   window.adobeDataLayer.push({
@@ -68,7 +68,7 @@ function sendFormBeacon(details = {}, event = null) {
   if (event) {
     window.adobeDataLayer.push({
       event,
-      details
+      details,
     });
   }
 }
