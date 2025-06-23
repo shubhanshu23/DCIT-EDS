@@ -2,7 +2,7 @@ import { getCookieConsentState } from './aem.js';
 
 /* eslint-disable prefer-const */
 function sendPageBeacon() {
-  window.dcitDataLayer = window.dcitDataLayer || [];
+  window.adobeDataLayer = window.adobeDataLayer || [];
   const metadata = {};
   Array.from(document.getElementsByTagName('meta')).forEach((meta) => {
     const nameAttr = meta.getAttribute('name');
@@ -20,12 +20,12 @@ function sendPageBeacon() {
     }
   });
   metadata.title = document.title || 'Default Title';
-  window.dcitDataLayer.push({
-    event: 'page-load',
-    eventInfo: {
-      page: metadata
-    },
-  });
+  // window.adobeDataLayer.push({
+  //   event: 'page-load',
+  //   eventInfo: {
+  //     page: metadata
+  //   },
+  // });
 }
 
 function sendAuthInfoBeacon(user = null, state = null) {
@@ -37,7 +37,8 @@ function sendAuthInfoBeacon(user = null, state = null) {
       }
     });
     details.state = state || 'n/a';
-    window.dcitDataLayer.push({
+    window.adobeDataLayer = window.adobeDataLayer || [];
+    window.adobeDataLayer.push({
       event: 'user-authentication',
       eventInfo: {
         eventType: state || 'n/a',
@@ -46,14 +47,14 @@ function sendAuthInfoBeacon(user = null, state = null) {
         details,
       },
     });
-    console.log(window.dcitDataLayer)
   }
 }
 
 function sendCookieConsentBeacon(accepted = "false") {
   const metaOgUrl = document.querySelector('meta[property="og:url"]');
   const page = metaOgUrl ? metaOgUrl.getAttribute('content') : window.location.href;
-  window.dcitDataLayer.push({
+  window.adobeDataLayer = window.adobeDataLayer || [];
+  window.adobeDataLayer.push({
     event: 'cookie-consent',
     eventInfo: {
       page,
@@ -67,11 +68,11 @@ function sendCookieConsentBeacon(accepted = "false") {
 
 function sendFormBeacon(eventInfo = {}, event = null) {
   if (event) {
-    window.dcitDataLayer.push({
+    window.adobeDataLayer = window.adobeDataLayer || [];
+    window.adobeDataLayer.push({
       event,
       eventInfo,
     });
-    console.log(window.dcitDataLayer);
   }
 }
 
