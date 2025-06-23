@@ -216,6 +216,21 @@
           }
         },
         {
+          "title": "survey Form",
+          "id": "form",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "fd/franklin/components/form/v1/form",
+                "template": {
+                  "fieldType": "form",
+                  "fd:version": "2.1"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Button",
           "id": "form-button",
           "plugins": {
