@@ -29,7 +29,6 @@ input[type="number"]::-webkit-outer-spin-button {
   outline: none;
   transition: border 0.2s;
   background: #f8fafc;
-  margin-bottom: 1rem;
 }
 
 .webinar-section form input[type="text"]:focus,
@@ -67,4 +66,64 @@ input[type="number"]::-webkit-outer-spin-button {
   color: green;
   margin-top: 1rem;
   text-align: center;
+}
+
+.webinar-section .disabled-btn {
+  background: #ccc !important;
+  color: #888 !important;
+  cursor: not-allowed !important;
+  border: 1px solid #bbb !important;
+  opacity: 0.7;
+}
+
+.webinar-section .otp-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  font-size: 1rem;
+}
+
+.webinar-section .otp-fields-container {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.webinar-section .otp-digit {
+  width: 48px;
+  height: 48px;
+  text-align: center;
+}
+
+.webinar-section .otp-digit:focus {
+  border: 2px solid #1976d2;
+  outline: none;
+}
+
+.webinar-section .get-otp-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 7px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 5px 0;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgb(44 62 80 / 10%);
+}
+
+.webinar-section .get-otp-btn:disabled {
+  background: #ccc !important;
+  color: #888 !important;
+  cursor: not-allowed !important;
+  border: 1px solid #bbb !important;
+  opacity: 0.7;
+}
+
+.webinar-section .get-otp-btn:hover:not(:disabled) {
+  background: #145ea8;
 }
