@@ -39,7 +39,7 @@ function sendAuthInfoBeacon(user = null, state = null) {
     details.state = state || 'n/a';
     window.adobeDataLayer.push({
       event: 'user-authentication',
-      eventInfo: {
+      details: {
         eventType: state || 'n/a',
         timestamp: new Date().toISOString(),
         cookieConsentAccepted: getCookieConsentState(),
@@ -54,7 +54,7 @@ function sendCookieConsentBeacon(accepted = "false") {
   const page = metaOgUrl ? metaOgUrl.getAttribute('content') : window.location.href;
   window.adobeDataLayer.push({
     event: 'cookie-consent',
-    eventInfo: {
+    details: {
       page,
       timestamp: new Date().toISOString(),
     },
@@ -64,11 +64,11 @@ function sendCookieConsentBeacon(accepted = "false") {
   });
 }
 
-function sendFormBeacon(eventInfo = {}, event = null) {
+function sendFormBeacon(details = {}, event = null) {
   if (event) {
     window.adobeDataLayer.push({
       event,
-      eventInfo,
+      details
     });
   }
 }
