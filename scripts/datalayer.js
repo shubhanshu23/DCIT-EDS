@@ -2,7 +2,7 @@ import { getCookieConsentState } from './aem.js';
 
 /* eslint-disable prefer-const */
 function sendPageBeacon() {
-  window.dcitDataLayer = window.dcitDataLayer || [];
+  window.adobeDataLayer = window.adobeDataLayer || [];
   const metadata = {};
   Array.from(document.getElementsByTagName('meta')).forEach((meta) => {
     const nameAttr = meta.getAttribute('name');
@@ -20,12 +20,12 @@ function sendPageBeacon() {
     }
   });
   metadata.title = document.title || 'Default Title';
-  window.dcitDataLayer.push({
-    event: 'page-load',
-    eventInfo: {
-      page: metadata
-    },
-  });
+  // window.adobeDataLayer.push({
+  //   event: 'page-load',
+  //   eventInfo: {
+  //     page: metadata
+  //   },
+  // });
 }
 
 function sendAuthInfoBeacon(user = null, state = null) {
@@ -37,25 +37,24 @@ function sendAuthInfoBeacon(user = null, state = null) {
       }
     });
     details.state = state || 'n/a';
-    window.dcitDataLayer.push({
+    window.adobeDataLayer.push({
       event: 'user-authentication',
-      eventInfo: {
+      details: {
         eventType: state || 'n/a',
         timestamp: new Date().toISOString(),
         cookieConsentAccepted: getCookieConsentState(),
         details,
       },
     });
-    console.log(window.dcitDataLayer)
   }
 }
 
 function sendCookieConsentBeacon(accepted = "false") {
   const metaOgUrl = document.querySelector('meta[property="og:url"]');
   const page = metaOgUrl ? metaOgUrl.getAttribute('content') : window.location.href;
-  window.dcitDataLayer.push({
+  window.adobeDataLayer.push({
     event: 'cookie-consent',
-    eventInfo: {
+    details: {
       page,
       timestamp: new Date().toISOString(),
     },
@@ -65,13 +64,12 @@ function sendCookieConsentBeacon(accepted = "false") {
   });
 }
 
-function sendFormBeacon(eventInfo = {}, event = null) {
+function sendFormBeacon(details = {}, event = null) {
   if (event) {
-    window.dcitDataLayer.push({
+    window.adobeDataLayer.push({
       event,
-      eventInfo,
+      details
     });
-    console.log(window.dcitDataLayer);
   }
 }
 
