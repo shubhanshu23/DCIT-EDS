@@ -2,7 +2,7 @@ import { getCookieConsentState } from './aem.js';
 
 /* eslint-disable prefer-const */
 function sendPageBeacon() {
-  window.adobeDataLayer = window.adobeDataLayer || [];
+  //window.adobeDataLayer = window.adobeDataLayer || [];
   const metadata = {};
   Array.from(document.getElementsByTagName('meta')).forEach((meta) => {
     const nameAttr = meta.getAttribute('name');
