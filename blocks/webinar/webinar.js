@@ -49,7 +49,7 @@ export default async function decorate(block) {
 
   const getOtpBtn = document.createElement('button');
   getOtpBtn.type = 'button';
-  getOtpBtn.textContent = `${placeholders.sendOtpBtn}`;
+  getOtpBtn.textContent = `Send otp to mobile`;
   getOtpBtn.className = 'get-otp-btn';
   getOtpBtn.disabled = true;
 
