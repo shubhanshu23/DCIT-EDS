@@ -2,6 +2,7 @@ import { getCookieConsentState } from './aem.js';
 
 /* eslint-disable prefer-const */
 function sendPageBeacon() {
+  window.dcitDataLayer = window.dcitDataLayer || [];
   const metadata = {};
   Array.from(document.getElementsByTagName('meta')).forEach((meta) => {
     const nameAttr = meta.getAttribute('name');
@@ -19,7 +20,7 @@ function sendPageBeacon() {
     }
   });
   metadata.title = document.title || 'Default Title';
-  window.adobeDataLayer.push({
+  window.dcitDataLayer.push({
     page: metadata,
   });
 }
@@ -33,7 +34,7 @@ function sendAuthInfoBeacon(user = null, state = null) {
       }
     });
     details.state = state || 'n/a';
-    window.adobeDataLayer.push({
+    window.dcitDataLayer.push({
       event: 'user-authentication',
       eventInfo: {
         eventType: state || 'n/a',
@@ -48,7 +49,7 @@ function sendAuthInfoBeacon(user = null, state = null) {
 function sendCookieConsentBeacon(accepted = false) {
   const metaOgUrl = document.querySelector('meta[property="og:url"]');
   const page = metaOgUrl ? metaOgUrl.getAttribute('content') : window.location.href;
-  window.adobeDataLayer.push({
+  window.dcitDataLayer.push({
     event: 'cookie-consent',
     eventInfo: {
       page,
@@ -62,7 +63,7 @@ function sendCookieConsentBeacon(accepted = false) {
 
 function sendFormBeacon(eventInfo = {}, event = null) {
   if (event) {
-    window.adobeDataLayer.push({
+    window.dcitDataLayer.push({
       event,
       eventInfo,
     });
