@@ -1,15 +1,17 @@
 import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
+import decorateRating from '../rating/rating.js';
 
 function createOtpFormSection(placeholders) {
   const form = document.createElement('form');
   form.setAttribute('method', 'POST');
   form.setAttribute('action', '#');
 
-  // Suggestion textarea
+  // Suggestion textarea (hidden initially)
   const suggestion = document.createElement('textarea');
   suggestion.name = 'suggestion';
   suggestion.placeholder = `${placeholders.suggestion}*`;
   suggestion.required = true;
+  suggestion.style.display = 'none';
 
   // Email input
   const emailInput = document.createElement('input');
@@ -18,11 +20,10 @@ function createOtpFormSection(placeholders) {
   emailInput.placeholder = `${placeholders.email}*`;
   emailInput.required = true;
 
-  // OTP wrapper
+  // OTP setup
   const otpWrapper = document.createElement('div');
   otpWrapper.className = 'otp-wrapper';
 
-  // Send OTP button
   const getOtpBtn = document.createElement('button');
   getOtpBtn.type = 'button';
   getOtpBtn.textContent = `${placeholders.sendOtpBtn}`;
@@ -32,30 +33,42 @@ function createOtpFormSection(placeholders) {
   const otpFieldsContainer = document.createElement('div');
   otpFieldsContainer.className = 'otp-fields-container';
 
-  const OTP_LENGTH = 4;
   const otpInputs = [];
-  for (let i = 0; i < OTP_LENGTH; i += 1) {
+  for (let i = 0; i < 4; i += 1) {
     const otpDigit = document.createElement('input');
     otpDigit.type = 'text';
     otpDigit.inputMode = 'numeric';
     otpDigit.maxLength = 1;
     otpDigit.className = 'otp-digit';
-    otpDigit.style.display = 'none'; // hidden initially
+    otpDigit.style.display = 'none';
     otpInputs.push(otpDigit);
     otpFieldsContainer.appendChild(otpDigit);
   }
 
-  // Success icon (tick)
   const otpSuccessIcon = document.createElement('span');
   otpSuccessIcon.textContent = '✔';
   otpSuccessIcon.className = 'otp-success-icon';
   otpSuccessIcon.style.display = 'none';
   otpSuccessIcon.style.color = 'green';
   otpSuccessIcon.style.marginLeft = '10px';
-  otpSuccessIcon.style.fontSize = '18px';
-  otpSuccessIcon.style.verticalAlign = 'middle';
 
   otpWrapper.append(getOtpBtn, otpFieldsContainer, otpSuccessIcon);
+
+  // Rating section setup (hidden initially)
+  const ratingFieldDiv = document.createElement('div');
+  const ratingInput = document.createElement('input');
+  ratingInput.type = 'number';
+  ratingInput.name = 'rating';
+  ratingInput.max = 5;
+  ratingInput.required = true;
+  ratingFieldDiv.appendChild(ratingInput);
+  const ratingWrapper = decorateRating(ratingFieldDiv, { enabled: true, readOnly: false });
+  ratingWrapper.style.display = 'none';
+
+  // Get OTP string
+  function getOtpValue() {
+    return otpInputs.map((input) => input.value).join('');
+  }
 
   // Submit button
   const submitBtn = document.createElement('button');
@@ -64,45 +77,33 @@ function createOtpFormSection(placeholders) {
   submitBtn.disabled = true;
   submitBtn.classList.add('disabled-btn');
 
-  // Get OTP string
-  function getOtpValue() {
-    return otpInputs.map((input) => input.value).join('');
-  }
-  // Enable/disable submit button
+  // Update validation and field visibility
   function updateSubmitState() {
     const allOtpVisible = otpInputs[0].style.display !== 'none';
     const otpCorrect = getOtpValue() === '1234';
 
-    // Show tick icon if OTP is correct
     otpSuccessIcon.style.display = otpCorrect ? 'inline-block' : 'none';
 
+    // Show/hide fields after OTP success
+    if (otpCorrect && allOtpVisible) {
+      suggestion.style.display = 'block';
+      ratingWrapper.style.display = 'flex';
+    } else {
+      suggestion.style.display = 'none';
+      ratingWrapper.style.display = 'none';
+    }
+
     const isValid = suggestion.value.trim()
-      && emailInput.validity.valid
-      && allOtpVisible
-      && otpCorrect;
+    && emailInput.validity.valid
+    && allOtpVisible
+    && otpCorrect
+    && ratingInput.value !== '';
 
     submitBtn.disabled = !isValid;
     submitBtn.classList.toggle('disabled-btn', !isValid);
   }
 
-  // Enable/disable "Send OTP" button based on email validity
-  emailInput.addEventListener('input', () => {
-    const isValid = emailInput.validity.valid;
-    getOtpBtn.disabled = !isValid;
-    updateSubmitState(); // re-check in case email changed
-  });
-
-  // Show OTP fields on "Send OTP" click
-  getOtpBtn.addEventListener('click', () => {
-    otpInputs.forEach((input) => {
-      input.style.display = 'inline-block';
-      input.value = '';
-    });
-    otpInputs[0].focus();
-    updateSubmitState();
-  });
-
-  // OTP input events
+  // OTP field events
   otpInputs.forEach((input, index) => {
     input.addEventListener('input', () => {
       if (input.value.length === 1 && index < otpInputs.length - 1) {
@@ -118,9 +119,28 @@ function createOtpFormSection(placeholders) {
     });
   });
 
-  suggestion.addEventListener('input', updateSubmitState);
+  // Enable OTP button after valid email
+  emailInput.addEventListener('input', () => {
+    getOtpBtn.disabled = !emailInput.validity.valid;
+    updateSubmitState();
+  });
 
-  form.append(emailInput, otpWrapper, suggestion, submitBtn);
+  // Show OTP fields on click
+  getOtpBtn.addEventListener('click', () => {
+    otpInputs.forEach((input) => {
+      input.style.display = 'inline-block';
+      input.value = '';
+    });
+    otpInputs[0].focus();
+    updateSubmitState();
+  });
+
+  // Other input listeners
+  suggestion.addEventListener('input', updateSubmitState);
+  ratingInput.addEventListener('change', updateSubmitState);
+
+  // Final form assembly
+  form.append(emailInput, otpWrapper, ratingWrapper, suggestion, submitBtn);
   return form;
 }
 

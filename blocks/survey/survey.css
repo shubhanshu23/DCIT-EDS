@@ -169,3 +169,37 @@
   font-size: 18px;
   vertical-align: middle;
 }
+
+.rating-wrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/** rating.css **/
+main .rating {
+    display: flex;
+    gap: 5px;
+    margin: 0;
+    font-size: 2rem;
+}
+
+main .rating .star {
+    cursor: pointer;
+}
+
+main .rating.disabled .star {
+    cursor: not-allowed;
+}
+
+main .rating .star.selected {
+    color: #f8d053;
+}
+
+main .rating:hover .star.hover {
+    color: #ecba24;
+}
+
+main .rating.disabled .star:not(.selected) {
+    color: #ccc;
+}
