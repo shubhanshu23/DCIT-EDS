@@ -105,6 +105,7 @@ export default async function decorate(block) {
       formData.phone = phoneInput.value.trim();
       formData.birthday = `${daySelect.value}-${monthSelect.value}-${yearSelect.value}`;
       formData.address = addressInput.value.trim();
+      formData.score = document.querySelector(".quiz-last-score--event")?.innerText;
     }
     sessionStorage.removeItem('quizInitiationData');
     sendFormBeacon(formData, 'quiz-submission');
