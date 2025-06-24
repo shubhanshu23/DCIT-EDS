@@ -1,1 +1,25 @@
-/* eslint-disable */
+
+.survey-thank.block {
+    display: flex;
+}
+
+.survey-thank.block > div {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 8%);
+  text-align: center;
+  font-family: Arial, sans-serif;
+  display: none;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.survey-thank.block > div:first-child {
+  border-left: 6px solid #4caf50;
+}
+
+.survey-thank.block > div:nth-child(2) {
+  border-left: 6px solid #f44336;
+}

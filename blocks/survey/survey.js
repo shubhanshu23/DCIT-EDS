@@ -141,6 +141,14 @@ function createOtpFormSection(placeholders) {
 
   // Final form assembly
   form.append(emailInput, otpWrapper, ratingWrapper, suggestion, submitBtn);
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const rating = Number(ratingInput.value);
+    // Redirect with rating as a query param
+    window.location.href = `/survey-thankyou?rating=${rating}`;
+  });
+
   return form;
 }
 
