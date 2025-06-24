@@ -24,7 +24,7 @@ function sendPageBeacon() {
   window.adobeDataLayer.push({
     event: 'page-load',
     eventInfo: {
-      page: metadata
+      page: metadata,
     },
   });
 }

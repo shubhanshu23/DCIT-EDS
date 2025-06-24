@@ -5352,6 +5352,25 @@
     ]
   },
   {
+    "id": "survey-thank",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "description1",
+        "label": "Happy Message",
+        "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "description2",
+        "label": "Improvement Message",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "quiz-question",
     "fields": [
       {
