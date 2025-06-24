@@ -39,11 +39,23 @@
 .cards-section.plans-section .columns-wrapper .columns div div {
   padding: 20px;
   box-shadow: 0 2px 7px gray;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.plans-section .default-content-wrapper h4 {
+  font-size: 2rem;
+}
+
+.plans-section .default-content-wrapper p {
+  font-size: 1.5rem;
 }
 
 .plans-section .columns h4 {
   font-size: 24px;
-  font-weight: 400;
+  font-weight: 600;
   margin-bottom: 12px;
 }
 
@@ -55,20 +67,21 @@
 }
 
 .plans-section .columns .button-container {
-  margin-top: 12px;
+  margin: auto 0 5px;
+  text-align: center;
 }
 
 .plans-section a.button.primary {
   background-color: #1976d2;
   color: #fff;
-  border-radius: 6.25em;
+  border-radius: 1.25em;
   font-weight: 600;
   border: 1px solid #1976d2;
-  padding: 5px 15px;
+  padding: 10px 24px;
 }
 
 .plans-section .columns a.button.primary:hover {
-  background-color: #1976d2;
+  background-color: rgb(23 64 139);
   opacity: 1;
   text-decoration: none;
 }
