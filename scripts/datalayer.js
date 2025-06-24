@@ -20,12 +20,13 @@ function sendPageBeacon() {
     }
   });
   metadata.title = document.title || 'Default Title';
-  // window.adobeDataLayer.push({
-  //   event: 'page-load',
-  //   eventInfo: {
-  //     page: metadata
-  //   },
-  // });
+  metadata.cookieConsentAccepted = getCookieConsentState();
+  window.adobeDataLayer.push({
+    event: 'page-load',
+    eventInfo: {
+      page: metadata
+    },
+  });
 }
 
 function sendAuthInfoBeacon(user = null, state = null) {
