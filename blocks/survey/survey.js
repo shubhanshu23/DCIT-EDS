@@ -29,6 +29,7 @@ function createOtpFormSection(placeholders) {
   getOtpBtn.textContent = `${placeholders.sendOtpBtn}`;
   getOtpBtn.className = 'get-otp-btn';
   getOtpBtn.disabled = true;
+  getOtpBtn.style.display = 'none';
 
   const otpFieldsContainer = document.createElement('div');
   otpFieldsContainer.className = 'otp-fields-container';
@@ -73,7 +74,7 @@ function createOtpFormSection(placeholders) {
   // Submit button
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
-  submitBtn.textContent = `${placeholders.save || 'Save'}`;
+  submitBtn.textContent = `${placeholders.submit || 'submit'}`;
   submitBtn.disabled = true;
   submitBtn.classList.add('disabled-btn');
 
@@ -122,6 +123,7 @@ function createOtpFormSection(placeholders) {
   // Enable OTP button after valid email
   emailInput.addEventListener('input', () => {
     getOtpBtn.disabled = !emailInput.validity.valid;
+    getOtpBtn.style.display = emailInput.validity.valid ? 'inline-block' : 'none';
     updateSubmitState();
   });
 
@@ -143,10 +145,11 @@ function createOtpFormSection(placeholders) {
   form.append(emailInput, otpWrapper, ratingWrapper, suggestion, submitBtn);
 
   form.addEventListener('submit', (e) => {
+    const locale = document.querySelector('meta[name="locale"]')?.content;
     e.preventDefault();
     const rating = Number(ratingInput.value);
     // Redirect with rating as a query param
-    window.location.href = `/survey-thankyou?rating=${rating}`;
+    window.location.href = `/${locale}/survey-thankyou?rating=${rating}`;
   });
 
   return form;
