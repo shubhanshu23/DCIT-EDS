@@ -43,6 +43,40 @@ export default async function decorate(block) {
   phoneInput.required = true;
   phoneInput.pattern = '[0-9]{10,15}';
 
+  // OTP field
+  const otpWrapper = document.createElement('div');
+  otpWrapper.className = 'otp-wrapper';
+
+  const getOtpBtn = document.createElement('button');
+  getOtpBtn.type = 'button';
+  getOtpBtn.textContent = `${placeholders.sendOtpToMobile}` || 'Send otp to Mobile';
+  getOtpBtn.className = 'get-otp-btn';
+  getOtpBtn.disabled = true;
+
+  otpWrapper.appendChild(getOtpBtn);
+
+  const otpFieldsContainer = document.createElement('div');
+  otpFieldsContainer.className = 'otp-fields-container';
+
+  const otpInputs = [];
+  for (let i = 0; i < 4; i += 1) {
+    const otpDigit = document.createElement('input');
+    otpDigit.type = 'text';
+    otpDigit.inputMode = 'numeric';
+    otpDigit.maxLength = 1;
+    otpDigit.className = 'otp-digit';
+    otpDigit.style.display = 'none';
+    otpDigit.required = true;
+    otpInputs.push(otpDigit);
+    otpFieldsContainer.appendChild(otpDigit);
+  }
+  otpWrapper.appendChild(otpFieldsContainer);
+
+  // get OTP value
+  function getOtpValue() {
+    return otpInputs.map((input) => input.value).join('');
+  }
+
   // Email Address
   const emailInput = document.createElement('input');
   emailInput.type = 'email';
@@ -62,7 +96,7 @@ export default async function decorate(block) {
   ];
   const defaultOption = document.createElement('option');
   defaultOption.value = '';
-  defaultOption.textContent =`${placeholders.preferredTimeSlot}*`;
+  defaultOption.textContent = `${placeholders.preferredTimeSlot}*`;
   defaultOption.disabled = true;
   defaultOption.selected = true;
   timeSlotSelect.appendChild(defaultOption);
@@ -76,12 +110,80 @@ export default async function decorate(block) {
   // Submit Button
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
-  submitBtn.textContent = `${placeholders.signUp}*`;
+  submitBtn.textContent = `${placeholders.signUp}`;
+  submitBtn.disabled = true;
+  submitBtn.classList.add('disabled-btn');
+
+  function updateSubmitState() {
+    const allFilled = firstNameInput.value.trim()
+    && lastNameInput.value.trim()
+    && phoneInput.validity.valid
+    && emailInput.validity.valid
+    && otpInputs[0].style.display !== 'none'
+    && getOtpValue() === '1234'
+    && timeSlotSelect.value !== '';
+    submitBtn.disabled = !allFilled;
+    submitBtn.classList.toggle('disabled-btn', !allFilled);
+  }
+
+  // Focus next input on input
+  otpInputs.forEach((input, index) => {
+    input.addEventListener('input', () => {
+      if (input.value.length === 1 && index < otpInputs.length - 1) {
+        otpInputs[index + 1].focus();
+      }
+      updateSubmitState();
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !input.value && index > 0) {
+        otpInputs[index - 1].focus();
+      }
+    });
+  });
+
+  [firstNameInput, lastNameInput, phoneInput, emailInput, timeSlotSelect].forEach((el) => {
+    el.addEventListener('input', () => {
+      updateSubmitState();
+      if (el === phoneInput) {
+        getOtpBtn.disabled = !phoneInput.validity.valid;
+        submitBtn.disabled = true;
+        submitBtn.classList.add('disabled-btn');
+        otpInputs.forEach((input) => {
+          input.style.display = 'none';
+          input.value = '';
+        });
+      }
+    });
+    el.addEventListener('change', () => {
+      updateSubmitState();
+      if (el === phoneInput) {
+        getOtpBtn.disabled = !phoneInput.validity.valid;
+        submitBtn.disabled = true;
+        submitBtn.classList.add('disabled-btn');
+        otpInputs.forEach((input) => {
+          input.style.display = 'none';
+          input.value = '';
+        });
+      }
+    });
+  });
+
+  getOtpBtn.addEventListener('click', () => {
+    otpInputs.forEach((input) => {
+      input.style.display = 'inline-block';
+      input.value = '';
+    });
+    otpInputs[0].focus();
+    updateSubmitState();
+  });
+
+  otpWrapper.insertBefore(getOtpBtn, otpWrapper.firstChild);
 
   form.append(
     firstNameInput,
     lastNameInput,
     phoneInput,
+    otpWrapper,
     emailInput,
     timeSlotSelect,
     submitBtn,

@@ -1,0 +1,171 @@
+.survey form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 24px;
+}
+
+.survey {
+  padding-top: 24px;
+}
+
+.survey form input[type="text"],
+.survey form input[type="email"], textarea {
+  width: 100%;
+  max-width: 400px;
+  border: 1.5px solid #cfd8dc;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  background: #f8fafc;
+}
+
+.survey form input[type="text"]:focus,
+.survey form input[type="email"]:focus,
+.survey form textarea:focus  {
+  border-color: #1976d2;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.form-checkbox label {
+  cursor: pointer;
+  color: #2d3e6c;
+}
+
+.form-checkbox input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: #1976d2;
+}
+
+.survey form button[type="submit"] {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgb(44 62 80 / 10%);
+}
+
+.survey form button[type="submit"]:hover {
+  background: #145ea8;
+}
+
+.survey h2 {
+  text-align: center;
+  color: #17408b;
+  font-size: 2rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.survey p {
+  text-align: center;
+  color: #2d3e6c;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+@media (width <= 500px) {
+  .survey form input[type="text"],
+  .survey form input[type="email"],
+  .form-checkbox {
+    max-width: 100%;
+  }
+
+  .survey form button[type="submit"] {
+    width: 100%;
+  }
+}
+
+.quiz-form {
+  display: none;
+}
+
+.quiz-form.active {
+  display: block;
+}
+
+.disabled-btn {
+  background: #ccc !important;
+  color: #888 !important;
+  cursor: not-allowed !important;
+  border: 1px solid #bbb !important;
+  opacity: 0.7;
+}
+
+.otp-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 16px;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.otp-fields-container {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.otp-digit {
+  width: 48px;
+  height: 48px;
+  text-align: center;
+}
+
+.otp-digit:focus {
+  border: 2px solid #1976d2;
+  outline: none;
+}
+
+.get-otp-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgb(44 62 80 / 10%);
+}
+
+.get-otp-btn:disabled {
+  background: #ccc !important;
+  color: #888 !important;
+  cursor: not-allowed !important;
+  border: 1px solid #bbb !important;
+  opacity: 0.7;
+}
+
+.get-otp-btn:hover:not(:disabled) {
+  background: #145ea8;
+}
+
+.otp-success-icon {
+  font-size: 18px;
+  vertical-align: middle;
+}

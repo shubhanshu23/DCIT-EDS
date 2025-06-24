@@ -64,7 +64,7 @@ export default async function decorate(block) {
       expander?.addEventListener('click', (e) => {
         e.preventDefault();
         const wrapper = languageSwitcher.querySelectorAll('p.button-container');
-        wrapper?.forEach(wrap => {
+        wrapper?.forEach((wrap) => {
           wrap.classList.toggle('active');
         });
       });
@@ -76,7 +76,8 @@ export default async function decorate(block) {
           const currentPath = window.location.pathname;
           const langHref = lang.getAttribute('href');
           if (langHref && !currentPath.startsWith(langHref)) {
-            const newUrl = window.location.origin + langHref + window.location.pathname.substring(4) + window.location.search + window.location.hash;
+            const newUrl = window.location.origin + langHref + window.location.pathname.substring(4)
+              + window.location.search + window.location.hash;
             window.location.href = newUrl;
           } else {
             window.location.reload();

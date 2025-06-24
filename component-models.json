@@ -5340,6 +5340,18 @@
     ]
   },
   {
+    "id": "survey",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "quiz-question",
     "fields": [
       {
