@@ -17,7 +17,7 @@
 // elements till the index of the hovered star element
 export default function decorateRating(fieldDiv, fieldJson) {
   // get the input element from the fieldDiv
-  const input = fieldDiv.querySelector('input[type="number"]');
+  const input = document.querySelector('input[type="number"]');
   const enabled = fieldJson?.enabled;
   const readOnly = fieldJson?.readOnly;
 
