@@ -216,7 +216,7 @@
           }
         },
         {
-          "title": "survey Form",
+          "title": "survey",
           "id": "survey-form",
           "plugins": {
             "xwalk": {
