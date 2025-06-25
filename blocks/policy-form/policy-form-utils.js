@@ -9,24 +9,27 @@ export default function decoratePolicy(formLoad, placeholders) {
     input.required = true;
     return input;
   };
+
   const form = document.createElement('form');
   form.setAttribute('method', 'POST');
   form.setAttribute('action', '#');
-  const policyInput = createInput('text', 'policy-number', `${placeholders.firstname}*`);
+
+  const policyInput = createInput('text', 'policy-number', `${placeholders.policyNumber || 'Policy Number'}*`);
   const emailInput = createInput('email', 'email', `${placeholders.email}*`);
+
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
-  submitBtn.textContent = `${placeholders.startQuiz}`;
+  submitBtn.textContent = `${placeholders.submit}`;
   submitBtn.disabled = true;
   submitBtn.classList.add('disabled-btn');
+
   // OTP
   const otpComponent = createOtpComponent({
     correctOtp: '1234',
-    onSuccess: () => {
-      // eslint-disable-next-line no-use-before-define
-      updateState();
-    },
+    // eslint-disable-next-line no-use-before-define
+    onSuccess: () => updateState(),
   });
+
   // eslint-disable-next-line object-curly-newline
   const { wrapper: otpWrapper, getOtpBtn, otpInputs, isOtpCorrect, showOtpBtn } = otpComponent;
 
@@ -34,18 +37,14 @@ export default function decoratePolicy(formLoad, placeholders) {
     const allOtpVisible = otpInputs[0].style.display !== 'none';
     const otpValid = isOtpCorrect();
 
-    let isValid = emailInput.validity.valid
-      && allOtpVisible
-      && otpValid;
+    let isValid = emailInput.validity.valid && allOtpVisible && otpValid;
 
-    if (formLoad === 'renewal') {
-      isValid = emailInput.validity.valid
-      && policyInput
-      && allOtpVisible
-      && otpValid;
+    if (formLoad === 'renew') {
+      isValid = isValid && policyInput.value.trim() !== '';
     }
 
     submitBtn.disabled = !isValid;
+    submitBtn.classList.toggle('disabled-btn', !isValid);
   }
 
   emailInput.addEventListener('input', () => {
@@ -54,10 +53,12 @@ export default function decoratePolicy(formLoad, placeholders) {
     updateState();
   });
 
-  if (formLoad === 'renewal') {
+  if (formLoad === 'renew') {
+    policyInput.addEventListener('input', updateState);
     form.append(policyInput, emailInput, otpWrapper, submitBtn);
-  } else if (formLoad === 'rejoin') {
+  } else {
     form.append(emailInput, otpWrapper, submitBtn);
   }
+
   return form;
 }
