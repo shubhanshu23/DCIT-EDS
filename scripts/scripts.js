@@ -127,6 +127,90 @@ export async function fetchPlaceholdersForLocale() {
   return placeholders;
 }
 
+// utils/otpComponent.js
+
+export function createOtpComponent({ onSuccess, correctOtp = '1234', otpLength = 4 }) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'otp-wrapper';
+
+  const getOtpBtn = document.createElement('button');
+  getOtpBtn.type = 'button';
+  getOtpBtn.className = 'get-otp-btn';
+  getOtpBtn.textContent = 'Get OTP';
+  getOtpBtn.disabled = true;
+  getOtpBtn.style.display = 'none';
+
+  const otpFieldsContainer = document.createElement('div');
+  otpFieldsContainer.className = 'otp-fields-container';
+
+  const otpInputs = [];
+  for (let i = 0; i < otpLength; i += 1) {
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.inputMode = 'numeric';
+    input.maxLength = 1;
+    input.className = 'otp-digit';
+    input.style.display = 'none';
+    otpInputs.push(input);
+    otpFieldsContainer.appendChild(input);
+  }
+
+  const successIcon = document.createElement('span');
+  successIcon.textContent = '✔';
+  successIcon.className = 'otp-success-icon';
+  successIcon.style.display = 'none';
+  successIcon.style.color = 'green';
+  successIcon.style.marginLeft = '10px';
+
+  wrapper.append(getOtpBtn, otpFieldsContainer, successIcon);
+
+  function getOtpValue() {
+    return otpInputs.map((input) => input.value).join('');
+  }
+
+  function validateOtp() {
+    const value = getOtpValue();
+    const valid = value === correctOtp;
+    successIcon.style.display = valid ? 'inline-block' : 'none';
+    if (valid && typeof onSuccess === 'function') {
+      onSuccess();
+    }
+    return valid;
+  }
+
+  otpInputs.forEach((input, index) => {
+    input.addEventListener('input', () => {
+      if (input.value.length === 1 && index < otpInputs.length - 1) {
+        otpInputs[index + 1].focus();
+      }
+      validateOtp();
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !input.value && index > 0) {
+        otpInputs[index - 1].focus();
+      }
+    });
+  });
+
+  getOtpBtn.addEventListener('click', () => {
+    otpInputs.forEach((input) => {
+      input.style.display = 'inline-block';
+      input.value = '';
+    });
+    otpInputs[0].focus();
+  });
+
+  return {
+    wrapper,
+    getOtpBtn,
+    otpInputs,
+    isOtpCorrect: () => getOtpValue() === correctOtp,
+    showOtpBtn: () => { getOtpBtn.style.display = 'inline-block'; },
+    hideOtpBtn: () => { getOtpBtn.style.display = 'none'; },
+  };
+}
+
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element

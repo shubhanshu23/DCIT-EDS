@@ -5371,6 +5371,27 @@
     ]
   },
   {
+    "id": "policy-form",
+    "fields": [
+      {
+        "component": "select",
+        "name": "policyformtype",
+        "label": "Form Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Renew",
+            "value": "renew"
+          },
+          {
+            "name": "Rejoin",
+            "value": "rejoin"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "quiz-question",
     "fields": [
       {
