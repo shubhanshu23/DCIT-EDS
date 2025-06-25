@@ -1,10 +1,10 @@
 export default function decorate(block) {
-  // Get the rating from the URL
+  // Get the "happy" param from the URL
   const params = new URLSearchParams(window.location.search);
-  const rating = Number(params.get('rating'));
+  const isHappy = params.get('happy');
 
-  // Handle missing or invalid rating
-  if (Number.isNaN(rating)) {
+  // Handle missing or invalid value
+  if (isHappy !== 'true' && isHappy !== 'false') {
     block.innerHTML = '<p>Thank you for your response.</p>';
     return;
   }
@@ -17,8 +17,8 @@ export default function decorate(block) {
   successDiv.style.display = 'none';
   improveDiv.style.display = 'none';
 
-  // Show based on rating value
-  if (rating > 3) {
+  // Show based on happy value
+  if (isHappy === 'true') {
     successDiv.style.display = 'block';
   } else {
     improveDiv.style.display = 'block';

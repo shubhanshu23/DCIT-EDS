@@ -55,7 +55,7 @@ function createOtpFormSection(placeholders) {
 
   otpWrapper.append(getOtpBtn, otpFieldsContainer, otpSuccessIcon);
 
-  // Rating section setup (hidden initially)
+  // Rating section
   const ratingFieldDiv = document.createElement('div');
   const ratingInput = document.createElement('input');
   ratingInput.type = 'number';
@@ -66,26 +66,35 @@ function createOtpFormSection(placeholders) {
   const ratingWrapper = decorateRating(ratingFieldDiv, { enabled: true, readOnly: false });
   ratingWrapper.style.display = 'none';
 
-  // Get OTP string
+  // Thumbs Up / Down buttons
+  const thumbsWrapper = document.createElement('div');
+  thumbsWrapper.className = 'thumbs-wrapper';
+  thumbsWrapper.style.display = 'flex'; // Always visible
+
+  const thumbsUpBtn = document.createElement('button');
+  thumbsUpBtn.type = 'button';
+  thumbsUpBtn.textContent = '👍';
+  thumbsUpBtn.classList.add('thumbs-up-btn');
+  thumbsUpBtn.disabled = true;
+
+  const thumbsDownBtn = document.createElement('button');
+  thumbsDownBtn.type = 'button';
+  thumbsDownBtn.textContent = '👎';
+  thumbsDownBtn.classList.add('thumbs-down-btn');
+  thumbsDownBtn.disabled = true;
+
+  thumbsWrapper.append(thumbsUpBtn, thumbsDownBtn);
+
   function getOtpValue() {
     return otpInputs.map((input) => input.value).join('');
   }
 
-  // Submit button
-  const submitBtn = document.createElement('button');
-  submitBtn.type = 'submit';
-  submitBtn.textContent = `${placeholders.submit || 'submit'}`;
-  submitBtn.disabled = true;
-  submitBtn.classList.add('disabled-btn');
-
-  // Update validation and field visibility
-  function updateSubmitState() {
+  function updateState() {
     const allOtpVisible = otpInputs[0].style.display !== 'none';
     const otpCorrect = getOtpValue() === '1234';
 
     otpSuccessIcon.style.display = otpCorrect ? 'inline-block' : 'none';
 
-    // Show/hide fields after OTP success
     if (otpCorrect && allOtpVisible) {
       suggestion.style.display = 'block';
       ratingWrapper.style.display = 'flex';
@@ -95,22 +104,21 @@ function createOtpFormSection(placeholders) {
     }
 
     const isValid = suggestion.value.trim()
-    && emailInput.validity.valid
-    && allOtpVisible
-    && otpCorrect
-    && ratingInput.value !== '';
+      && emailInput.validity.valid
+      && allOtpVisible
+      && otpCorrect
+      && ratingInput.value !== '';
 
-    submitBtn.disabled = !isValid;
-    submitBtn.classList.toggle('disabled-btn', !isValid);
+    thumbsUpBtn.disabled = !isValid;
+    thumbsDownBtn.disabled = !isValid;
   }
 
-  // OTP field events
   otpInputs.forEach((input, index) => {
     input.addEventListener('input', () => {
       if (input.value.length === 1 && index < otpInputs.length - 1) {
         otpInputs[index + 1].focus();
       }
-      updateSubmitState();
+      updateState();
     });
 
     input.addEventListener('keydown', (e) => {
@@ -120,37 +128,40 @@ function createOtpFormSection(placeholders) {
     });
   });
 
-  // Enable OTP button after valid email
   emailInput.addEventListener('input', () => {
     getOtpBtn.disabled = !emailInput.validity.valid;
     getOtpBtn.style.display = emailInput.validity.valid ? 'inline-block' : 'none';
-    updateSubmitState();
+    updateState();
   });
 
-  // Show OTP fields on click
   getOtpBtn.addEventListener('click', () => {
     otpInputs.forEach((input) => {
       input.style.display = 'inline-block';
       input.value = '';
     });
     otpInputs[0].focus();
-    updateSubmitState();
+    updateState();
   });
 
-  // Other input listeners
-  suggestion.addEventListener('input', updateSubmitState);
-  ratingInput.addEventListener('change', updateSubmitState);
+  suggestion.addEventListener('input', updateState);
+  ratingInput.addEventListener('change', updateState);
 
-  // Final form assembly
-  form.append(emailInput, otpWrapper, ratingWrapper, suggestion, submitBtn);
-
-  form.addEventListener('submit', (e) => {
-    const locale = document.querySelector('meta[name="locale"]')?.content;
-    e.preventDefault();
-    const rating = Number(ratingInput.value);
-    // Redirect with rating as a query param
-    window.location.href = `/${locale}/survey-thankyou?rating=${rating}`;
+  // Handle thumbs button redirects
+  const locale = document.querySelector('meta[name="locale"]')?.content || 'en';
+  thumbsUpBtn.addEventListener('click', () => {
+    if (!thumbsUpBtn.disabled) {
+      window.location.href = `/${locale}/survey-thankyou?happy=true`;
+    }
   });
+
+  thumbsDownBtn.addEventListener('click', () => {
+    if (!thumbsDownBtn.disabled) {
+      window.location.href = `/${locale}/survey-thankyou?happy=false`;
+    }
+  });
+
+  // Assemble the form
+  form.append(emailInput, otpWrapper, ratingWrapper, suggestion, thumbsWrapper);
 
   return form;
 }

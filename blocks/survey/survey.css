@@ -203,3 +203,41 @@ main .rating:hover .star.hover {
 main .rating.disabled .star:not(.selected) {
     color: #ccc;
 }
+
+.thumbs-wrapper {
+    font-size: 2rem;
+  gap: 2rem;
+  margin-top: 16px;
+}
+
+.thumbs-up-btn,
+.thumbs-down-btn {
+  font-size: 24px;
+  padding: 8px 16px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.thumbs-up-btn:hover:not(:disabled) {
+  background-color: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+}
+
+.thumbs-down-btn:hover:not(:disabled) {
+  background-color: #f8d7da;
+  border-color: #dc3545;
+  color: #721c24;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.thumbs-up-btn:disabled,
+/* stylelint-disable-next-line no-descending-specificity */
+.thumbs-down-btn:disabled {
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
