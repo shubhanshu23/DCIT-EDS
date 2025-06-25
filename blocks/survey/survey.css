@@ -241,3 +241,8 @@ main .rating.disabled .star:not(.selected) {
   cursor: not-allowed;
 }
 
+.survey-container {
+    text-align: center;
+    padding-block-start: 2rem;
+}
+
