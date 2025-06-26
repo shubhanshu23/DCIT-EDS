@@ -25,6 +25,7 @@ export default function decoratePolicy(formLoad, placeholders) {
 
   // OTP
   const otpComponent = createOtpComponent({
+    placeholders,
     correctOtp: '1234',
     // eslint-disable-next-line no-use-before-define
     onSuccess: () => updateState(),

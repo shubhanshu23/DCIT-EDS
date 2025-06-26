@@ -129,14 +129,15 @@ export async function fetchPlaceholdersForLocale() {
 
 // utils/otpComponent.js
 
-export function createOtpComponent({ onSuccess, correctOtp = '1234', otpLength = 4 }) {
+// eslint-disable-next-line object-curly-newline
+export function createOtpComponent({ placeholders, onSuccess, correctOtp = '1234', otpLength = 4 }) {
   const wrapper = document.createElement('div');
   wrapper.className = 'otp-wrapper';
 
   const getOtpBtn = document.createElement('button');
   getOtpBtn.type = 'button';
   getOtpBtn.className = 'get-otp-btn';
-  getOtpBtn.textContent = 'Get OTP';
+  getOtpBtn.textContent = placeholders.sendOtp;
   getOtpBtn.disabled = true;
   getOtpBtn.style.display = 'none';
 

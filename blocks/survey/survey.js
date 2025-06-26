@@ -52,6 +52,7 @@ function surveyForm(placeholders) {
 
   // OTP
   const otpComponent = createOtpComponent({
+    placeholders,
     correctOtp: '1234',
     onSuccess: () => {
       suggestion.style.display = 'block';
