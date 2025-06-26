@@ -5391,6 +5391,18 @@
       }
     ]
   },
+    {
+    "id": "survey-popup",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": ""
+      }
+    ]
+  },
   {
     "id": "quiz-question",
     "fields": [

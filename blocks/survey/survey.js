@@ -1,7 +1,7 @@
 import { fetchPlaceholdersForLocale, createOtpComponent } from '../../scripts/scripts.js';
 import decorateRating from '../rating/rating.js';
 
-function surveyForm(placeholders) {
+export function surveyForm(placeholders) {
   const form = document.createElement('form');
   form.setAttribute('method', 'POST');
   form.setAttribute('action', '#');
