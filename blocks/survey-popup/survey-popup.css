@@ -1,1 +1,249 @@
-/* eslint-disable */
+.survey-modal form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 24px;
+}
+
+.survey-modal {
+  padding-top: 24px;
+  overflow-y: scroll;
+}
+
+.survey-modal form input[type="text"],
+.survey-modal form input[type="email"], textarea {
+  width: 100%;
+  max-width: 400px;
+  border: 1.5px solid #cfd8dc;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  background: #f8fafc;
+}
+
+.survey-modal form input[type="text"]:focus,
+.survey-modal form input[type="email"]:focus,
+.survey-modal form textarea:focus  {
+  border-color: #1976d2;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.form-checkbox label {
+  cursor: pointer;
+  color: #2d3e6c;
+}
+
+.form-checkbox input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: #1976d2;
+}
+
+.survey-modal form button[type="submit"] {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgb(44 62 80 / 10%);
+}
+
+.survey-modal form button[type="submit"]:hover {
+  background: #145ea8;
+}
+
+.survey-modal h2 {
+  text-align: center;
+  color: #17408b;
+  font-size: 2rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.survey-modal p {
+  text-align: center;
+  color: #2d3e6c;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+@media (width <= 500px) {
+  .survey-modal form input[type="text"],
+  .survey-modal form input[type="email"],
+  .form-checkbox {
+    max-width: 100%;
+  }
+
+  .survey-modal form button[type="submit"] {
+    width: 100%;
+  }
+}
+
+.quiz-form {
+  display: none;
+}
+
+.quiz-form.active {
+  display: block;
+}
+
+.disabled-btn {
+  background: #ccc !important;
+  color: #888 !important;
+  cursor: not-allowed !important;
+  border: 1px solid #bbb !important;
+  opacity: 0.7;
+}
+
+.otp-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 16px;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.otp-fields-container {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.otp-digit {
+  width: 48px;
+  height: 48px;
+  text-align: center;
+}
+
+.otp-digit:focus {
+  border: 2px solid #1976d2;
+  outline: none;
+}
+
+.get-otp-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgb(44 62 80 / 10%);
+}
+
+.get-otp-btn:disabled {
+  background: #ccc !important;
+  color: #888 !important;
+  cursor: not-allowed !important;
+  border: 1px solid #bbb !important;
+  opacity: 0.7;
+}
+
+.get-otp-btn:hover:not(:disabled) {
+  background: #145ea8;
+}
+
+.otp-success-icon {
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.rating-wrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/** rating.css **/
+main .rating {
+    display: flex;
+    gap: 5px;
+    margin: 0;
+    font-size: 2rem;
+}
+
+main .rating .star {
+    cursor: pointer;
+}
+
+main .rating.disabled .star {
+    cursor: not-allowed;
+}
+
+main .rating .star.selected {
+    color: #f8d053;
+}
+
+main .rating:hover .star.hover {
+    color: #ecba24;
+}
+
+main .rating.disabled .star:not(.selected) {
+    color: #ccc;
+}
+
+.thumbs-wrapper {
+    font-size: 2rem;
+  gap: 2rem;
+  margin-top: 16px;
+}
+
+.thumbs-up-btn,
+.thumbs-down-btn {
+  font-size: 24px;
+  padding: 8px 16px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.thumbs-up-btn:hover:not(:disabled) {
+  background-color: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+}
+
+.thumbs-down-btn:hover:not(:disabled) {
+  background-color: #f8d7da;
+  border-color: #dc3545;
+  color: #721c24;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.thumbs-up-btn:disabled,
+/* stylelint-disable-next-line no-descending-specificity */
+.thumbs-down-btn:disabled {
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
+.survey-modal-container {
+    text-align: center;
+    padding-block-start: 2rem;
+}
+

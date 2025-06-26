@@ -1,7 +1,41 @@
 import { fetchPlaceholdersForLocale, createOtpComponent } from '../../scripts/scripts.js';
 import decorateRating from '../rating/rating.js';
 
-export function surveyForm(placeholders) {
+async function showThankYouContent(type = 'happy') {
+  const modalContent = document.querySelector('.survey-modal .modal-content');
+  if (!modalContent) return;
+
+  modalContent.innerHTML = ''; // Clear old form
+
+  // Close Button
+  const closeBtn = document.createElement('span');
+  closeBtn.classList.add('close');
+  closeBtn.innerHTML = '&times;';
+  closeBtn.addEventListener('click', () => {
+    document.querySelector('.survey-modal')?.remove();
+    localStorage.setItem('surveyModalDismissed', Date.now().toString());
+  });
+
+  // Thank You Message
+  const message = document.createElement('div');
+  message.className = 'thank-you-message';
+
+  if (type === 'happy') {
+    message.innerHTML = `
+      <h2>🎉 Thank you for your positive feedback!</h2>
+      <p>We’re glad you had a great experience.</p>
+    `;
+  } else {
+    message.innerHTML = `
+      <h2>🙏 Thank you for your feedback!</h2>
+      <p>We appreciate your input and will work to improve.</p>
+    `;
+  }
+
+  modalContent.append(closeBtn, message);
+}
+
+export function surveyForm(placeholders, isModal = false) {
   const form = document.createElement('form');
   form.setAttribute('method', 'POST');
   form.setAttribute('action', '#');
@@ -92,13 +126,23 @@ export function surveyForm(placeholders) {
 
   thumbsUpBtn.addEventListener('click', () => {
     if (!thumbsUpBtn.disabled) {
-      window.location.href = `/${locale}/survey-thankyou?happy=true`;
+      if (isModal) {
+        showThankYouContent('happy');
+      } else {
+        window.location.href = `/${locale}/survey-thankyou?happy=true`;
+      }
     }
   });
 
   thumbsDownBtn.addEventListener('click', () => {
     if (!thumbsDownBtn.disabled) {
-      window.location.href = `/${locale}/survey-thankyou?happy=false`;
+      if (!thumbsUpBtn.disabled) {
+        if (isModal) {
+          showThankYouContent('sad');
+        } else {
+          window.location.href = `/${locale}/survey-thankyou?happy=true`;
+        }
+      }
     }
   });
 

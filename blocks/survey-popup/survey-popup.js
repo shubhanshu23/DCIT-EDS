@@ -1,8 +1,12 @@
-import { surveyForm as createSurveyForm } from '../survey/survey.js';
+import { surveyForm } from '../survey/survey.js';
+import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
 
-function showLeaveUsModal() {
+async function showLeaveUsModal(title) {
+  const placeholders = await fetchPlaceholdersForLocale();
+
   const modalOverlay = document.createElement('div');
   modalOverlay.classList.add('modal');
+  modalOverlay.classList.add('survey-modal');
   modalOverlay.style.display = 'block';
 
   const modalContent = document.createElement('div');
@@ -17,27 +21,36 @@ function showLeaveUsModal() {
     localStorage.setItem('surveyModalDismissed', Date.now().toString());
   });
 
+  if (title) {
+    const titleElem = document.createElement('h2');
+    titleElem.textContent = title;
+    titleElem.classList.add('modal-title');
+    modalContent.appendChild(titleElem);
+  }
+
+  // Append close button
   modalContent.appendChild(closeBtn);
 
-  createSurveyForm().then((form) => {
-    modalContent.appendChild(form);
-  });
+  // Directly append form (no .then, because it's not a Promise)
+  const form = await surveyForm(placeholders, true);
+  modalContent.appendChild(form);
 
   modalOverlay.appendChild(modalContent);
   document.body.appendChild(modalOverlay);
 }
 
 // Show modal if not seen for X hours
-export function triggerModalOnInactivity(hours = 24) {
+export function triggerModalOnInactivity(hours = 24, title = 'Survey Form') {
   const lastSeen = localStorage.getItem('surveyModalDismissed');
   const now = Date.now();
 
   if (!lastSeen || now - Number(lastSeen) > hours * 60 * 60 * 1000) {
-    setTimeout(showLeaveUsModal, 5000); // delay modal load after page load
+    setTimeout(() => showLeaveUsModal(title), 5000); // Show modal 5s after page load
   }
 }
 
 export default async function decorate(block) {
-  triggerModalOnInactivity(24);
-  console.log(block, 'block');
+  const title = block.querySelector('p')?.textContent;
+  triggerModalOnInactivity(24, title);
+  block.innerHTML = '';
 }
