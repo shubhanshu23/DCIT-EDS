@@ -60,5 +60,20 @@ export default function decoratePolicy(formLoad, placeholders) {
     form.append(emailInput, otpWrapper, submitBtn);
   }
 
+  form.addEventListener('submit', (e) => {
+    e.preventDefault(); // prevent actual form submission
+    const locale = document.querySelector('meta[name="locale"]')?.content || 'en';
+
+    const policyNumber = policyInput?.value?.trim() || null;
+    const email = emailInput.value.trim();
+
+    // Here you can handle the form data, for example:
+    console.log('Form Submitted:', {
+      policyNumber,
+      email,
+    });
+    window.location.href = `/${locale}/policy-renewal-survey`;
+  });
+
   return form;
 }

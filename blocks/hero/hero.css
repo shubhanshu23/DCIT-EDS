@@ -38,6 +38,19 @@ main:has(.hero-container) {
   margin-top: 50px;
 }
 
+main:has(.section.hero-container[data-linktext="policy renew"]) div, main:has(.section.hero-container[data-linktext="policy rejoin"]) div {
+    margin: auto;
+}
+
+main .section.hero-container[data-linktext="policy renew"] .hero a, main .section.hero-container[data-linktext="policy rejoin"] .hero a{
+  font-weight: bold;
+}
+
+main .section.hero-container[data-linktext="policy renew"] .hero a:hover, main .section.hero-container[data-linktext="policy rejoin"] .hero a:hover{
+  color: #86bc25;
+  border-color: #86bc25;
+}
+
 @media (width >= 767px) {
   .hero {
     padding: 200px 40px;
@@ -57,5 +70,9 @@ main:has(.hero-container) {
 
   main:has(.hero-container) {
     margin-top: 70px;
+  }
+
+  main .section.hero-container[data-linktext="policy renew"] .hero, main .section.hero-container[data-linktext="policy rejoin"] .hero {
+    padding: 200px 12px;
   }
 }
