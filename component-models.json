@@ -5400,6 +5400,18 @@
         "name": "title",
         "label": "Title",
         "value": ""
+      },
+      {
+        "component": "text",
+        "name": "happy-message",
+        "label": "Happy Message",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "unhappy-message",
+        "label": "Unhappy Message",
+        "valueType": "string"
       }
     ]
   },
