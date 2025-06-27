@@ -5402,13 +5402,13 @@
         "value": ""
       },
       {
-        "component": "text",
+        "component": "richtext",
         "name": "happy-message",
         "label": "Happy Message",
         "valueType": "string"
       },
       {
-        "component": "text",
+        "component": "richtext",
         "name": "unhappy-message",
         "label": "Unhappy Message",
         "valueType": "string"
