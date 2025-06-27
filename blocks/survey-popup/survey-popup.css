@@ -178,30 +178,30 @@
 }
 
 /** rating.css **/
-main .rating {
+.survey-modal .rating {
     display: flex;
     gap: 5px;
     margin: 0;
     font-size: 2rem;
 }
 
-main .rating .star {
+.survey-modal .rating .star {
     cursor: pointer;
 }
 
-main .rating.disabled .star {
+.survey-modal .rating.disabled .star {
     cursor: not-allowed;
 }
 
-main .rating .star.selected {
+.survey-modal .rating .star.selected {
     color: #f8d053;
 }
 
-main .rating:hover .star.hover {
+.survey-modal .rating:hover .star.hover {
     color: #ecba24;
 }
 
-main .rating.disabled .star:not(.selected) {
+.survey-modal .rating.disabled .star:not(.selected) {
     color: #ccc;
 }
 

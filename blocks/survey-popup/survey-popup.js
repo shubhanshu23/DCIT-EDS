@@ -1,7 +1,7 @@
 import { surveyForm } from '../survey/survey.js';
 import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
 
-async function showLeaveUsModal(title) {
+async function showLeaveUsModal(title, happyContent, sadContent) {
   const placeholders = await fetchPlaceholdersForLocale();
 
   const modalOverlay = document.createElement('div');
@@ -32,7 +32,7 @@ async function showLeaveUsModal(title) {
   modalContent.appendChild(closeBtn);
 
   // Directly append form (no .then, because it's not a Promise)
-  const form = await surveyForm(placeholders, true);
+  const form = await surveyForm(placeholders, true, happyContent, sadContent);
   modalContent.appendChild(form);
 
   modalOverlay.appendChild(modalContent);
@@ -40,17 +40,21 @@ async function showLeaveUsModal(title) {
 }
 
 // Show modal if not seen for X hours
-export function triggerModalOnInactivity(hours = 24, title = 'Survey Form') {
+export function triggerModalOnInactivity(hours = 24, title = 'Survey Form', happyContent = null, sadContent = null) {
   const lastSeen = localStorage.getItem('surveyModalDismissed');
   const now = Date.now();
 
   if (!lastSeen || now - Number(lastSeen) > hours * 60 * 60 * 1000) {
-    setTimeout(() => showLeaveUsModal(title), 5000); // Show modal 5s after page load
+    setTimeout(() => showLeaveUsModal(title, happyContent, sadContent), 5000);
   }
 }
 
 export default async function decorate(block) {
   const title = block.querySelector('p')?.textContent;
-  triggerModalOnInactivity(24, title);
+  const innerDivs = block.querySelectorAll(':scope > div > div');
+  const happyMessageDiv = innerDivs[1]?.cloneNode(true);
+  const sadMessageDiv = innerDivs[2]?.cloneNode(true);
+
+  triggerModalOnInactivity(24, title, happyMessageDiv, sadMessageDiv);
   block.innerHTML = '';
 }
