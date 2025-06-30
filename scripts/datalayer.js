@@ -23,7 +23,7 @@ function sendPageBeacon() {
   metadata.cookieConsentAccepted = getCookieConsentState();
   window.adobeDataLayer.push({
     event: 'page-load',
-    eventInfo: {
+    details: {
       page: metadata,
     },
   });
