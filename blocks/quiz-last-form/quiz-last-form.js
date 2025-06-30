@@ -103,7 +103,7 @@ export default async function decorate(block) {
       formData.cookieConsentAccepted = getCookieConsentState();
       formData.jobTitle = jobInput.value.trim();
       formData.phone = phoneInput.value.trim();
-      formData.birthday = `${daySelect.value}-${monthSelect.value}-${yearSelect.value}`;
+      formData.birthday = `${yearSelect.value}-${monthSelect.value.padStart(2, '0')}-${daySelect.value.padStart(2, '0')}`;
       formData.address = addressInput.value.trim();
       formData.score = document.querySelector('.quiz-last-score--event')?.innerText;
     }
