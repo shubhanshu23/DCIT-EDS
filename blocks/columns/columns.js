@@ -27,7 +27,7 @@ export default function decorate(block) {
           const plan = heading.textContent.trim();
           sessionStorage.setItem('plan', plan);
           sessionStorage.setItem('premium', button.getAttribute('title') || '');
-          window.location.href = `/${locale}/signup`;
+          window.location.href = `/${locale}/insurance-signup`;
         }
       });
     });

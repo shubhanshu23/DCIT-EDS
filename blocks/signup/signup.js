@@ -9,6 +9,23 @@ export default async function decorate(block) {
   form.setAttribute('method', 'POST');
   form.setAttribute('action', '#');
 
+  // Get selected plan and premium from sessionStorage
+  const selectedPlan = sessionStorage.getItem('plan');
+  const selectedPremium = sessionStorage.getItem('premium');
+
+  if (selectedPlan || selectedPremium) {
+    const selectedInfo = document.createElement('div');
+    selectedInfo.className = 'selected-plan-info';
+
+    selectedInfo.innerHTML = `
+      <h4><strong>${placeholders.selectedInfoTitle}</strong></h4>
+      ${selectedPlan ? `<p>${placeholders.plan}: <strong> ${selectedPlan} </strong></p>` : ''}
+      ${selectedPremium ? `<p>${placeholders.premium}: <strong> ${selectedPremium} </strong></p>` : ''}
+    `;
+
+    block.appendChild(selectedInfo);
+  }
+
   // First Name
   const firstNameInput = document.createElement('input');
   firstNameInput.type = 'text';
@@ -38,44 +55,37 @@ export default async function decorate(block) {
   agreeInput.id = 'agreeToTerms';
   agreeInput.name = 'agreeToTerms';
   agreeInput.required = true;
+
   const agreeLabel = document.createElement('label');
   agreeLabel.setAttribute('for', 'agreeToTerms');
   agreeLabel.innerHTML = `${placeholders.agreePersonaldata}`;
   agreeDiv.append(agreeInput, agreeLabel);
 
-  // Start Quiz button
+  // Submit button
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
   submitBtn.textContent = `${placeholders.submit}`;
   submitBtn.disabled = true;
   submitBtn.classList.add('disabled-btn');
 
+  // Function to update button state
   function updateSubmitState() {
     const allFilled = firstNameInput.value.trim()
-    && lastNameInput.value.trim()
-    && emailInput.validity.valid
-    && agreeInput.checked;
+      && lastNameInput.value.trim()
+      && emailInput.validity.valid
+      && agreeInput.checked;
+
     submitBtn.disabled = !allFilled;
     submitBtn.classList.toggle('disabled-btn', !allFilled);
   }
 
-  [firstNameInput, lastNameInput, agreeInput, emailInput].forEach((el) => {
-    el.addEventListener('input', () => {
-      updateSubmitState();
-      if (el === emailInput) {
-        submitBtn.disabled = true;
-        submitBtn.classList.add('disabled-btn');
-      }
-    });
-    el.addEventListener('change', () => {
-      updateSubmitState();
-      if (el === emailInput) {
-        submitBtn.disabled = true;
-        submitBtn.classList.add('disabled-btn');
-      }
-    });
+  // Add listeners to form fields
+  [firstNameInput, lastNameInput, emailInput, agreeInput].forEach((el) => {
+    el.addEventListener('input', updateSubmitState);
+    el.addEventListener('change', updateSubmitState);
   });
 
+  // Add fields to form
   form.append(
     firstNameInput,
     lastNameInput,
@@ -83,10 +93,14 @@ export default async function decorate(block) {
     agreeDiv,
     submitBtn,
   );
+
+  // Add form to block
   block.append(form);
 
+  // Handle form submission
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+
     const formData = {
       page: getCurrentPage(),
       timestamp: new Date().toISOString(),
@@ -95,10 +109,11 @@ export default async function decorate(block) {
       lastName: lastNameInput.value.trim(),
       email: emailInput.value.trim(),
       agreeToTerms: `${agreeInput.checked}`,
-      plan: `${sessionStorage.getItem('plan')}`,
-      premium: `${sessionStorage.getItem('premium')}`,
+      plan: selectedPlan || '',
+      premium: selectedPremium || '',
     };
-    sendFormBeacon(formData, 'signup');
+
+    sendFormBeacon(formData, 'insurance-signup');
     form.parentElement.classList.remove('active');
     console.log('Signup completed!');
   });

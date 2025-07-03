@@ -167,3 +167,26 @@ main > .section.signup-container:first-of-type {
 .get-otp-btn:hover:not(:disabled) {
   background: #145ea8;
 }
+
+.selected-plan-info {
+  background-color: #f0f4f8;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.selected-plan-info p {
+  margin: 0.5rem 0;
+  font-weight: normal;
+  color: #000;
+}
+
+.selected-plan-info p strong {
+  color: #1976d2;
+  font-weight: 700;
+}
+
+.signup-container .signup-wrapper {
+    margin-block-start: 32px;
+}
