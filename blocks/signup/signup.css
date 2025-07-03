@@ -6,6 +6,10 @@
   margin-top: 24px;
 }
 
+main > .section.signup-container:first-of-type {
+    text-align: center;
+}
+
 .signup-container {
   padding-top: 24px;
 }
