@@ -16,17 +16,18 @@ export default function decorate(block) {
   });
 
   const planSection = document.querySelector('.plans-section');
-
   if (planSection) {
+    const locale = document.querySelector('meta[name="locale"]')?.content || 'en';
     const buttons = planSection.querySelectorAll('.button');
     buttons.forEach((button) => {
       button.addEventListener('click', () => {
-        const heading = button.closest('h4');
+        const container = button.closest('div');
+        const heading = container?.querySelector('h4');
         if (heading) {
           const plan = heading.textContent.trim();
           sessionStorage.setItem('plan', plan);
           sessionStorage.setItem('premium', button.getAttribute('title') || '');
-          window.location.href = '/plans';
+          window.location.href = `/${locale}/signup`;
         }
       });
     });
