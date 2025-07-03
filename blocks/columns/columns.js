@@ -1,16 +1,32 @@
 export default function decorate(block) {
-  const cols = [...block.firstElementChild.children];
-  block.classList.add(`columns-${cols.length}-cols`);
+  const columns = [...block.firstElementChild.children];
+  block.classList.add(`columns-${columns.length}-cols`);
 
-  // setup image columns
+  const planSection = document.querySelector('.plans-section');
+
+  if (planSection) {
+    const buttons = planSection.querySelectorAll('.button');
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const heading = button.closest('h4');
+        if (heading) {
+          const plan = heading.textContent.trim();
+          sessionStorage.setItem('plan', plan);
+          sessionStorage.setItem('premium', button.getAttribute('title') || '');
+          window.location.href = '/plans';
+        }
+      });
+    });
+  }
+
+  // Handle image-only columns
   [...block.children].forEach((row) => {
     [...row.children].forEach((col) => {
-      const pic = col.querySelector('picture');
-      if (pic) {
-        const picWrapper = pic.closest('div');
-        if (picWrapper && picWrapper.children.length === 1) {
-          // picture is only content in column
-          picWrapper.classList.add('columns-img-col');
+      const picture = col.querySelector('picture');
+      if (picture) {
+        const wrapper = picture.closest('div');
+        if (wrapper && wrapper.children.length === 1) {
+          wrapper.classList.add('columns-img-col');
         }
       }
     });

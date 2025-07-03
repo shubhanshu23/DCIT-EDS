@@ -46,7 +46,7 @@ export default async function decorate(block) {
   // Start Quiz button
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
-  submitBtn.textContent = `${placeholders.startQuiz}`;
+  submitBtn.textContent = `${placeholders.submit}`;
   submitBtn.disabled = true;
   submitBtn.classList.add('disabled-btn');
 
@@ -100,6 +100,6 @@ export default async function decorate(block) {
     };
     sendFormBeacon(formData, 'signup');
     form.parentElement.classList.remove('active');
-    console.log('Signup started!');
+    console.log('Signup completed!');
   });
 }

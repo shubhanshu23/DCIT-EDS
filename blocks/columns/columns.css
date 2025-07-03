@@ -19,6 +19,11 @@
   display: block;
 }
 
+.cards-section .columns-wrapper .columns div {
+  align-items: stretch;
+}
+
+
 @media (width >= 900px) {
   .columns > div {
     align-items: center;
