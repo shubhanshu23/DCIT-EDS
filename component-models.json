@@ -5463,6 +5463,18 @@
     ]
   },
   {
+    "id": "signup",
+    "fields": [
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "quiz-score",
     "fields": [
       {
