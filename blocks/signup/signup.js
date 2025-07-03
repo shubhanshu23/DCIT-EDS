@@ -4,7 +4,6 @@ import { fetchPlaceholdersForLocale } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const placeholders = await fetchPlaceholdersForLocale();
-  document.querySelector('.signup-form').classList.add('active');
 
   const form = document.createElement('form');
   form.setAttribute('method', 'POST');
